@@ -95,6 +95,7 @@
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"YYImage.jpg","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"YYPdf.pdf","CopyToMask":-1,"filePath":"datafiles",},
     {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"YYGif.gif","CopyToMask":-1,"filePath":"datafiles",},
+    {"resourceType":"GMIncludedFile","resourceVersion":"1.0","name":"MobileUtils_Documentation.pdf","CopyToMask":0,"filePath":"datafiles",},
   ],
   "MetaData": {
     "IDEVersion": "9.9.1.129",
