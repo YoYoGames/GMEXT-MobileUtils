@@ -1,0 +1,8 @@
+
+https://developer.android.com/training/sharing/send
+
+text/plain, text/rtf, text/html, text/json, receivers should register for text/*
+image/jpg, image/png, image/gif, receivers should register for image/*
+video/mp4, video/3gp, receivers should register for video/*
+application/pdf, receivers should register for supported file extensions
+
