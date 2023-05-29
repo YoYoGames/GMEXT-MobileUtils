@@ -1,0 +1,9 @@
+{
+  "resourceType": "GMExtensionConfigSet",
+  "configurables": null,
+  "extensionId": {
+    "name": "MobileUtils_Gallery",
+    "path": "extensions/MobileUtils_Gallery/MobileUtils_Gallery.yy"
+  },
+  "resourceVersion": "1.0"
+}
