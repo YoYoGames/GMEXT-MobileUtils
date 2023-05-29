@@ -6,7 +6,7 @@
   "options": [],
   "exportToGame": true,
   "supportedTargets": 105554172285166,
-  "extensionVersion": "1.0.7",
+  "extensionVersion": "1.1.0",
   "packageId": "com.Kaguva.ShareImage",
   "productId": "F87F1752EF5676078DB4BED8477B99A8",
   "author": "",

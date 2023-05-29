@@ -1,0 +1,14 @@
+[
+    {
+        "projectFile": "source/MobileUtils_gml/MobileUtils.yyp",
+        "extensionFile": "source/MobileUtils_gml/extensions/MobileUtils_Camera/MobileUtils_Camera.yy",
+        "packageId": "com.yoyogames.mobileutilsext",
+        "packageName": "MobileUtils Ext",
+        "packageVersion": "1.1.0",
+        "includeFolders": null,
+        "includeResources": null,
+        "excludeFolders": null,
+        "excludeResources": null,
+        "format": "LTS22"
+    }
+]

@@ -6,7 +6,7 @@
   "options": [],
   "exportToGame": true,
   "supportedTargets": 105554163798254,
-  "extensionVersion": "1.0.8",
+  "extensionVersion": "1.1.0",
   "packageId": "com.Kaguva.Camera",
   "productId": "E8EF3866FA741E040AD109F1EE9A1B1A",
   "author": "",
