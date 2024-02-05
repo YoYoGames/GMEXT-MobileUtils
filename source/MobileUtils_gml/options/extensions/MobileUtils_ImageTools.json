@@ -1,9 +1,5 @@
 {
   "resourceType": "GMExtensionConfigSet",
   "configurables": null,
-  "extensionId": {
-    "name": "MobileUtils_ImageTools",
-    "path": "extensions/MobileUtils_ImageTools/MobileUtils_ImageTools.yy"
-  },
   "resourceVersion": "1.0"
 }

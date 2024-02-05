@@ -1,9 +1,5 @@
 {
   "resourceType": "GMExtensionConfigSet",
   "configurables": null,
-  "extensionId": {
-    "name": "MobileUtils_Camera",
-    "path": "extensions/MobileUtils_Camera/MobileUtils_Camera.yy"
-  },
   "resourceVersion": "1.0"
 }

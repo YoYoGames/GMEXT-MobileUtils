@@ -18,7 +18,7 @@
   "exportToGame": true,
   "extensionVersion": "1.0.8",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_ImageTools.ext","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"MobileMedia_ImageTools.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_ImageTools.ext","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"MobileUtils_Image_Width","argCount":1,"args":[
             1,
           ],"documentation":"","externalName":"MobileUtils_Image_Width","help":"MobileUtils_Image_Width(path)","hidden":false,"kind":11,"returnType":2,},
@@ -45,6 +45,8 @@
   "gradleinject": "",
   "hasConvertedCodeInjection": true,
   "helpfile": "",
+  "HTML5CodeInjection": "",
+  "html5Props": false,
   "IncludedResources": [
     "Sprites\\Camera\\Sprite_TakePhoto",
     "Sprites\\Camera\\Sprtie_TakeSprite",
