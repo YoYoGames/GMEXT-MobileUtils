@@ -7,10 +7,7 @@
   "androidcodeinjection": "<YYAndroidGradleDependencies>\r\n\r\nandroid {\r\n    lintOptions {\r\n        abortOnError false\r\n    }\r\n}\r\n</YYAndroidGradleDependencies>\r\n\r\n<YYAndroidManifestManifestInject>\r\n\r\n<uses-permission\r\n    android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"\r\n    tools:remove=\"android:maxSdkVersion\"/>\r\n\r\n</YYAndroidManifestManifestInject>\r\n\r\n<YYAndroidManifestApplicationAttributes_>\r\nandroid:requestLegacyExternalStorage=\"true\"\r\n</YYAndroidManifestApplicationAttributes_>\r\n\r\n<YYAndroidManifestApplicationInject>\r\n<provider\r\n    android:name=\"androidx.core.content.FileProvider\"\r\n    android:authorities=\"${YYAndroidPackageName}\"\r\n    android:exported=\"false\"\r\n    android:grantUriPermissions=\"true\">\r\n    <meta-data\r\n        android:name=\"android.support.FILE_PROVIDER_PATHS\"\r\n        android:resource=\"@xml/file_provider_paths_share\" />\r\n</provider>\r\n</YYAndroidManifestApplicationInject>\r\n",
   "androidinject": "\r\n<provider android:name=\"androidx.core.content.FileProvider\" android:authorities=\"${YYAndroidPackageName}\" android:exported=\"false\" android:grantUriPermissions=\"true\">\r\n    <meta-data android:name=\"android.support.FILE_PROVIDER_PATHS\" android:resource=\"@xml/file_provider_paths_share\"></meta-data>\r\n</provider>\r\n",
   "androidmanifestinject": "\r\n\r\n<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" tools:remove=\"android:maxSdkVersion\"></uses-permission>\r\n\r\n",
-  "androidPermissions": [
-    "android.permission.READ_EXTERNAL_STORAGE",
-    "android.permission.MANAGE_EXTERNAL_STORAGE",
-  ],
+  "androidPermissions": [],
   "androidProps": true,
   "androidsourcedir": "",
   "author": "",
@@ -21,7 +18,7 @@
   "exportToGame": true,
   "extensionVersion": "1.0.7",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[],"copyToTargets":52777614151918,"filename":"Share.ext","final":"","functions":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"Share.ext","constants":[],"copyToTargets":52777614151918,"filename":"Share.ext","final":"","functions":[
         {"resourceType":"GMExtensionFunction","resourceVersion":"1.0","name":"MobileUtils_Share_Open","argCount":2,"args":[
             1,
             1,
@@ -34,6 +31,8 @@
   "gradleinject": "\r\n\r\nandroid {\r\n    lintOptions {\r\n        abortOnError false\r\n    }\r\n}\r\n",
   "hasConvertedCodeInjection": true,
   "helpfile": "",
+  "HTML5CodeInjection": "",
+  "html5Props": false,
   "IncludedResources": [
     "Sprites\\Share\\sprite2",
     "Sprites\\Share\\sprite1",

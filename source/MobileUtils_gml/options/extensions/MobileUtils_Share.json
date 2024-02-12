@@ -1,9 +1,5 @@
 {
   "resourceType": "GMExtensionConfigSet",
   "configurables": null,
-  "extensionId": {
-    "name": "MobileUtils_Share",
-    "path": "extensions/MobileUtils_Share/MobileUtils_Share.yy"
-  },
   "resourceVersion": "1.0"
 }

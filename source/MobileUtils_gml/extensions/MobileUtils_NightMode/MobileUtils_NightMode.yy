@@ -18,7 +18,7 @@
   "exportToGame": true,
   "extensionVersion": "0.0.1",
   "files": [
-    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"","constants":[
+    {"resourceType":"GMExtensionFile","resourceVersion":"1.0","name":"MobileUtils_NightMode.ext","constants":[
         {"resourceType":"GMExtensionConstant","resourceVersion":"1.0","name":"MobileUtils_NightMode_Night","hidden":false,"value":"0",},
         {"resourceType":"GMExtensionConstant","resourceVersion":"1.0","name":"MobileUtils_NightMode_Light","hidden":false,"value":"1",},
         {"resourceType":"GMExtensionConstant","resourceVersion":"1.0","name":"MobileUtils_NightMode_Undefined","hidden":false,"value":"2",},
@@ -27,8 +27,10 @@
       ],"init":"","kind":4,"order":[],"origname":"","ProxyFiles":[],"uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject": "",
-  "hasConvertedCodeInjection": false,
+  "hasConvertedCodeInjection": true,
   "helpfile": "",
+  "HTML5CodeInjection": "",
+  "html5Props": false,
   "IncludedResources": [],
   "installdir": "",
   "iosCocoaPodDependencies": "",

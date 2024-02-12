@@ -60,43 +60,32 @@ public class MobileUtils_Share extends RunnerSocial
 			
 			default:
 	
-				boolean permission = false;
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) 
-				{
-					if(Environment.isExternalStorageManager())
-						permission = true;
-				} 
-				else 
-				{
-					if(ContextCompat.checkSelfPermission(RunnerActivity.CurrentActivity,Manifest.permission.READ_EXTERNAL_STORAGE) == 0)
-					if(ContextCompat.checkSelfPermission(RunnerActivity.CurrentActivity,Manifest.permission.WRITE_EXTERNAL_STORAGE) == 0)
-						permission = true;
-				}
+				File localFile = new File(activity.getFilesDir() + "/" + value);
 				
-				if(!permission)
-					return 0.0;
-	
-				File localFile = new File(activity.getFilesDir()+"/"+value);
-				File extFile = new File(String.valueOf(Environment.getExternalStorageDirectory())+"/"+value);
+				File imagePath = new File(activity.getFilesDir(), "my_images"); 
+				imagePath.mkdir();
+				File newFile = new File(imagePath, value); 
 				
 				try
 				{
-					copy(localFile,extFile);
+					copy(localFile,newFile);
 				}
 				catch(Exception e)
 				{
-					Log.i("yoyo","something wrong");
+					Log.i("yoyo","something wrong" + e);
 					return -2.0;
 				}
 				
-				Uri uriFile;
-				if(MIME.equals("application/pdf") || MIME.equals("*/*"))
-					uriFile = FileProvider.getUriForFile(activity, activity.getPackageName(), extFile);
-				else
-					uriFile = Uri.fromFile(extFile);				
+				Uri contentUri = FileProvider.getUriForFile(activity, activity.getPackageName(), newFile);
+				Log.i("yoyo","Uri content:" + contentUri.toString());
 				
+				// Uri uriFile;
+				// if(MIME.equals("application/pdf") || MIME.equals("*/*"))
+					// uriFile = FileProvider.getUriForFile(activity, activity.getPackageName(), extFile);
+				// else
+					// uriFile = Uri.fromFile(extFile);
 				
-				i.putExtra(Intent.EXTRA_STREAM, uriFile);
+				i.putExtra(Intent.EXTRA_STREAM, contentUri);
 			break;
 		}
         
