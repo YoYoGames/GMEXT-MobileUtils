@@ -3,6 +3,8 @@ show_debug_message("Async: " + json_encode(async_load))
 
 if(async_load[?"type"] == "MobileUtils_Camera_Open")
 {
+	if(!async_load[?"success"])
+		exit
 	var _path = async_load[?"path"]
 	
 	scr_image_tools_square_crop(_path,300)

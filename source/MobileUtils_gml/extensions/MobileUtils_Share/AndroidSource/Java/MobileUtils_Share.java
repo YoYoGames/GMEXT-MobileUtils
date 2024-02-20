@@ -77,7 +77,7 @@ public class MobileUtils_Share extends RunnerSocial
 				}
 				
 				Uri contentUri = FileProvider.getUriForFile(activity, activity.getPackageName(), newFile);
-				Log.i("yoyo","Uri content:" + contentUri.toString());
+				// Log.i("yoyo","Uri content:" + contentUri.toString());
 				
 				// Uri uriFile;
 				// if(MIME.equals("application/pdf") || MIME.equals("*/*"))
