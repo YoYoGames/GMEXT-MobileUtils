@@ -59,6 +59,8 @@ public class MobileUtils_Share extends RunnerSocial
 			break;
 			
 			default:
+			
+				// i.putExtra(Intent.EXTRA_TEXT, Title_text);
 	
 				File localFile = new File(activity.getFilesDir() + "/" + value);
 				
