@@ -6,6 +6,7 @@
     {"name":"Gallery","order":1,"path":"folders/MobileUtils Demo/Gallery.yy",},
     {"name":"Objects","order":2,"path":"folders/MobileUtils Demo/Gallery/Objects.yy",},
     {"name":"Rooms","order":3,"path":"folders/MobileUtils Demo/Gallery/Rooms.yy",},
+    {"name":"AppPopupSettings","order":9,"path":"folders/MobileUtils Demo/AppPopupSettings.yy",},
     {"name":"ImageTools","order":2,"path":"folders/MobileUtils Demo/ImageTools.yy",},
     {"name":"Mobile Vibrate","order":8,"path":"folders/MobileUtils Demo/Mobile Vibrate.yy",},
     {"name":"Android","order":1,"path":"folders/MobileUtils Demo/Mobile Vibrate/Android.yy",},
@@ -22,6 +23,7 @@
   ],
   "ResourceOrderSettings":[
     {"name":"MobileUtils_Android_Vibrate","order":5,"path":"extensions/MobileUtils_Android_Vibrate/MobileUtils_Android_Vibrate.yy",},
+    {"name":"MobileUtils_App_Popup_Settings","order":7,"path":"extensions/MobileUtils_App_Popup_Settings/MobileUtils_App_Popup_Settings.yy",},
     {"name":"MobileUtils_Gallery","order":1,"path":"extensions/MobileUtils_Gallery/MobileUtils_Gallery.yy",},
     {"name":"MobileUtils_ImageTools","order":2,"path":"extensions/MobileUtils_ImageTools/MobileUtils_ImageTools.yy",},
     {"name":"MobileUtils_NightMode","order":3,"path":"extensions/MobileUtils_NightMode/MobileUtils_NightMode.yy",},
