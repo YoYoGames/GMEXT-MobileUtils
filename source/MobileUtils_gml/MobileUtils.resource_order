@@ -1,12 +1,12 @@
 {
   "FolderOrderSettings":[
     {"name":"MobileUtils Demo","order":3,"path":"folders/MobileUtils Demo.yy",},
+    {"name":"AppPopupSettings","order":9,"path":"folders/MobileUtils Demo/AppPopupSettings.yy",},
     {"name":"Objects","order":3,"path":"folders/MobileUtils Demo/Camera/Objects.yy",},
     {"name":"Rooms","order":4,"path":"folders/MobileUtils Demo/Camera/Rooms.yy",},
     {"name":"Gallery","order":1,"path":"folders/MobileUtils Demo/Gallery.yy",},
     {"name":"Objects","order":2,"path":"folders/MobileUtils Demo/Gallery/Objects.yy",},
     {"name":"Rooms","order":3,"path":"folders/MobileUtils Demo/Gallery/Rooms.yy",},
-    {"name":"AppPopupSettings","order":9,"path":"folders/MobileUtils Demo/AppPopupSettings.yy",},
     {"name":"ImageTools","order":2,"path":"folders/MobileUtils Demo/ImageTools.yy",},
     {"name":"Mobile Vibrate","order":8,"path":"folders/MobileUtils Demo/Mobile Vibrate.yy",},
     {"name":"Android","order":1,"path":"folders/MobileUtils Demo/Mobile Vibrate/Android.yy",},
