@@ -26,6 +26,7 @@
       ],"copyToTargets":52777614151918,"filename":"MobileUtils_Android_Vibrate.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Android_Vibrate_Shot","argCount":2,"args":[2,2,],"documentation":"","externalName":"MobileUtils_Android_Vibrate_Shot","help":"MobileUtils_Android_Vibrate_Shot(milliseconds,amplitude)","hidden":false,"kind":11,"name":"MobileUtils_Android_Vibrate_Shot","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Android_Vibrate_Predefined","argCount":0,"args":[2,],"documentation":"","externalName":"MobileUtils_Android_Vibrate_Predefined","help":"MobileUtils_Android_Vibrate_Predefined(effectId)","hidden":false,"kind":4,"name":"MobileUtils_Android_Vibrate_Predefined","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
+        {"$GMExtensionFunction":"","%Name":"MobileUtils_Android_Vibrate_Available","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_Android_Vibrate_Available","help":"MobileUtils_Android_Vibrate_Available()","hidden":false,"kind":4,"name":"MobileUtils_Android_Vibrate_Available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":4,"name":"Share.ext","order":[],"origname":"extensions\\Share.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",

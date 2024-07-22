@@ -24,5 +24,16 @@ public class MobileUtils_Android_Vibrate extends RunnerSocial
 		((Vibrator) activity.getSystemService(Activity.VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot((long)milliseconds,(int)amplitude));
 
 	}
+
+	public double MobileUtils_Android_Vibrate_Available() {
+		Vibrator vibrator = (Vibrator) activity.getSystemService(Activity.VIBRATOR_SERVICE);
+		
+		if (vibrator != null && vibrator.hasVibrator()) {
+			return 1.0;
+		} else {
+			return 0.0;
+		}
+
+	}
 }
 
