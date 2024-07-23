@@ -29,6 +29,7 @@
     {"name":"MobileUtils_NightMode","order":3,"path":"extensions/MobileUtils_NightMode/MobileUtils_NightMode.yy",},
     {"name":"MobileUtils_Share","order":4,"path":"extensions/MobileUtils_Share/MobileUtils_Share.yy",},
     {"name":"MobileUtils_TapticEngine","order":6,"path":"extensions/MobileUtils_TapticEngine/MobileUtils_TapticEngine.yy",},
+    {"name":"MobileUtils_Web_Vibrate","order":8,"path":"extensions/MobileUtils_Web_Vibrate/MobileUtils_Web_Vibrate.yy",},
     {"name":"Font_YoYo_30","order":1,"path":"fonts/Font_YoYo_30/Font_YoYo_30.yy",},
     {"name":"Font_YoYo_50","order":2,"path":"fonts/Font_YoYo_50/Font_YoYo_50.yy",},
     {"name":"Note_MobileUtils_Share","order":3,"path":"notes/Note_MobileUtils_Share/Note_MobileUtils_Share.yy",},

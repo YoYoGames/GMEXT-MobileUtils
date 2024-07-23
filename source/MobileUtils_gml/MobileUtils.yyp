@@ -57,6 +57,7 @@
     {"id":{"name":"MobileUtils_NightMode","path":"extensions/MobileUtils_NightMode/MobileUtils_NightMode.yy",},},
     {"id":{"name":"MobileUtils_Share","path":"extensions/MobileUtils_Share/MobileUtils_Share.yy",},},
     {"id":{"name":"MobileUtils_TapticEngine","path":"extensions/MobileUtils_TapticEngine/MobileUtils_TapticEngine.yy",},},
+    {"id":{"name":"MobileUtils_Web_Vibrate","path":"extensions/MobileUtils_Web_Vibrate/MobileUtils_Web_Vibrate.yy",},},
     {"id":{"name":"Font_YoYo_20","path":"fonts/Font_YoYo_20/Font_YoYo_20.yy",},},
     {"id":{"name":"Font_YoYo_30","path":"fonts/Font_YoYo_30/Font_YoYo_30.yy",},},
     {"id":{"name":"Font_YoYo_50","path":"fonts/Font_YoYo_50/Font_YoYo_50.yy",},},
