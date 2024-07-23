@@ -16,8 +16,8 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"MobileUtils_Html5_Vibrate.js","final":"","functions":[
-        {"$GMExtensionFunction":"","%Name":"MobileUtils_Web_Vibrate_Available","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_Web_Vibrate_Available","help":"MobileUtils_Web_Vibrate_Available()","hidden":false,"kind":5,"name":"MobileUtils_Web_Vibrate_Available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
+    {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":32,"filename":"MobileUtils_Html5_Vibrate.js","final":"","functions":[
+        {"$GMExtensionFunction":"","%Name":"MobileUtils_Web_Vibrate_Available","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_Web_Vibrate_Available","help":"MobileUtils_Web_Vibrate_Available()","hidden":false,"kind":5,"name":"MobileUtils_Web_Vibrate_Available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Web_Vibrate_Shot","argCount":0,"args":[2,],"documentation":"","externalName":"MobileUtils_Web_Vibrate_Shot","help":"MobileUtils_Web_Vibrate_Shot(miliseconds)","hidden":false,"kind":5,"name":"MobileUtils_Web_Vibrate_Shot","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
       ],"init":"","kind":5,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
