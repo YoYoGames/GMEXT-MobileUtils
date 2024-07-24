@@ -67,8 +67,8 @@
   "optionsFile":"options.json",
   "packageId":"com.Kaguva.ShareImage",
   "parent":{
-    "name":"Extensions",
-    "path":"folders/MobileUtils/Extensions.yy",
+    "name":"Mobile Vibrate",
+    "path":"folders/MobileUtils/Extensions/Mobile Vibrate.yy",
   },
   "productId":"F87F1752EF5676078DB4BED8477B99A8",
   "resourceType":"GMExtension",

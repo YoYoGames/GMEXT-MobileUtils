@@ -57,8 +57,8 @@
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{
-    "name":"Extensions",
-    "path":"folders/MobileUtils/Extensions.yy",
+    "name":"Mobile Vibrate",
+    "path":"folders/MobileUtils/Extensions/Mobile Vibrate.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",
