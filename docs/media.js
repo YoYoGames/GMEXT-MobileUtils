@@ -9,7 +9,7 @@
  * @event social
  * @member {string} type The string `"MobileUtils_Camera_Open"`
  * @member {string} path The path to the photo
- * @member {boolean} success Whether successful
+ * @member {boolean} success Whether a picture was taken
  * @event_end
  * 
  * @example
@@ -174,7 +174,7 @@
  *     Obj_MobileUtils_Gallery_Picture.sprite = sprite_add(_path, 0, 0, 0, 0, 0);
  * }
  * ```
- * The code above is was extracted from the ${function.MobileUtils_Gallery_Open} sample and shows an example on to get the width of an image (for a complete example please refer to the respective function).
+ * The code above was extracted from the ${function.MobileUtils_Gallery_Open} sample and shows an example on how to get the width of an image (for a complete example please refer to the respective function).
  * @function_end
  */
 
