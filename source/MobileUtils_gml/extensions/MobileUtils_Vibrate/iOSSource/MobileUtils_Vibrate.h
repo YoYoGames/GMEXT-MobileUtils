@@ -1,7 +1,8 @@
 
 #import <UIKit/UIKit.h>
+#import <CoreHaptics/CoreHaptics.h>
 
-@interface TapticEngine:NSObject
+@interface MobileUtils_Vibrate: NSObject
 {
     NSMutableDictionary *ListenerMap;
     
@@ -11,6 +12,6 @@
 @property(nonatomic, strong) UISelectionFeedbackGenerator *mUISelectionFeedbackGenerator;
 @property(nonatomic, strong) UINotificationFeedbackGenerator *mUINotificationFeedbackGenerator;
 
+@property(nonatomic, strong) CHHapticEngine *hapticEngine;
+
 @end
-
-

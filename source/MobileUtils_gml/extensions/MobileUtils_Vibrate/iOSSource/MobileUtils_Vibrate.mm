@@ -6,7 +6,7 @@
 //
 
 
-#import "TapticEngine.h"
+#import "MobileUtils_Vibrate.h"
 
 
 const int EVENT_OTHER_SOCIAL = 70;
@@ -17,11 +17,13 @@ extern UIView *g_glView;
 extern int g_DeviceWidth;
 extern int g_DeviceHeight;
 
-@implementation TapticEngine
+@implementation MobileUtils_Vibrate
 
 -(id)init {
     if ( self = [super init] ) {
         
+        self.hapticEngine = [[CHHapticEngine alloc] initAndReturnError:nil];
+        [self.hapticEngine startAndReturnError:nil];
         
         return self;
 	}
@@ -165,7 +167,32 @@ typedef enum {
 }
 
 
-MobileUtils_Vibrate_Shot
+-(void) MobileUtils_Vibrate_Shot:(double) milliseconds
+{
+    if (@available(iOS 13.0, *)) 
+    {
+        CHHapticEventParameter *intensityParameter = [[CHHapticEventParameter alloc] initWithParameterID:CHHapticEventParameterIDHapticIntensity value:1.0];
+        CHHapticEventParameter *sharpnessParameter = [[CHHapticEventParameter alloc] initWithParameterID:CHHapticEventParameterIDHapticSharpness value:0.5];
+        
+        CHHapticEvent *hapticEvent = [[CHHapticEvent alloc] initWithEventType:CHHapticEventTypeHapticContinuous parameters:@[intensityParameter, sharpnessParameter] relativeTime:0 duration:milliseconds/1000];
+
+        
+        // Create a haptic pattern
+        NSError *error = nil;
+        CHHapticPattern *pattern = [[CHHapticPattern alloc] initWithEvents:@[hapticEvent] parameters:@[] error:&error];
+        
+        // Create a player to play the haptic pattern
+        id<CHHapticPatternPlayer> player = [self.hapticEngine createPlayerWithPattern:pattern error:&error];
+        
+        // Start the haptic player
+        [player startAtTime:0 error:&error];
+        
+    } 
+    else
+    {
+        // Fallback on earlier versions
+    }
+}
 
 @end
 

@@ -56,7 +56,9 @@
   "iosdelegatename":"",
   "iosplistinject":"",
   "iosProps":true,
-  "iosSystemFrameworkEntries":[],
+  "iosSystemFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"CoreHaptics.framework","embed":0,"name":"CoreHaptics.framework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "iosThirdPartyFrameworkEntries":[],
   "license":"",
   "maccompilerflags":"",
