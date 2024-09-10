@@ -190,7 +190,7 @@ typedef enum {
     } 
     else
     {
-        // Fallback on earlier versions
+        [self MobileUtils_Vibrate_Predefined: 1]; // IMPACT_MEDIUM
     }
 }
 
