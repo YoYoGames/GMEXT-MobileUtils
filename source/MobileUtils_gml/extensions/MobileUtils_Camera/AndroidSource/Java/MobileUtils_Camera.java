@@ -76,7 +76,7 @@ public class MobileUtils_Camera extends RunnerSocial
 	@Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) 
 	{
-		Log.i("yoyo","Camera onActivityResult: " + String.valueOf(resultCode) + " - " + String.valueOf(Activity.RESULT_OK));
+		// Log.i("yoyo","Camera onActivityResult: " + String.valueOf(resultCode) + " - " + String.valueOf(Activity.RESULT_OK));
 		
 		try 
 		{
@@ -122,7 +122,10 @@ public class MobileUtils_Camera extends RunnerSocial
 		}
 		catch(Exception e)
 		{
-			
+				int dsMapIndex = RunnerJNILib.jCreateDsMap(null, null, null);
+				RunnerJNILib.DsMapAddString( dsMapIndex,"type","MobileUtils_Camera_Open" );
+				RunnerJNILib.DsMapAddDouble( dsMapIndex,"success",0.0);
+				RunnerJNILib.CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_SOCIAL);
 		}
 	}
 }
