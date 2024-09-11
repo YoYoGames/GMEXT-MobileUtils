@@ -1,14 +1,19 @@
 /**
  * @module home
  * @title Mobile Utils
- * @desc Mobile Utils is a set of extensions offering functionality on the mobile platforms **Android** and **iOS**.
+ * @desc Mobile Utils is a set of extensions offering various functionality on the mobile platforms **Android** and **iOS**.
+ * 
+ * [[Info: In order to avoid injecting unnecessary permissions into the application manifest this module is separated into several distinct modules depending on your game requirements.]]
  * 
  * @section Modules
  * @desc These are the modules under the Mobile Utils extension.
  * 
- * [[Note: The modules themselves are split up into multiple smaller extensions, allowing you to include only the functionality you need in your projects.]]
- * 
- * @ref module.media
+ * @ref module.camera
+ * @ref module.gallery
+ * @ref module.image_tools
+ * @ref module.share
+ * @ref module.settings
+ * @ref module.nightmode
  * @ref module.vibration
  * @section_end
  * 

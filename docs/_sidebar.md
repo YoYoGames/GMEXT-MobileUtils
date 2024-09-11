@@ -1,3 +1,8 @@
 * ### [Mobile Utils Extension](Home)
-  * ### ${module.media}
+  * ### ${module.camera}
+  * ### ${module.gallery}
+  * ### ${module.image_tools}
+  * ### ${module.share}
+  * ### ${module.settings}
+  * ### ${module.nightmode}
   * ### ${module.vibration}

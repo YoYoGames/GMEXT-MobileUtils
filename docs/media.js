@@ -209,54 +209,120 @@
  * @function_end
  */
 
- /**
-  * @func MobileUtils_AppPopupSettings_Show
-  * @desc This function brings up the app settings.
-  * 
-  * @example
-  * ```gml
-  * MobileUtils_AppPopupSettings_Show();
-  * ```
-  * @function_end
-  */
+/**
+ * @func MobileUtils_AppPopupSettings_Show
+ * @desc This function brings up the app settings.
+ * 
+ * @example
+ * ```gml
+ * MobileUtils_AppPopupSettings_Show();
+ * ```
+ * @function_end
+ */
+
+/**
+ * @func MobileUtils_NightMode_Check
+ * @desc This function returns the night mode setting of the device.
+ * 
+ * @returns {constant.MobileUtils_NightMode}
+ * 
+ * @example
+ * ```gml
+ * var _mode = MobileUtils_NightMode_Check();
+ * ```
+ * @function_end
+ */
+
+// Constants
+
+/**
+ * @constant MobileUtils_NightMode
+ * @desc This set of constants represents the night mode setting.
+ * @member MobileUtils_NightMode_Night Night mode is set to night
+ * @member MobileUtils_NightMode_Light Night mode is set to light
+ * @member MobileUtils_NightMode_Undefined Night mode is undefined
+ * @constant_end
+ */
+
 
 // Modules
 
- /**
- * @module media
- * @title Mobile Media
- * @desc This module allows **Android** and **iOS** developers to interact with the camera and gallery applications of the mobile device.
+/**
+ * @module camera
+ * @title Camera
+ * @desc This module provides interaction with the device's camera.
  * 
- * [[Info: In order to avoid injecting unnecessary permissions into the application manifest this module is separated into four distinct modules depending on your game requirements.]]
- * 
- * @section_func Camera Functions
- * @desc These functions are provided to work with the camera.
+ * @section_func
+ * @desc These are the functions in this module: 
  * @ref MobileUtils_Camera_Open
  * @section_end
+ * @module_end
+ */
+
+/**
+ * @module gallery
+ * @title Gallery
+ * @desc This module provides interaction with the gallery.
  * 
- * @section_func Gallery Functions
- * @desc These functions are provided to work with the gallery.
+ * @section_func
+ * @desc These are the functions in this module: 
  * @ref MobileUtils_Gallery_Open
  * @section_end
+ * @module_end
+ */
+
+/**
+ * @module image_tools
+ * @title Image Tools
+ * @desc This module provides interaction with images on the device.
  * 
- * @section_func Image Tools Functions
- * @desc These functions are provided to work with images and edit them.
+ * @section_func
+ * @desc These are the functions in this module: 
  * @ref MobileUtils_Image_Width
  * @ref MobileUtils_Image_Height
  * @ref MobileUtils_Image_Resize
  * @ref MobileUtils_Image_Crop
  * @section_end
+ * @module_end
+ */
+
+/**
+ * @module share
+ * @title Share
+ * @desc This module provides interaction with images on the device.
  * 
- * @section_func Share Functions
- * @desc These functions are provided to share files.
+ * @section_func
+ * @desc These are the functions in this module: 
  * @ref MobileUtils_Share_Open
  * @section_end
- *
+ * @module_end
+ */
+
+/**
+ * @module settings
+ * @title Settings
+ * @desc This module provides interaction with settings.
  * 
- * @section_func Settings Functions
- * @desc These functions are provided to interact with settings.
- * @ref MobileUtils_AppPopupSettings_Show 
+ * @section_func
+ * @desc These are the functions in this module: 
+ * @ref MobileUtils_AppPopupSettings_Show
+ * @section_end
+ * @module_end
+ */
+
+/**
+ * @module nightmode
+ * @title Night Mode
+ * @desc This module provides functionality related to night mode.
+ * 
+ * @section_func
+ * @desc These are the functions in this module: 
+ * @ref MobileUtils_NightMode_Check
  * @section_end
  * 
+ * @section_const
+ * @desc These are the constants in this module: 
+ * @ref MobileUtils_NightMode
+ * @section_end
  * @module_end
  */
