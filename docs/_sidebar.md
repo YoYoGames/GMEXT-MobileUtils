@@ -1,4 +1,4 @@
-* ### [Mobile Utils Extension](Home)
+* ### [Mobile Utils Extension](home)
   * ### ${module.camera}
   * ### ${module.gallery}
   * ### ${module.image_tools}

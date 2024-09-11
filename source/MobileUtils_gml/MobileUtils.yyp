@@ -33,7 +33,7 @@
     {"$GMFolder":"","%Name":"Extensions","folderPath":"folders/MobileUtils/Extensions.yy","name":"Extensions","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "IncludedFiles":[
-    {"$GMIncludedFile":"","%Name":"MobileUtils_Documentation.pdf","CopyToMask":0,"filePath":"datafiles","name":"MobileUtils_Documentation.pdf","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
+    {"$GMIncludedFile":"","%Name":"GMEXT-MobileUtils.html","CopyToMask":0,"filePath":"datafiles","name":"GMEXT-MobileUtils.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"YYFile.yy","CopyToMask":-1,"filePath":"datafiles","name":"YYFile.yy","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"YYGif.gif","CopyToMask":-1,"filePath":"datafiles","name":"YYGif.gif","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"YYImage.jpg","CopyToMask":-1,"filePath":"datafiles","name":"YYImage.jpg","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -53,6 +53,7 @@
     {"id":{"name":"MobileUtils_NightMode","path":"extensions/MobileUtils_NightMode/MobileUtils_NightMode.yy",},},
     {"id":{"name":"MobileUtils_Share","path":"extensions/MobileUtils_Share/MobileUtils_Share.yy",},},
     {"id":{"name":"MobileUtils_Vibrate","path":"extensions/MobileUtils_Vibrate/MobileUtils_Vibrate.yy",},},
+    {"id":{"name":"MobileUtils","path":"extensions/MobileUtils/MobileUtils.yy",},},
     {"id":{"name":"fnt_gm_15","path":"fonts/fnt_gm_15/fnt_gm_15.yy",},},
     {"id":{"name":"fnt_gm_20","path":"fonts/fnt_gm_20/fnt_gm_20.yy",},},
     {"id":{"name":"fnt_gm_30","path":"fonts/fnt_gm_30/fnt_gm_30.yy",},},

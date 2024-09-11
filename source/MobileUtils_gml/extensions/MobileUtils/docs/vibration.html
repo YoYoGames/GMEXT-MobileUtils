@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Device Vibration - GMEXT-MobileUtils</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+        <link href="assets/css/gmext_style.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Device Vibration";
+        var mkdocs_page_input_path = "vibration.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/gml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> GMEXT-MobileUtils
+        </a>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils Extension</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="image_tools.html">Image Tools</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Device Vibration</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">GMEXT-MobileUtils</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Device Vibration</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/vibration.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <p><a id="top"></a></p>
+<h1 id="device-vibration"><strong>Device Vibration</strong></h1>
+<p>This module contains functions to interact with device vibration on the Android, iOS and HTML5 platforms.</p>
+<h2 id="functions">Functions</h2>
+<p>The following functions can be used:</p>
+<ul>
+<li><a href="vibration.html#mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</a></li>
+<li><a href="vibration.html#mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</a></li>
+<li><a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a></li>
+</ul>
+<h2 id="constants">Constants</h2>
+<p>These are the constants that you can use:</p>
+<ul>
+<li><a href="vibration.html#mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</a></li>
+</ul>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</h1>
+<p>This function creates a one-shot vibration.</p>
+<p>A one-shot vibration will vibrate constantly for the specified period of time at the specified amplitude, and then stop.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On iOS versions &lt; 13 this function's <code>milliseconds</code> parameter is ignored and it plays a medium impact predefined effect instead (<code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_MEDIUM</code>).</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Shot(milliseconds, amplitude)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>milliseconds</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The number of milliseconds to vibrate</td>
+</tr>
+<tr>
+<td>amplitude</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The amplitude of the vibration. This is a value between 1 and 255, or -1 for the default</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">if(MobileUtils_Vibrate_Is_Available())
+{
+    MobileUtils_Vibrate_Shot(1000);
+}</code></pre>
+The code example first checks if device vibration is available using <a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a>. If it is, a one-shot vibration of one second is created using <a href="vibration.html#mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</a>.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</h1>
+<p>This function creates a predefined vibration effect.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is unsupported on HTML5.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Predefined(effectId)</code></pre>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>effectId</td>
+<td><a href="vibration.html#mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</a></td>
+<td>The predefined effect to create</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p>N/A</p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<pre class="highlight"><code class="language-gml">if (os_type != os_android) { exit; }
+
+var _perm_vibrate = "android.permission.VIBRATE";
+if (os_check_permission(_perm_vibrate))
+{
+    MobileUtils_Vibrate_Predefined(MobileUtils_VIBRATE_KIND_ANDROID_HEAVY_CLICK);
+} else
+{
+    os_request_permission(_perm_vibrate);
+}</code></pre>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</h1>
+<p>This function returns if device vibration is available.</p>
+<p>The function returns 0 if vibration is not available, 1 if it is and 2 if extra functionality can be used.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Is_Available()</code></pre>
+</blockquote>
+<p><br></p>
+<p><br></p>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></p>
+</blockquote>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><pre class="highlight"><code class="language-gml">if (MobileUtils_Vibrate_Is_Available())
+{
+    show_debug_message("This device supports vibration.");
+}</code></pre>
+The code example above checks if device vibration is available using <a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a> and shows a debug message if true.</p>
+<p><br></p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</h1>
+<p>This set of constants represents the predefined vibration effects that can be used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Constants are included for both Android and iOS. You should make sure to use the right constant on the right platform.</p>
+</div>
+<p>These constants are referenced by the following functions:</p>
+<ul>
+<li><a href="vibration.html#mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</a></li>
+</ul>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_ANDROID_CLICK</code></td>
+<td>A click effect on Android.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_ANDROID_DOUBLE_CLICK</code></td>
+<td>A double click effect on Android.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_ANDROID_HEAVY_CLICK</code></td>
+<td>A heavy click effect on Android.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_ANDROID_TICK</code></td>
+<td>A tick effect on Android.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_LIGHT</code></td>
+<td>A light impact haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_MEDIUM</code></td>
+<td>A medium impact haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_HEAVY</code></td>
+<td>A heavy impact haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_RIGID</code></td>
+<td>A rigid impact haptic effect on iOS. This is only available on iOS &gt;= 13.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_SOFT</code></td>
+<td>A soft impact haptic effect on iOS. This is only available on iOS &gt;= 13.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_SELECTION</code></td>
+<td>A selection haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_WARNING</code></td>
+<td>A warning notification haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_SUCCESS</code></td>
+<td>A success notification haptic effect on iOS.</td>
+</tr>
+<tr>
+<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_ERROR</code></td>
+<td>An error notification haptic effect on iOS.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="nightmode.html" class="btn btn-neutral float-left" title="Night Mode"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p><p align="center">GameMaker 2024</p></p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/YoYoGames/GMEXT-MobileUtils" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="nightmode.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/gml.min.js"></script>
+      <script src="assets/js/gmext_script.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

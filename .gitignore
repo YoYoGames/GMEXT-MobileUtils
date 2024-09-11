@@ -1,2 +1,4 @@
 
 source/MobileUtils_gml/options/extensions/
+
+*.resource_order
