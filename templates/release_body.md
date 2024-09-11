@@ -17,6 +17,7 @@ MobileUtils is a set of tools and features that enables developers to use extra 
 - Gallery (select photo)
 - Image Tools
 - Share
+- Vibration
 
 ## DOCUMENTATION
 

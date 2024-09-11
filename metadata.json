@@ -1,18 +1,1 @@
-{
-    "gitHubUrl": "https://github.com/YoYoGames/GMEXT-MobileUtils",
-    "projectFile": "source/MobileUtils_gml/MobileUtils.yyp",
-    "projectVersion": "LTS22",
-    "releaseTemplate": "templates/release_body.md",
-    "extensionMetaData": [
-        {
-            "extensionFile": "source/MobileUtils_gml/extensions/MobileUtils_Camera/MobileUtils_Camera.yy",
-            "packageId": "com.yoyogames.mobileutilsext",
-            "packageName": "MobileUtils Ext",
-            "packageVersion": "1.1.0",
-            "packageFormat": "LTS22",
-            "includeFolders": null,
-            "includeResources": null,
-            "excludeResources": null
-        }
-    ]
-}
+{"gitHubUrl":"https://github.com/YoYoGames/GMEXT-MobileUtils","projectFile":"source/MobileUtils_gml/MobileUtils.yyp","projectVersion":"LTS22","releaseTemplate":"templates/release_body.md","extensionMetaData":[{"extensionFile":"source/MobileUtils_gml/extensions/MobileUtils/MobileUtils.yy","packageId":"com.yoyogames.mobileutilsext","packageName":"MobileUtils Ext","packageVersion":"1.2.0","packageFormat":"LTS22","includeFolders":null,"includeResources":null,"excludeFolders":null,"excludeResources":null,"postRemovals":[]}],"documentationFolder":null}
