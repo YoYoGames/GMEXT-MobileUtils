@@ -6,3 +6,4 @@
   * ### ${module.settings}
   * ### ${module.nightmode}
   * ### ${module.vibration}
+  * ### ${module.local_notifications}

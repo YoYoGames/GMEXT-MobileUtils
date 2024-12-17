@@ -15,6 +15,7 @@
  * @ref module.settings
  * @ref module.nightmode
  * @ref module.vibration
+ * @ref module.local_notifications
  * @section_end
  * 
  * @module_end
