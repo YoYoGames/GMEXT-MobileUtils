@@ -1,7 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-@interface LocalNotifications:NSObject <UNUserNotificationCenterDelegate>
+@interface LocalNotifications:NSObject
 
 // Class method to get the notification prefix
 + (NSString *)prefix;
@@ -39,12 +39,5 @@
  Checks the current notification permission status and returns it via an asynchronous event.
  */
 - (void)LocalPushNotification_iOS_Permission_Status;
-
-/**
- Should be called during the extension's launch to set up notification handling.
-
- @param launchOptions The launch options dictionary provided by the system.
- */
-- (void)onLaunch:(NSDictionary *)launchOptions;
 
 @end

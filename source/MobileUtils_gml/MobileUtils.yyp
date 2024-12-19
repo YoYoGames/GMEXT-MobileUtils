@@ -46,10 +46,11 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.8.1.171",
+    "IDEVersion":"2024.11.0.179",
   },
   "name":"MobileUtils",
   "resources":[
+    {"id":{"name":"MobileUtils_APN","path":"extensions/MobileUtils_APN/MobileUtils_APN.yy",},},
     {"id":{"name":"MobileUtils_App_Popup_Settings","path":"extensions/MobileUtils_App_Popup_Settings/MobileUtils_App_Popup_Settings.yy",},},
     {"id":{"name":"MobileUtils_Camera","path":"extensions/MobileUtils_Camera/MobileUtils_Camera.yy",},},
     {"id":{"name":"MobileUtils_Gallery","path":"extensions/MobileUtils_Gallery/MobileUtils_Gallery.yy",},},

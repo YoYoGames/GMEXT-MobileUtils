@@ -1,4 +1,6 @@
-#import "UNUserNotificationCenterMultiplexer.h"
+#import <objc/runtime.h>
+
+#import "iPad_RunnerAppDelegate.h"
 #import "LocalNotifications.h"
 
 extern "C" int dsMapCreate();
@@ -10,14 +12,142 @@ extern void CreateAsynEventWithDSMap(int dsmapindex, int event_index);
 
 const int EVENT_OTHER_SOCIAL = 70;
 const int EVENT_OTHER_NOTIFICATION = 71;
-// External function declarations...
 
-const char*  YYNotification_id = "id";
-const char*  YYNotification_title = "title";
-const char*  YYNotification_message = "message";
-const char*  YYNotification_data = "data";
+static const void *kOnceTokenKey = &kOnceTokenKey;
+
+typedef void(^RunOnceCompletionHandler)(void);
+typedef void(^RunOncePresentationHandler)(UNNotificationPresentationOptions options);
+
+// Wrap a "void(void)" completion handler so it only runs once
+static void(^RunOnceVoidCompletionHandler(void(^originalHandler)(void)))(void) {
+    __block BOOL called = NO;
+    return ^{
+        if (!called) {
+            called = YES;
+            if (originalHandler) originalHandler();
+        } else {
+            // Already called, do nothing
+        }
+    };
+}
+
+// Wrap a "(UNNotificationPresentationOptions)" completion handler so it only runs once
+static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotificationPresentationOptions)))(UNNotificationPresentationOptions) {
+    __block BOOL called = NO;
+    return ^(UNNotificationPresentationOptions options){
+        if (!called) {
+            called = YES;
+            if (originalHandler) originalHandler(options);
+        } else {
+            // Already called, do nothing
+        }
+    };
+}
 
 @implementation LocalNotifications
+
++ (void)load {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        class_addProtocol([iPad_RunnerAppDelegate class], @protocol(UNUserNotificationCenterDelegate));
+        [self swizzleUserNotificationMethods];
+    });
+}
+
++ (void)swizzleUserNotificationMethods {
+    Class appDelegateClass = [iPad_RunnerAppDelegate class];
+
+    // willPresentNotification
+    [self swizzleMethodInClass:appDelegateClass
+              originalSelector:@selector(userNotificationCenter:willPresentNotification:withCompletionHandler:)
+              swizzledSelector:@selector(yy_userNotificationCenter:willPresentNotification:withCompletionHandler:)];
+
+    // didReceiveNotificationResponse
+    [self swizzleMethodInClass:appDelegateClass
+              originalSelector:@selector(userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)
+              swizzledSelector:@selector(yy_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)];
+}
+
++ (void)swizzleMethodInClass:(Class)appDelegateClass
+            originalSelector:(SEL)originalSelector
+            swizzledSelector:(SEL)swizzledSelector {
+
+    Method originalMethod = class_getInstanceMethod(appDelegateClass, originalSelector);
+    Method swizzledMethod = class_getInstanceMethod(self, swizzledSelector);
+
+    BOOL didAddMethod = class_addMethod(appDelegateClass,
+                                        originalSelector,
+                                        method_getImplementation(swizzledMethod),
+                                        method_getTypeEncoding(swizzledMethod));
+
+    if (didAddMethod) {
+        NSLog(@"[MobileUtils_APN] Added method %@ to class %@", NSStringFromSelector(originalSelector), NSStringFromClass(appDelegateClass));
+    } else {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+        NSLog(@"[MobileUtils_APN] Swizzled method %@ in class %@", NSStringFromSelector(originalSelector), NSStringFromClass(appDelegateClass));
+    }
+}
+
+#pragma mark - Swizzled Notification Methods
+
+// Swizzled willPresentNotification
+- (void)yy_userNotificationCenter:(UNUserNotificationCenter *)center
+          willPresentNotification:(UNNotification *)notification
+            withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
+
+    // Wrap the completionHandler with a run-once handler
+    void (^onceHandler)(UNNotificationPresentationOptions) = RunOncePresentationCompletionHandler(completionHandler);
+
+    // Call the original if available
+    if ([self respondsToSelector:@selector(yy_userNotificationCenter:willPresentNotification:withCompletionHandler:)]) {
+        // Here yy_ version is original due to method_exchangeImplementations logic
+        [self yy_userNotificationCenter:center willPresentNotification:notification withCompletionHandler:onceHandler];
+    }
+
+    // Insert your logic here
+    NSLog(@"LocalNotifications: willPresentNotification");
+
+    UNNotificationTrigger *trigger = notification.request.trigger;
+
+    // This is a remote notification? Ignore...
+    if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        return;
+    }
+
+    [LocalNotifications handleLocalNotification:notification];
+
+    onceHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge);
+}
+
+// Swizzled didReceiveNotificationResponse
+- (void)yy_userNotificationCenter:(UNUserNotificationCenter *)center
+     didReceiveNotificationResponse:(UNNotificationResponse *)response
+              withCompletionHandler:(void (^)(void))completionHandler {
+
+    // Wrap the completionHandler with a run-once handler
+    void (^onceHandler)(void) = RunOnceVoidCompletionHandler(completionHandler);
+
+    // Call the original if available
+    if ([self respondsToSelector:@selector(yy_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)]) {
+        [self yy_userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:onceHandler];
+    }
+
+    // Insert your logic here
+    NSLog(@"LocalNotifications: didReceiveNotificationResponse");
+
+    UNNotification *notification = response.notification;
+    UNNotificationTrigger *trigger = notification.request.trigger;
+
+    // This is a remote notification? Ignore...
+    if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        return;
+    }
+
+    [LocalNotifications handleLocalNotification:notification];
+
+    onceHandler();
+}
+
 
 + (NSString*) prefix
 {
@@ -62,9 +192,12 @@ const char*  YYNotification_data = "data";
             NSMutableDictionary *data = [NSMutableDictionary dictionary];
             data[@"value"] = @(granted);
             data[@"success"] = @(error != nil);
-            [self sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Request" data:data];
+            [LocalNotifications sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Request" data:data];
          }];
     } else {
+        // iOS 9 and earlier
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         UIUserNotificationType allNotificationTypes = (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
@@ -72,7 +205,8 @@ const char*  YYNotification_data = "data";
         NSMutableDictionary *data = [NSMutableDictionary dictionary];
         data[@"value"] = @(YES);
         data[@"success"] = @(YES);
-        [self sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Request" data:data];
+        [LocalNotifications sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Request" data:data];
+#pragma clang diagnostic pop
     }
 }
 
@@ -105,57 +239,13 @@ const char*  YYNotification_data = "data";
         NSMutableDictionary *data = [NSMutableDictionary dictionary];
         data[@"value"] = statusString;
         data[@"success"] = @(YES);
-        [self sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Status" data:data];
+        [LocalNotifications sendAsyncEvent:EVENT_OTHER_SOCIAL eventType:@"LocalPushNotification_iOS_Permission_Status" data:data];
     }];
 }
 
-#pragma mark - Selectors
+#pragma mark - Helper Methods
 
-- (void)onLaunch:(NSDictionary *)launchOptions {
-
-    // Register with the UNUserNotificationCenter multiplexer
-    NSLog(@"LocalNotifications onLaunch:");
-    UNUserNotificationCenterMultiplexer *multiplexer = [UNUserNotificationCenterMultiplexer sharedInstance];
-    [multiplexer registerDelegate:self];
-}
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center 
-        didReceiveNotificationResponse:(UNNotificationResponse *)response 
-        withCompletionHandler:(void (^)(void))completionHandler {
-    UNNotification *notification = response.notification;
-    UNNotificationTrigger *trigger = notification.request.trigger;
-    
-    NSLog(@"LocalNotifications: didReceiveNotificationResponse");
-
-    // This is a remote notification? Ignore...
-    if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        return;
-    }
-    
-    [self handleLocalNotification:notification];
-    
-    completionHandler();
-}
-
-- (void)userNotificationCenter:(UNUserNotificationCenter *)center 
-        willPresentNotification:(UNNotification *)notification 
-        withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler {
-    UNNotificationTrigger *trigger = notification.request.trigger;
-    
-    NSLog(@"LocalNotifications: willPresentNotification");
-
-    // This is a remote notification? Ignore...
-    if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        return;
-    }
-
-    [self handleLocalNotification:notification];
-    
-    // Present the notification
-    completionHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound);
-}
-
-- (void)handleLocalNotification:(UNNotification*)notification {
++ (void)handleLocalNotification:(UNNotification*)notification {
 
     NSString *identifier = notification.request.identifier;
 
@@ -165,12 +255,10 @@ const char*  YYNotification_data = "data";
     data[@"message"] = notification.request.content.body;
     data[@"data"] = notification.request.content.userInfo[@"data_key"];
     
-    [self sendAsyncEvent:EVENT_OTHER_NOTIFICATION eventType:@"Notification_Local" data:data];
+    [LocalNotifications sendAsyncEvent:EVENT_OTHER_NOTIFICATION eventType:@"Notification_Local" data:data];
 }
 
-#pragma mark - Helper Methods
-
-- (void)sendAsyncEvent:(int)eventId eventType:(NSString *)eventType data:(NSDictionary *)data {
++ (void)sendAsyncEvent:(int)eventId eventType:(NSString *)eventType data:(NSDictionary *)data {
     dispatch_async(dispatch_get_main_queue(), ^{
         int dsMapIndex = dsMapCreate();
         dsMapAddString(dsMapIndex, (char *)"type", (char *)[eventType UTF8String]);
