@@ -94,9 +94,11 @@ public class MobileUtils_Camera extends RunnerSocial
 					Bundle extras = data.getExtras();//finish converting and copy the image
 					Bitmap bitmap = extras.getParcelable("data");//receive image to bitmap
 					
-					File imagePath = new File(activity.getFilesDir(), "my_pics"); 
-					imagePath.mkdir();
-					File newFile = new File(imagePath, "temp.jpeg"); 
+					// File imagePath = new File(activity.getFilesDir(), "my_pics"); 
+					// imagePath.mkdir();
+					// File newFile = new File(imagePath, "temp.jpeg"); 
+					
+					File newFile = new File(activity.getExternalFilesDir(null), "temp.jpeg"); 
 					
 					//create a file to write bitmap data
 					newFile.createNewFile();

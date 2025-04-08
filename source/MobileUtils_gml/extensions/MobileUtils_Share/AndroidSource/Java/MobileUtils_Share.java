@@ -24,6 +24,12 @@ import java.nio.channels.FileChannel;
 
 import androidx.core.content.FileProvider;
 
+import android.content.pm.ResolveInfo;
+import java.util.List;
+import android.content.pm.PackageManager;
+import 	android.webkit.MimeTypeMap;
+import android.content.Context;
+
 public class MobileUtils_Share extends RunnerSocial
 {	
 	Activity activity = RunnerActivity.CurrentActivity;
@@ -39,7 +45,42 @@ public class MobileUtils_Share extends RunnerSocial
 		inStream.close();
 		outStream.close();
 	}
+	
+	
+	public void shareFile(Context context, File file) {
+		
+		if (!file.exists()) {
+			Log.i("yoyo","File not found!");
+			return;
+		}
 
+		Log.i("yoyo","PackageName: " + context.getPackageName());
+
+		Uri fileUri = FileProvider.getUriForFile(
+			context,
+			context.getPackageName() + ".fileprovider",
+			file
+		);
+		
+		String mimeType = getMimeType(file.getAbsolutePath());
+		
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType(mimeType != null ? mimeType : "*/*");
+		shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+		shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+		context.startActivity(Intent.createChooser(shareIntent, "Share file using"));
+	}
+	
+		public String getMimeType(String path) {
+			String extension = MimeTypeMap.getFileExtensionFromUrl(path);
+			if (extension != null) {
+				return MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension.toLowerCase());
+			}
+			return null;
+		}
+	
+	
     public double MobileUtils_Share_Open(String Title_text,String MIME,String value)
 	{
 		StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -61,38 +102,35 @@ public class MobileUtils_Share extends RunnerSocial
 			default:
 			
 				// i.putExtra(Intent.EXTRA_TEXT, Title_text);
-	
+			
 				File localFile = new File(activity.getFilesDir() + "/" + value);
+				Log.i("yoyo",activity.getFilesDir() + "/" + value);
 				
-				File imagePath = new File(activity.getFilesDir(), "my_images"); 
-				imagePath.mkdir();
-				File newFile = new File(imagePath, value); 
+				File newFile = new File(activity.getExternalFilesDir(null), value); 
 				
 				try
 				{
+					Log.i("yoyo","Copying....");
 					copy(localFile,newFile);
+					Log.i("yoyo","Copy SUCCESS");
 				}
 				catch(Exception e)
 				{
-					Log.i("yoyo","something wrong" + e);
+					Log.i("yoyo","Copy Failed");
 					return -2.0;
 				}
 				
-				Uri contentUri = FileProvider.getUriForFile(activity, activity.getPackageName(), newFile);
-				// Log.i("yoyo","Uri content:" + contentUri.toString());
+				shareFile(activity,newFile);
 				
-				// Uri uriFile;
-				// if(MIME.equals("application/pdf") || MIME.equals("*/*"))
-					// uriFile = FileProvider.getUriForFile(activity, activity.getPackageName(), extFile);
-				// else
-					// uriFile = Uri.fromFile(extFile);
-				
-				i.putExtra(Intent.EXTRA_STREAM, contentUri);
-			break;
+				return 1.0;//break;
 		}
         
-		i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		// i.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+		
+		
+
         activity.startActivity(Intent.createChooser(i,Title_text));
+		// activity.startActivity(i);
 		
 		return 1.0;
     }	
