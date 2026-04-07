@@ -185,8 +185,8 @@
  * [[NOTE: On iOS devices, permissions will be requested automatically. Android developers already have the required permissions added to the manifest by the extension: `android.permission.READ_EXTERNAL_STORAGE`, `android.permission.WRITE_EXTERNAL_STORAGE`, `android.permission.CAMERA`.]]
  * 
  * @param {string} title Title of the share (not available for all the providers)
- * @param {string} path The path to the file
  * @param {string} mime One of the following strings: `"text/plain"`, `"text/rtf"`, `"text/html"`, `"text/json"`, `"image/jpg"`, `"image/gif"`, `"application/pdf"`, `"*/*"`
+ * @param {string} path The path to the file
  *
  * @example
  * ```gml
