@@ -14,7 +14,7 @@
   "copyToTargets":0,
   "description":"",
   "exportToGame":true,
-  "extensionVersion":"1.3.0",
+  "extensionVersion":"1.4.0",
   "files":[],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,
