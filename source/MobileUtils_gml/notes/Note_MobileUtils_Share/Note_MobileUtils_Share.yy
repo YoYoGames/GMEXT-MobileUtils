@@ -1,5 +1,5 @@
 {
-  "$GMNotes":"",
+  "$GMNotes":"v1",
   "%Name":"Note_MobileUtils_Share",
   "name":"Note_MobileUtils_Share",
   "parent":{

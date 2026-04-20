@@ -30,7 +30,7 @@
   "physicsShapePoints":[],
   "physicsStartAwake":true,
   "properties":[
-    {"$GMObjectProperty":"v1","%Name":"goto","filters":[
+    {"$GMObjectProperty":"v2","%Name":"goto","filters":[
         "GMRoom",
       ],"listItems":[],"multiselect":false,"name":"goto","rangeEnabled":false,"rangeMax":10.0,"rangeMin":0.0,"resourceType":"GMObjectProperty","resourceVersion":"2.0","value":"","varType":5,},
   ],

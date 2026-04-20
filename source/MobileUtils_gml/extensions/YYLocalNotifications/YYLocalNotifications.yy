@@ -20,7 +20,7 @@
   "exportToGame":true,
   "extensionVersion":"1.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"LocalNotifications.ext","constants":[
+    {"$GMExtensionFile":"v1","%Name":"LocalNotifications.ext","constants":[
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_Authorized","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_Authorized","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"Authorized\"",},
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_Denied","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_Denied","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"Denied\"",},
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_NotDetermined","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_NotDetermined","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"NotDetermined\"",},
@@ -30,7 +30,7 @@
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_iOS_Permission_Request","argCount":0,"args":[],"documentation":"","externalName":"LocalPushNotification_iOS_Permission_Request","help":"LocalPushNotification_iOS_Permission_Request()","hidden":false,"kind":4,"name":"LocalPushNotification_iOS_Permission_Request","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_iOS_Permission_Status","argCount":0,"args":[],"documentation":"","externalName":"LocalPushNotification_iOS_Permission_Status","help":"LocalPushNotification_iOS_Permission_Status()","hidden":false,"kind":4,"name":"LocalPushNotification_iOS_Permission_Status","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_Create_Ext","argCount":0,"args":[1,2,1,1,1,1,],"documentation":"","externalName":"LocalPushNotification_Create_Ext","help":"LocalPushNotification_Create_Ext(ID,seconds,title,message,data,img_path)","hidden":false,"kind":4,"name":"LocalPushNotification_Create_Ext","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
-      ],"init":"","kind":4,"name":"LocalNotifications.ext","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":4,"name":"LocalNotifications.ext","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,

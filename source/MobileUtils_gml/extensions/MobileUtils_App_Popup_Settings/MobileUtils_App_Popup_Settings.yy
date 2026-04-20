@@ -16,9 +16,9 @@
   "exportToGame":true,
   "extensionVersion":"1.0.7",
   "files":[
-    {"$GMExtensionFile":"","%Name":"Share.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileUtils_App_Popup_Settings.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"Share.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileUtils_App_Popup_Settings.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_AppPopupSettings_Show","argCount":2,"args":[],"documentation":"","externalName":"MobileUtils_AppPopupSettings_Show","help":"MobileUtils_AppPopupSettings_Show","hidden":false,"kind":11,"name":"MobileUtils_AppPopupSettings_Show","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"Share.ext","order":[],"origname":"extensions\\Share.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":4,"name":"Share.ext","origname":"extensions\\Share.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,

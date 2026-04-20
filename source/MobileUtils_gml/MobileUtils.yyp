@@ -1,8 +1,8 @@
 {
-  "$GMProject":"",
+  "$GMProject":"v1",
   "%Name":"MobileUtils",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -36,6 +36,7 @@
     {"$GMFolder":"","%Name":"MobileUtils","folderPath":"folders/MobileUtils.yy","name":"MobileUtils","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Extensions","folderPath":"folders/MobileUtils/Extensions.yy","name":"Extensions","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
+  "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[
     {"$GMIncludedFile":"","%Name":"GMEXT-MobileUtils.html","CopyToMask":0,"filePath":"datafiles","name":"GMEXT-MobileUtils.html","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
     {"$GMIncludedFile":"","%Name":"YYFile.yy","CopyToMask":-1,"filePath":"datafiles","name":"YYFile.yy","resourceType":"GMIncludedFile","resourceVersion":"2.0",},
@@ -46,7 +47,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.11.0.179",
+    "IDEVersion":"2024.14.4.222",
   },
   "name":"MobileUtils",
   "resources":[
@@ -83,7 +84,6 @@
     {"id":{"name":"Obj_MobileUtils_Share_Gif","path":"objects/Obj_MobileUtils_Share_Gif/Obj_MobileUtils_Share_Gif.yy",},},
     {"id":{"name":"Obj_MobileUtils_Share_Image","path":"objects/Obj_MobileUtils_Share_Image/Obj_MobileUtils_Share_Image.yy",},},
     {"id":{"name":"Obj_MobileUtils_Share_PDF","path":"objects/Obj_MobileUtils_Share_PDF/Obj_MobileUtils_Share_PDF.yy",},},
-    {"id":{"name":"Obj_MobileUtils_Share_PermissionsDraw","path":"objects/Obj_MobileUtils_Share_PermissionsDraw/Obj_MobileUtils_Share_PermissionsDraw.yy",},},
     {"id":{"name":"Obj_MobileUtils_Share_Text","path":"objects/Obj_MobileUtils_Share_Text/Obj_MobileUtils_Share_Text.yy",},},
     {"id":{"name":"Obj_MobileUtils_Shot","path":"objects/Obj_MobileUtils_Shot/Obj_MobileUtils_Shot.yy",},},
     {"id":{"name":"rm_gm_base","path":"rooms/rm_gm_base/rm_gm_base.yy",},},

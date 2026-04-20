@@ -16,13 +16,13 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"","%Name":"MobileUtils_NightMode.ext","constants":[
+    {"$GMExtensionFile":"v1","%Name":"MobileUtils_NightMode.ext","constants":[
         {"$GMExtensionConstant":"","%Name":"MobileUtils_NightMode_Night","hidden":false,"name":"MobileUtils_NightMode_Night","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"0",},
         {"$GMExtensionConstant":"","%Name":"MobileUtils_NightMode_Light","hidden":false,"name":"MobileUtils_NightMode_Light","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"1",},
         {"$GMExtensionConstant":"","%Name":"MobileUtils_NightMode_Undefined","hidden":false,"name":"MobileUtils_NightMode_Undefined","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"2",},
       ],"copyToTargets":-1,"filename":"MobileUtils_NightMode.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_NightMode_Check","argCount":0,"args":[],"documentation":"","externalName":"MobileUtils_NightMode_Check","help":"MobileUtils_NightMode_Check()","hidden":false,"kind":4,"name":"MobileUtils_NightMode_Check","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"MobileUtils_NightMode.ext","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":4,"name":"MobileUtils_NightMode.ext","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,

@@ -20,12 +20,9 @@
   "exportToGame":true,
   "extensionVersion":"1.0.8",
   "files":[
-    {"$GMExtensionFile":"","%Name":"MobileMedia_Camera.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_Camera.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"MobileMedia_Camera.ext","constants":[],"copyToTargets":52777614151918,"filename":"MobileMedia_Camera.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"MobileUtils_Camera_Open","argCount":2,"args":[],"documentation":"","externalName":"MobileUtils_Camera_Open","help":"MobileUtils_Camera_Open()","hidden":false,"kind":11,"name":"MobileUtils_Camera_Open","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-      ],"init":"","kind":4,"name":"MobileMedia_Camera.ext","order":[
-        {"name":"MobileUtils_Image_Width","path":"extensions/MobileUtils_ImageTools/MobileUtils_ImageTools.yy",},
-        {"name":"MobileUtils_Image_Height","path":"extensions/MobileUtils_ImageTools/MobileUtils_ImageTools.yy",},
-      ],"origname":"extensions\\CameraClass.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+      ],"init":"","kind":4,"name":"MobileMedia_Camera.ext","origname":"extensions\\CameraClass.ext","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
   "hasConvertedCodeInjection":true,
