@@ -45,7 +45,7 @@ public class MobileUtils_Gallery extends RunnerSocial
 				Uri uri = data.getData();
 
 				// Get original file name
-				String fileName = "gallery.jpg"; // fallback
+				String fileName = "temp.jpg"; // fallback
 
 				Cursor cursor = activity.getContentResolver().query(
 						uri,

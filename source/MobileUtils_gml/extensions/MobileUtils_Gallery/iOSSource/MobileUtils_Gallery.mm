@@ -2,6 +2,8 @@
 #import <Foundation/Foundation.h>
 #import "MobileUtils_Gallery.h"
 
+#import <Photos/Photos.h>
+
 const int EVENT_OTHER_SOCIAL = 70;
 extern int CreateDsMap( int _num, ... );
 extern void CreateAsynEventWithDSMap(int dsmapindex, int event_index);
@@ -23,23 +25,53 @@ extern int g_DeviceHeight;
     return([paths objectAtIndex:0]);
 }
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    //UIImageWriteToSavedPhotosAlbum(chosenImage,nil,nil,nil);
-	
-    NSString* path = [[self iOS_GetPath] stringByAppendingString: @"/temp.jpg"];
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-    
-    [UIImageJPEGRepresentation(chosenImage, 1.0) writeToFile:path atomically:YES];
-    
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-	
-	int dsMapIndex;
-	if(PickGalery)
-	{
-		dsMapIndex = CreateDsMap(2,"type",0.0 ,"MobileUtils_Gallery_Open","path", 0.0,[path UTF8String]);
-		CreateAsynEventWithDSMap(dsMapIndex,EVENT_OTHER_SOCIAL);
-	}
+
+    NSString *fileName = @"temp.jpg";
+
+    if (@available(iOS 11.0, *))
+    {
+        PHAsset *asset = info[UIImagePickerControllerPHAsset];
+
+        if (asset)
+        {
+            NSArray *resources = [PHAssetResource assetResourcesForAsset:asset];
+
+            if (resources.count > 0)
+            {
+                NSString *originalName =
+                    ((PHAssetResource *)resources[0]).originalFilename;
+
+                NSString *baseName =
+                    [originalName stringByDeletingPathExtension];
+
+                fileName =
+                    [baseName stringByAppendingPathExtension:@"jpg"];
+            }
+        }
+    }
+
+    NSString *path =
+        [[self iOS_GetPath] stringByAppendingPathComponent:fileName];
+
+    [UIImageJPEGRepresentation(chosenImage, 1.0)
+        writeToFile:path
+        atomically:YES];
+
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    if (PickGalery)
+    {
+        int dsMapIndex = CreateDsMap(
+            3,
+            "type", 0.0, "MobileUtils_Gallery_Open",
+            "path", 0.0, [path UTF8String],
+            "filename", 0.0, [fileName UTF8String]);
+
+        CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_SOCIAL);
+    }
 }
 
 
