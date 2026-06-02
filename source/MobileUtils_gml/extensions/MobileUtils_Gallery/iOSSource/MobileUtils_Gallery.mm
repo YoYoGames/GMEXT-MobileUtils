@@ -11,11 +11,11 @@ extern UIViewController *g_controller;
 extern UIView *g_glView;
 extern int g_DeviceWidth;
 extern int g_DeviceHeight;
-	
+    
 
 @implementation MobileUtils_Gallery
 {
-	Boolean PickGalery;
+    Boolean PickGalery;
 }
 
 
@@ -29,33 +29,39 @@ extern int g_DeviceHeight;
 {
     UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
 
-    NSString *fileName = @"temp.jpg";
+    NSString *fileName = nil;
 
+    // =========================
+    // iOS 11+ BEST METHOD
+    // =========================
     if (@available(iOS 11.0, *))
     {
-        PHAsset *asset = info[UIImagePickerControllerPHAsset];
+        NSURL *url = info[UIImagePickerControllerImageURL];
 
-        if (asset)
+        if (url)
         {
-            NSArray *resources = [PHAssetResource assetResourcesForAsset:asset];
+            NSString *originalName = [url lastPathComponent];
 
-            if (resources.count > 0)
-            {
-                NSString *originalName =
-                    ((PHAssetResource *)resources[0]).originalFilename;
+            NSString *baseName = [originalName stringByDeletingPathExtension];
 
-                NSString *baseName =
-                    [originalName stringByDeletingPathExtension];
-
-                fileName =
-                    [baseName stringByAppendingPathExtension:@"jpg"];
-            }
+            fileName = [baseName stringByAppendingPathExtension:@"jpg"];
         }
     }
 
+    // =========================
+    // FALLBACK (iOS 10 and older OR missing URL)
+    // =========================
+    if (fileName == nil)
+    {
+        fileName = [NSString stringWithFormat:@"image_%f.jpg",
+                    [[NSDate date] timeIntervalSince1970]];
+    }
+
+    // Build path
     NSString *path =
         [[self iOS_GetPath] stringByAppendingPathComponent:fileName];
 
+    // Save as JPEG (your design choice)
     [UIImageJPEGRepresentation(chosenImage, 1.0)
         writeToFile:path
         atomically:YES];
@@ -68,12 +74,12 @@ extern int g_DeviceHeight;
             3,
             "type", 0.0, "MobileUtils_Gallery_Open",
             "path", 0.0, [path UTF8String],
-            "filename", 0.0, [fileName UTF8String]);
+            "filename", 0.0, [fileName UTF8String]
+        );
 
         CreateAsynEventWithDSMap(dsMapIndex, EVENT_OTHER_SOCIAL);
     }
 }
-
 
 -(void) MobileUtils_Gallery_Open
 {
