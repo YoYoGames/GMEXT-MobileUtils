@@ -43,7 +43,9 @@
   "iosdelegatename":null,
   "iosplistinject":"\r\n<key>NSPhotoLibraryUsageDescription</key>\r\n<string>You can select photos to attach to reports.</string>\r\n",
   "iosProps":true,
-  "iosSystemFrameworkEntries":[],
+  "iosSystemFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"Photos.framework","embed":0,"name":"Photos.framework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "iosThirdPartyFrameworkEntries":[],
   "license":"Free to use, also for commercial games.",
   "maccompilerflags":"",
