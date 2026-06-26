@@ -11,7 +11,7 @@
   "androidsourcedir":"",
   "author":"",
   "classname":"MobileUtils_Gallery",
-  "copyToTargets":0,
+  "copyToTargets":12,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"1.0.8",
