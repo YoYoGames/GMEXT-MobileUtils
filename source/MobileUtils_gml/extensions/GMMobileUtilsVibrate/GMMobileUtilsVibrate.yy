@@ -37,8 +37,12 @@
   "iosdelegatename":"",
   "iosplistinject":null,
   "iosProps":true,
-  "iosSystemFrameworkEntries":[],
-  "iosThirdPartyFrameworkEntries":[],
+  "iosSystemFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"CoreHaptics.framework","embed":0,"name":"CoreHaptics.framework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
+  "iosThirdPartyFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"GMMobileUtilsVibrate.xcframework","embed":0,"name":"GMMobileUtilsVibrate.xcframework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "license":"",
   "maccompilerflags":"",
   "maclinkerflags":"-ObjC",
