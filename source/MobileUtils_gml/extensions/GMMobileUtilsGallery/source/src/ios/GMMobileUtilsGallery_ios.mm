@@ -165,9 +165,9 @@ extern UIViewController *g_controller;
                       options:NSDataWritingAtomic
                         error:&writeError];
 
-    [picker dismissViewControllerAnimated:YES completion:^{
-        if (!written)
-        {
+   [picker dismissViewControllerAnimated:YES completion:^{
+    if (!written)
+    {
             const char *message =
                 writeError.localizedDescription.UTF8String;
 
@@ -175,14 +175,14 @@ extern UIViewController *g_controller;
                 false
                 path:""
                 filename:""
-                error:(message ?: "Could not save selected image.")];
+                error:(message ? message : "Could not save selected image.")];
             return;
         }
 
         [self finishGalleryRequest:
             true
-            path:(path.UTF8String ?: "")
-            filename:(fileName.UTF8String ?: "")
+            path:(path.UTF8String ? path.UTF8String : "")
+            filename:(fileName.UTF8String ? fileName.UTF8String : "")
             error:""];
     }];
 }

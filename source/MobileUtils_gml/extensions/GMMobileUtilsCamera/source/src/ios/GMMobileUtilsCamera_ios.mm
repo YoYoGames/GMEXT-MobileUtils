@@ -146,7 +146,7 @@ extern UIViewController *g_controller;
             [self finishCameraRequest:
                 false
                 path:""
-                error:(message ?: "Could not save camera image.")];
+                error:(message ? message : "Could not save camera image.")];
             return;
         }
 
