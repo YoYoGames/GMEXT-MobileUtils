@@ -36,7 +36,9 @@
   "iosplistinject":null,
   "iosProps":true,
   "iosSystemFrameworkEntries":[],
-  "iosThirdPartyFrameworkEntries":[],
+  "iosThirdPartyFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"GMMobileUtilsAPN.xcframework","embed":0,"name":"GMMobileUtilsAPN.xcframework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "license":"",
   "maccompilerflags":"-fobjc-arc",
   "maclinkerflags":"-ObjC",
