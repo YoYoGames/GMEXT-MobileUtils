@@ -1,0 +1,44 @@
+[gml_api]
+module GMMobileUtilsVibrate;
+
+[global, bind = typed_gml]
+function mobile_utils_vibrate_is_available(): real;
+
+[global, bind = typed_gml]
+function mobile_utils_vibrate_predefined(kind: real): bool;
+
+[global, bind = typed_gml]
+function mobile_utils_vibrate_shot(milliseconds: real): bool;
+
+[global, bind = typed_gml]
+enum MobileUtilsVibrationAvailability:int32
+{
+    None = 0,
+    Basic = 1,
+    HapticEngine = 2,
+}
+
+[global, bind = typed_gml]
+enum MobileUtilsAndroidVibrationKind:int32
+{
+    Click = 0,
+    DoubleClick = 1,
+    Tick = 2,
+    HeavyClick = 5,
+}
+
+[global, bind = typed_gml]
+enum MobileUtilsIOSVibrationKind:int32
+{
+    ImpactLight = 0,
+    ImpactMedium = 1,
+    ImpactHeavy = 2,
+    ImpactRigid = 3,
+    ImpactSoft = 4,
+
+    Selection = 10,
+
+    NotificationWarning = 20,
+    NotificationSuccess = 21,
+    NotificationError = 22,
+}

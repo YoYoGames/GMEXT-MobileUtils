@@ -1,3 +1,3 @@
 
-if(MobileUtils_Vibrate_Is_Available())
-	MobileUtils_Vibrate_Shot(1000)
+if(mobile_utils_vibrate_is_available())
+	mobile_utils_vibrate_shot(1000)

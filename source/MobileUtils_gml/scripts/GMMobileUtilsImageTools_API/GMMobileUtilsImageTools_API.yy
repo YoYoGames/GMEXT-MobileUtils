@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsImageTools_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsImageTools_API",
+  "parent":{
+    "name":"ImageTools",
+    "path":"folders/MobileUtils/ExtGenExtensions/ImageTools.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

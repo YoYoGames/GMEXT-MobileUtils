@@ -1,0 +1,28 @@
+{
+  "$schema": "./extgen.schema.json",
+  "input": "spec.gmidl",
+  "root": "./",
+  "gamemaker": {
+    "wrappers": {
+      "outputFile": "../../../scripts/GMMobileUtilsVibrate_API/GMMobileUtilsVibrate_API.gml"
+    },
+    "extension": {
+      "mode": "patch",
+      "outputFile": "../../../extensions/GMMobileUtilsVibrate/GMMobileUtilsVibrate.yy"
+    },
+    "injectors": { }
+  },
+  "targets": {
+    "ios":{
+      "mode": "objc"
+    },
+    "android":{
+      "mode": "java"
+    }
+  },
+  "extras": {
+    "docs": { 
+      "outputFile": "../../../../../docs/extgen_docs.js"
+    }
+  }
+}

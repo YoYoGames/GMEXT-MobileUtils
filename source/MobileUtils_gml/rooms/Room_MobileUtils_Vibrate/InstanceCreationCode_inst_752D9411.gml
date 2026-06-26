@@ -1,2 +1,2 @@
 
-text = $"Available? : {MobileUtils_Vibrate_Is_Available()}";
+text = $"Available? : {mobile_utils_vibrate_is_available()}";

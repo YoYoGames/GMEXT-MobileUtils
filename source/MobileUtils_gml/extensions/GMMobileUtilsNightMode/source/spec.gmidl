@@ -1,0 +1,13 @@
+[gml_api]
+module GMMobileUtilsNightMode;
+
+[global, bind = typed_gml]
+function mobile_utils_night_mode_check(): real;
+
+[global, bind = typed_gml]
+enum MobileUtilsNightMode:int32
+{
+    Dark = 0,
+    Light = 1,
+    Undefined = 2,
+}

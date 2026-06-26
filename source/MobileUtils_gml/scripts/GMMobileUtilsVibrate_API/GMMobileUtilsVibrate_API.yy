@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsVibrate_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsVibrate_API",
+  "parent":{
+    "name":"Vibrate",
+    "path":"folders/MobileUtils/ExtGenExtensions/Vibrate.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

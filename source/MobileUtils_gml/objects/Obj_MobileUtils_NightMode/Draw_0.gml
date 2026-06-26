@@ -1,16 +1,17 @@
 
 var _str = ""
-switch(MobileUtils_NightMode_Check())
+
+switch(mobile_utils_night_mode_check())
 {
-	case MobileUtils_NightMode_Night:
-		_str = "Night"
+	case MobileUtilsNightMode.Dark:
+		_str = "Dark"
 	break
 	
-	case MobileUtils_NightMode_Light:
+	case MobileUtilsNightMode.Light:
 		_str = "Light"
 	break
 	
-	case MobileUtils_NightMode_Undefined:
+	case MobileUtilsNightMode.Undefined:
 		_str = "Undefined"
 	break
 }

@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsNightMode_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsNightMode_API",
+  "parent":{
+    "name":"NightMode",
+    "path":"folders/MobileUtils/ExtGenExtensions/NightMode.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

@@ -1,15 +1,35 @@
 
+var _count = array_length(kind_array);
 
+if (_count == 0)
+{
+    exit;
+}
 
-if(!array_length(kind_array))
-	exit
+if (!mobile_utils_vibrate_is_available())
+{
+    show_debug_message("Vibration is not available.");
+    exit;
+}
 
-if(MobileUtils_Vibrate_Is_Available())
-	MobileUtils_Vibrate_Predefined(kind_array[index])
+var _kind = kind_array[index];
 
-index ++
+var _success =
+    mobile_utils_vibrate_predefined(_kind);
 
-if(index == array_length(kind_array))
-	index = 0
+if (!_success)
+{
+    show_debug_message(
+        $"Could not play predefined vibration: {index}"
+    );
+}
 
-text = $"Predefined: {index}"
+index++;
+
+if (index >= _count)
+{
+    index = 0;
+}
+
+text = $"Predefined: {index}";
+

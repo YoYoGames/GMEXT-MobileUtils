@@ -1,0 +1,24 @@
+[gml_api]
+module GMMobileUtilsImageTools;
+
+[global, bind = typed_gml]
+function mobile_utils_image_width(path: string): real;
+
+[global, bind = typed_gml]
+function mobile_utils_image_height(path: string): real;
+
+[global, bind = typed_gml]
+function mobile_utils_image_resize(
+    path: string,
+    width: real,
+    height: real
+): bool;
+
+[global, bind = typed_gml]
+function mobile_utils_image_crop(
+    path: string,
+    width: real,
+    height: real,
+    offset_x: real,
+    offset_y: real
+): bool;
