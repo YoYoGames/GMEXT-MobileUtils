@@ -1,0 +1,5 @@
+[gml_api]
+module GMMobileUtilsAppPopupSettings;
+
+[global, bind = typed_gml]
+function mobile_utils_app_popup_settings_show(callback: func): unit;

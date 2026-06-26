@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"GMMobileUtilsAPN.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":4,"filename":"GMMobileUtilsAPN.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"__mobile_utils_apn_register","argCount":2,"args":[1,2,],"documentation":"@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}","externalName":"__EXT_NATIVE__mobile_utils_apn_register","help":"","hidden":true,"kind":4,"name":"__mobile_utils_apn_register","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"mobile_utils_apn_get_token","argCount":0,"args":[],"documentation":"@returns {String}","externalName":"__EXT_NATIVE__mobile_utils_apn_get_token","help":"","hidden":false,"kind":4,"name":"mobile_utils_apn_get_token","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
         {"$GMExtensionFunction":"","%Name":"__GMMobileUtilsAPN_invocation_handler","argCount":2,"args":[1,2,],"documentation":"@param {Pointer} _buffer_ptr\r\n@param {Real} _buffer_size","externalName":"__EXT_NATIVE__GMMobileUtilsAPN_invocation_handler","help":"","hidden":true,"kind":4,"name":"__GMMobileUtilsAPN_invocation_handler","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},

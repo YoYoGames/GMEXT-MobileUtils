@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsAppPopupSettings_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsAppPopupSettings_API",
+  "parent":{
+    "name":"AppPopupSettings",
+    "path":"folders/MobileUtils/ExtGenExtensions/AppPopupSettings.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

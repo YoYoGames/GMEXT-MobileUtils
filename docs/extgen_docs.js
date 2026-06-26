@@ -1,12 +1,6 @@
 /**
- * @function_partial mobile_utils_apn_register
+ * @function_partial mobile_utils_app_popup_settings_show
  * @param {Function} callback
- * @function_end 
- */
-
-/**
- * @function_partial mobile_utils_apn_get_token
- * @returns {String} 
  * @function_end 
  */
 

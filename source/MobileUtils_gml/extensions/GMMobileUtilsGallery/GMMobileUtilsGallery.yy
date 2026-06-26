@@ -16,7 +16,7 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"GMMobileUtilsGallery.ext","final":"","functions":[
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":12,"filename":"GMMobileUtilsGallery.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"__mobile_utils_gallery_open","argCount":2,"args":[1,2,],"documentation":"@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}","externalName":"__EXT_NATIVE__mobile_utils_gallery_open","help":"","hidden":true,"kind":4,"name":"__mobile_utils_gallery_open","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
         {"$GMExtensionFunction":"","%Name":"__GMMobileUtilsGallery_invocation_handler","argCount":2,"args":[1,2,],"documentation":"@param {Pointer} _buffer_ptr\r\n@param {Real} _buffer_size","externalName":"__EXT_NATIVE__GMMobileUtilsGallery_invocation_handler","help":"","hidden":true,"kind":4,"name":"__GMMobileUtilsGallery_invocation_handler","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":4,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
