@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsAPN_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsAPN_API",
+  "parent":{
+    "name":"APN",
+    "path":"folders/MobileUtils/ExtGenExtensions/APN.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
