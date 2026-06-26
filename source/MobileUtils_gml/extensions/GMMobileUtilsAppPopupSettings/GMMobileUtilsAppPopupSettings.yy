@@ -35,7 +35,9 @@
   "iosplistinject":null,
   "iosProps":true,
   "iosSystemFrameworkEntries":[],
-  "iosThirdPartyFrameworkEntries":[],
+  "iosThirdPartyFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"GMMobileUtilsAppPopupSettings.xcframework","embed":0,"name":"GMMobileUtilsAppPopupSettings.xcframework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "license":"",
   "maccompilerflags":"",
   "maclinkerflags":"-ObjC",
