@@ -13,7 +13,7 @@
   "androidsourcedir":"",
   "author":"",
   "classname":"MobileUtils_Vibrate",
-  "copyToTargets":-1,
+  "copyToTargets":0,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"0.0.1",

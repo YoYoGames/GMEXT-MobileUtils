@@ -1,0 +1,5 @@
+[gml_api]
+module GMMobileReview;
+
+[global, bind = typed_gml]
+function mobile_review_show(callback: func): unit;

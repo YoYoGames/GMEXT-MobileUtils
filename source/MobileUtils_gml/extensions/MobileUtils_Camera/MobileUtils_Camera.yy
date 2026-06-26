@@ -15,7 +15,7 @@
   "androidsourcedir":"",
   "author":"",
   "classname":"MobileUtils_Camera",
-  "copyToTargets":12,
+  "copyToTargets":0,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"1.0.8",

@@ -1,0 +1,5 @@
+[gml_api]
+module GMMobileUtilsCamera;
+
+[global, bind = typed_gml]
+function mobile_utils_camera_open(callback: func): unit;

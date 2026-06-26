@@ -1,0 +1,5 @@
+[gml_api]
+module GMMobileUtilsGallery;
+
+[global, bind = typed_gml]
+function mobile_utils_gallery_open(callback: func): unit;

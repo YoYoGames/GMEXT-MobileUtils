@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsShare_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsShare_API",
+  "parent":{
+    "name":"Share",
+    "path":"folders/MobileUtils/ExtGenExtensions/Share.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

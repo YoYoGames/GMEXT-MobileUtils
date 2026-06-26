@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMLocalNotifications_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMLocalNotifications_API",
+  "parent":{
+    "name":"LocalNotifications",
+    "path":"folders/MobileUtils/ExtGenExtensions/LocalNotifications.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

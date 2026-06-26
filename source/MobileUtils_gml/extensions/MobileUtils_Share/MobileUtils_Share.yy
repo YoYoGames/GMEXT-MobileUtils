@@ -11,7 +11,7 @@
   "androidsourcedir":"",
   "author":"",
   "classname":"MobileUtils_Share",
-  "copyToTargets":12,
+  "copyToTargets":0,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"1.0.7",

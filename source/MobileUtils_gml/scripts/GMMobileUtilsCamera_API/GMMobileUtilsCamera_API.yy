@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsCamera_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsCamera_API",
+  "parent":{
+    "name":"Camera",
+    "path":"folders/MobileUtils/ExtGenExtensions/Camera.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
