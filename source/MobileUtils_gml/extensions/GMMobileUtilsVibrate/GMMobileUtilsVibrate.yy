@@ -18,11 +18,16 @@
   "exportToGame":true,
   "extensionVersion":"0.0.1",
   "files":[
-    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":-1,"filename":"GMMobileUtilsVibrate.ext","final":"","functions":[
-        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_is_available","argCount":0,"args":[],"documentation":"@returns {Real}","externalName":"__EXT_NATIVE__mobile_utils_vibrate_is_available","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_is_available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_predefined","argCount":1,"args":[2,],"documentation":"@param {Real} kind\r\n@returns {Real}","externalName":"__EXT_NATIVE__mobile_utils_vibrate_predefined","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_predefined","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
-        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_shot","argCount":1,"args":[2,],"documentation":"@param {Real} milliseconds\r\n@returns {Real}","externalName":"__EXT_NATIVE__mobile_utils_vibrate_shot","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_shot","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":12,"filename":"GMMobileUtilsVibrate.ext","final":"","functions":[
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_is_available","argCount":0,"args":[],"documentation":"@returns {Real}","externalName":"__EXT_NATIVEmobile_utils_vibrate_is_available","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_is_available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_predefined","argCount":1,"args":[2,],"documentation":"@param {Real} kind\r\n@returns {Real}","externalName":"__EXT_NATIVEmobile_utils_vibrate_predefined","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_predefined","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_shot","argCount":1,"args":[2,],"documentation":"@param {Real} milliseconds\r\n@returns {Real}","externalName":"__EXT_NATIVEmobile_utils_vibrate_shot","help":"","hidden":false,"kind":4,"name":"mobile_utils_vibrate_shot","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
       ],"init":"","kind":4,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
+    {"$GMExtensionFile":"v1","%Name":"","constants":[],"copyToTargets":32,"filename":"GMMobileUtilsVibrate.js","final":"","functions":[
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_is_available","argCount":0,"args":[],"documentation":"","externalName":"mobile_utils_vibrate_is_available","help":"mobile_utils_vibrate_is_available()","hidden":false,"kind":5,"name":"mobile_utils_vibrate_is_available","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":2,},
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_shot","argCount":0,"args":[2,],"documentation":"","externalName":"","help":"mobile_utils_vibrate_shot(milliseconds)","hidden":false,"kind":5,"name":"mobile_utils_vibrate_shot","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
+        {"$GMExtensionFunction":"","%Name":"mobile_utils_vibrate_predefined","argCount":0,"args":[2,],"documentation":"","externalName":"mobile_utils_vibrate_predefined","help":"mobile_utils_vibrate_predefined(kind)","hidden":false,"kind":5,"name":"mobile_utils_vibrate_predefined","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
+      ],"init":"","kind":5,"name":"","origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":null,
   "hasConvertedCodeInjection":true,
