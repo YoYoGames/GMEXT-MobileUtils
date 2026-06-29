@@ -10,21 +10,51 @@ if (instance_number(object_index) > 1) {
 	return;
 }
 
+// Keeps track of the current notification permission status (a
+// MobileUtilsNotificationPermission value). Used by the Draw event.
+permission_status = MobileUtilsNotificationPermission.NotDetermined;
 
-var _info = os_get_info()
+// Register a single listener that is invoked every time a local notification is
+// presented (foreground) or tapped. This replaces the old Async events: the
+// notification fields are now delivered straight to this callback.
+mobile_utils_notification_set_listener(function(_id, _title, _message, _data, _image_path)
+{
+	show_debug_message("notification_id: " + _id);
+	show_debug_message("notification_title: " + _title);
+	show_debug_message("notification_message: " + _message);
+	show_debug_message("notification_data: " + _data);
+	show_debug_message("notification_image_path: " + _image_path);
+});
 
-// On iOS before we can use local notifications we need to request for permission
-// for this purpose we have a permission status variable that will keep track of our status.
-iOS_permission_status = LocalPushNotification_iOS_Permission_Status_NotDetermined
-if(os_type == os_ios)
+// Before delivering notifications we need permission. We first query the current
+// status; the result is delivered through the callback (no Async event needed).
+// On iOS this maps to UNUserNotificationCenter; on Android to POST_NOTIFICATIONS.
+mobile_utils_notification_permission_status(function(_status)
 {
-	// To request the current permission status we can use the function below.
-	// It doesn't return the value itself but it will trigger an Async PushNotification
-	// Event of the same name with the respective value.
-	LocalPushNotification_iOS_Permission_Status();
-}
-else if(os_type == os_android and _info[? "SDK_INT"] >= 33)
-{
-	if(os_check_permission("android.permission.POST_NOTIFICATIONS") != os_permission_granted)
-		os_request_permission("android.permission.POST_NOTIFICATIONS")
-}
+	permission_status = _status;
+
+	switch(_status)
+	{
+		case MobileUtilsNotificationPermission.Authorized:
+			// Authorized to deliver notifications to the user.
+			break;
+
+		case MobileUtilsNotificationPermission.Denied:
+			// Permission to deliver notifications was denied.
+			break;
+
+		case MobileUtilsNotificationPermission.NotDetermined:
+			// Permission hasn't been requested yet, so request it now. The
+			// callback reports whether the user granted it.
+			mobile_utils_notification_request_permission(function(_granted, _error)
+			{
+				permission_status = _granted
+					? MobileUtilsNotificationPermission.Authorized
+					: MobileUtilsNotificationPermission.Denied;
+
+				if(_error != "")
+					show_debug_message("Notification permission error: " + _error);
+			});
+			break;
+	}
+});

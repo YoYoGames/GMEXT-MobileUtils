@@ -1,8 +1,6 @@
 /// @description Cancel notification
 
-// This function call will cancel a previously created
-// local notification with a given unique id.
-LocalPushNotification_Cancel(uid);
+// Cancels a previously created local notification with the given unique id.
+mobile_utils_notification_cancel(uid);
 
 show_debug_message("Notification Cancelled: " + uid)
-

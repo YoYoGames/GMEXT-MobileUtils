@@ -1,51 +1,56 @@
 /**
- * @function_partial mobile_utils_vibrate_is_available
- * @returns {Real} 
+ * @function_partial mobile_utils_notification_create
+ * @param {String} identifier
+ * @param {Real} seconds
+ * @param {String} title
+ * @param {String} message
+ * @param {String} data
  * @function_end 
  */
 
 /**
- * @function_partial mobile_utils_vibrate_predefined
- * @param {Real} kind
- * @returns {Bool} 
+ * @function_partial mobile_utils_notification_create_ext
+ * @param {String} identifier
+ * @param {Real} seconds
+ * @param {String} title
+ * @param {String} message
+ * @param {String} data
+ * @param {String} image_path
  * @function_end 
  */
 
 /**
- * @function_partial mobile_utils_vibrate_shot
- * @param {Real} milliseconds
- * @returns {Bool} 
+ * @function_partial mobile_utils_notification_cancel
+ * @param {String} identifier
  * @function_end 
  */
 
 /**
- * @enum_partial MobileUtilsVibrationAvailability
- * @member None
- * @member Basic
- * @member HapticEngine
- * @enum_end 
+ * @function_partial mobile_utils_notification_set_listener
+ * @param {Function} callback
+ * @function_end 
  */
 
 /**
- * @enum_partial MobileUtilsAndroidVibrationKind
- * @member Click
- * @member DoubleClick
- * @member Tick
- * @member HeavyClick
- * @enum_end 
+ * @function_partial mobile_utils_notification_request_permission
+ * @param {Function} callback
+ * @function_end 
  */
 
 /**
- * @enum_partial MobileUtilsIOSVibrationKind
- * @member ImpactLight
- * @member ImpactMedium
- * @member ImpactHeavy
- * @member ImpactRigid
- * @member ImpactSoft
- * @member Selection
- * @member NotificationWarning
- * @member NotificationSuccess
- * @member NotificationError
+ * @function_partial mobile_utils_notification_permission_status
+ * @param {Function} callback
+ * @function_end 
+ */
+
+/**
+ * @enum_partial MobileUtilsNotificationPermission
+ * @member Unknown
+ * @member NotDetermined
+ * @member Denied
+ * @member Authorized
+ * @member Provisional
+ * @member Ephemeral
  * @enum_end 
  */
 

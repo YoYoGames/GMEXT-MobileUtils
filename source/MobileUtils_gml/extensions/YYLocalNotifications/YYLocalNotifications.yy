@@ -11,11 +11,11 @@
     "android.permission.WAKE_LOCK",
     "android.permission.POST_NOTIFICATIONS",
   ],
-  "androidProps":true,
+  "androidProps":false,
   "androidsourcedir":"",
   "author":"",
   "classname":"LocalNotifications",
-  "copyToTargets":9007199254741004,
+  "copyToTargets":9007199254740992,
   "description":"",
   "exportToGame":true,
   "extensionVersion":"1.0.1",
@@ -24,7 +24,7 @@
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_Authorized","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_Authorized","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"Authorized\"",},
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_Denied","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_Denied","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"Denied\"",},
         {"$GMExtensionConstant":"","%Name":"LocalPushNotification_iOS_Permission_Status_NotDetermined","hidden":false,"name":"LocalPushNotification_iOS_Permission_Status_NotDetermined","resourceType":"GMExtensionConstant","resourceVersion":"2.0","value":"\"NotDetermined\"",},
-      ],"copyToTargets":-1,"filename":"LocalNotifications.ext","final":"","functions":[
+      ],"copyToTargets":0,"filename":"LocalNotifications.ext","final":"","functions":[
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_Create","argCount":0,"args":[1,2,1,1,1,],"documentation":"","externalName":"LocalPushNotification_Create","help":"LocalPushNotification_Create(ID,seconds,title,message,data)","hidden":false,"kind":4,"name":"LocalPushNotification_Create","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_Cancel","argCount":0,"args":[1,],"documentation":"","externalName":"LocalPushNotification_Cancel","help":"LocalPushNotification_Cancel(ID)","hidden":false,"kind":4,"name":"LocalPushNotification_Cancel","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
         {"$GMExtensionFunction":"","%Name":"LocalPushNotification_iOS_Permission_Request","argCount":0,"args":[],"documentation":"","externalName":"LocalPushNotification_iOS_Permission_Request","help":"LocalPushNotification_iOS_Permission_Request()","hidden":false,"kind":4,"name":"LocalPushNotification_iOS_Permission_Request","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
@@ -44,7 +44,7 @@
   "ioscodeinjection":"\r\n<YYIosEntitlements>\r\n<key>aps-environment</key>\r\n<string>development</string>\r\n</YYIosEntitlements>\r\n",
   "iosdelegatename":"",
   "iosplistinject":"",
-  "iosProps":true,
+  "iosProps":false,
   "iosSystemFrameworkEntries":[
     {"$GMExtensionFrameworkEntry":"","%Name":"UserNotifications.framework","embed":0,"name":"UserNotifications.framework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
   ],

@@ -4,11 +4,11 @@
   "root": "./",
   "gamemaker": {
     "wrappers": {
-      "outputFile": "../../../scripts/GMMobileReview_API/GMMobileReview_API.gml"
+      "outputFile": "../../../scripts/GMLocalNotifications_API/GMLocalNotifications_API.gml"
     },
     "extension": {
       "mode": "patch",
-      "outputFile": "../../../extensions/GMMobileReview/GMMobileReview.yy"
+      "outputFile": "../../../extensions/GMLocalNotifications/GMLocalNotifications.yy"
     },
     "injectors": { }
   },

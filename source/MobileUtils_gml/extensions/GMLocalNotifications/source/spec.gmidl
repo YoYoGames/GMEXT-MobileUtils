@@ -1,5 +1,56 @@
 [gml_api]
-module GMMobileReview;
+module GMLocalNotifications;
 
 [global, bind = typed_gml]
-function mobile_review_show(callback: func): unit;
+function mobile_utils_notification_create(
+    identifier: string,
+    seconds: real,
+    title: string,
+    message: string,
+    data: string
+): unit;
+
+[global, bind = typed_gml]
+function mobile_utils_notification_create_ext(
+    identifier: string,
+    seconds: real,
+    title: string,
+    message: string,
+    data: string,
+    image_path: string
+): unit;
+
+[global, bind = typed_gml]
+function mobile_utils_notification_cancel(
+    identifier: string
+): unit;
+
+[global, bind = typed_gml]
+function mobile_utils_notification_set_listener(
+    callback: func
+): unit;
+
+// request_permission -> callback(granted, error). iOS: UNUserNotificationCenter
+// authorization. Android: POST_NOTIFICATIONS (API 33+).
+[global, bind = typed_gml]
+function mobile_utils_notification_request_permission(
+    callback: func
+): unit;
+
+// permission_status -> callback(status), where status is a
+// MobileUtilsNotificationPermission value.
+[global, bind = typed_gml]
+function mobile_utils_notification_permission_status(
+    callback: func
+): unit;
+
+[global, bind = typed_gml]
+enum MobileUtilsNotificationPermission:int32
+{
+    Unknown = 0,
+    NotDetermined = 1,
+    Denied = 2,
+    Authorized = 3,
+    Provisional = 4,
+    Ephemeral = 5,
+}
