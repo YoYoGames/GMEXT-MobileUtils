@@ -46,7 +46,9 @@
   "iosSystemFrameworkEntries":[
     {"$GMExtensionFrameworkEntry":"","%Name":"UserNotifications.framework","embed":0,"name":"UserNotifications.framework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
   ],
-  "iosThirdPartyFrameworkEntries":[],
+  "iosThirdPartyFrameworkEntries":[
+    {"$GMExtensionFrameworkEntry":"","%Name":"GMLocalNotifications.xcframework","embed":0,"name":"GMLocalNotifications.xcframework","resourceType":"GMExtensionFrameworkEntry","resourceVersion":"2.0","weakReference":false,},
+  ],
   "license":"",
   "maccompilerflags":"-fobjc-arc",
   "maclinkerflags":"-ObjC",
