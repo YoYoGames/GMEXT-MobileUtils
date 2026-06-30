@@ -3,7 +3,6 @@
 #import <UserNotifications/UserNotifications.h>
 #import <objc/runtime.h>
 
-#import "iPad_RunnerAppDelegate.h"
 #import "GMLocalNotifications_ios.h"
 
 /**
@@ -64,13 +63,20 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        class_addProtocol([iPad_RunnerAppDelegate class], @protocol(UNUserNotificationCenterDelegate));
-        [self swizzleUserNotificationMethods];
+        // Resolve the runner app delegate at runtime; its header is not on the
+        // extension build's include path.
+        Class appDelegateClass = NSClassFromString(@"iPad_RunnerAppDelegate");
+        if (appDelegateClass == Nil) {
+            NSLog(@"[GMLocalNotifications] Could not find iPad_RunnerAppDelegate.");
+            return;
+        }
+
+        class_addProtocol(appDelegateClass, @protocol(UNUserNotificationCenterDelegate));
+        [self swizzleUserNotificationMethodsForClass:appDelegateClass];
     });
 }
 
-+ (void)swizzleUserNotificationMethods {
-    Class appDelegateClass = [iPad_RunnerAppDelegate class];
++ (void)swizzleUserNotificationMethodsForClass:(Class)appDelegateClass {
 
     // willPresentNotification
     [self swizzleMethodInClass:appDelegateClass
