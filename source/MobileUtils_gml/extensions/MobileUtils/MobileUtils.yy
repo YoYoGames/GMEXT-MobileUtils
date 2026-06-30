@@ -40,8 +40,8 @@
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{
-    "name":"ExtGenExtensions",
-    "path":"folders/MobileUtils/ExtGenExtensions.yy",
+    "name":"Extensions",
+    "path":"folders/MobileUtils/Extensions.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

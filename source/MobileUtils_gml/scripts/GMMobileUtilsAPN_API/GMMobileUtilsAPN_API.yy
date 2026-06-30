@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsAPN_API",
   "parent":{
     "name":"APN",
-    "path":"folders/MobileUtils/ExtGenExtensions/APN.yy",
+    "path":"folders/MobileUtils/Extensions/APN.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

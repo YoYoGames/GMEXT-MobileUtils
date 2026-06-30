@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsNightMode_API",
   "parent":{
     "name":"NightMode",
-    "path":"folders/MobileUtils/ExtGenExtensions/NightMode.yy",
+    "path":"folders/MobileUtils/Extensions/NightMode.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

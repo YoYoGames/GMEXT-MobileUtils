@@ -58,7 +58,7 @@
   "packageId":"",
   "parent":{
     "name":"Vibrate",
-    "path":"folders/MobileUtils/ExtGenExtensions/Vibrate.yy",
+    "path":"folders/MobileUtils/Extensions/Vibrate.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

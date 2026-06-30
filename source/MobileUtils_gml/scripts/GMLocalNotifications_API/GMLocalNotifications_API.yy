@@ -6,7 +6,7 @@
   "name":"GMLocalNotifications_API",
   "parent":{
     "name":"LocalNotifications",
-    "path":"folders/MobileUtils/ExtGenExtensions/LocalNotifications.yy",
+    "path":"folders/MobileUtils/Extensions/LocalNotifications.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

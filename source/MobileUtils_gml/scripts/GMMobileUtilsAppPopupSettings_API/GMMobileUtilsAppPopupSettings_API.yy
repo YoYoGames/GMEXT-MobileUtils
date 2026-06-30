@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsAppPopupSettings_API",
   "parent":{
     "name":"AppPopupSettings",
-    "path":"folders/MobileUtils/ExtGenExtensions/AppPopupSettings.yy",
+    "path":"folders/MobileUtils/Extensions/AppPopupSettings.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

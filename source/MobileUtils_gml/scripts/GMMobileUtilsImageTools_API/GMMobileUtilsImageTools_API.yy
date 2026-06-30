@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsImageTools_API",
   "parent":{
     "name":"ImageTools",
-    "path":"folders/MobileUtils/ExtGenExtensions/ImageTools.yy",
+    "path":"folders/MobileUtils/Extensions/ImageTools.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

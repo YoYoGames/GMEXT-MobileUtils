@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsVibrate_API",
   "parent":{
     "name":"Vibrate",
-    "path":"folders/MobileUtils/ExtGenExtensions/Vibrate.yy",
+    "path":"folders/MobileUtils/Extensions/Vibrate.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

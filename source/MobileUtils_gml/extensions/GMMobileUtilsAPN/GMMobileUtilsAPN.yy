@@ -49,7 +49,7 @@
   "packageId":"",
   "parent":{
     "name":"APN",
-    "path":"folders/MobileUtils/ExtGenExtensions/APN.yy",
+    "path":"folders/MobileUtils/Extensions/APN.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

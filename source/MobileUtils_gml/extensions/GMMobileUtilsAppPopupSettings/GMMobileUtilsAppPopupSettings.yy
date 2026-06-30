@@ -48,7 +48,7 @@
   "packageId":"",
   "parent":{
     "name":"AppPopupSettings",
-    "path":"folders/MobileUtils/ExtGenExtensions/AppPopupSettings.yy",
+    "path":"folders/MobileUtils/Extensions/AppPopupSettings.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

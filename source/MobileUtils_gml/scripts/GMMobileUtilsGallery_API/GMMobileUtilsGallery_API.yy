@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsGallery_API",
   "parent":{
     "name":"MobileUtils_Gallery",
-    "path":"folders/MobileUtils/ExtGenExtensions/MobileUtils_Gallery.yy",
+    "path":"folders/MobileUtils/Extensions/MobileUtils_Gallery.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

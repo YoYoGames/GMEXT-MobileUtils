@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsShare_API",
   "parent":{
     "name":"Share",
-    "path":"folders/MobileUtils/ExtGenExtensions/Share.yy",
+    "path":"folders/MobileUtils/Extensions/Share.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

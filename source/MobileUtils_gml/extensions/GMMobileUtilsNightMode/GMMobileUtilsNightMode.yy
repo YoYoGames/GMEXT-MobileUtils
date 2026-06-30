@@ -47,7 +47,7 @@
   "packageId":"",
   "parent":{
     "name":"NightMode",
-    "path":"folders/MobileUtils/ExtGenExtensions/NightMode.yy",
+    "path":"folders/MobileUtils/Extensions/NightMode.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",

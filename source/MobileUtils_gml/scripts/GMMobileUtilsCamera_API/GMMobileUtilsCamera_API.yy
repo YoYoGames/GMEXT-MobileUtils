@@ -6,7 +6,7 @@
   "name":"GMMobileUtilsCamera_API",
   "parent":{
     "name":"Camera",
-    "path":"folders/MobileUtils/ExtGenExtensions/Camera.yy",
+    "path":"folders/MobileUtils/Extensions/Camera.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",

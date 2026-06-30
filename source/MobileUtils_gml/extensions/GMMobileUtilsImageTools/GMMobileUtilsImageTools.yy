@@ -50,7 +50,7 @@
   "packageId":"",
   "parent":{
     "name":"ImageTools",
-    "path":"folders/MobileUtils/ExtGenExtensions/ImageTools.yy",
+    "path":"folders/MobileUtils/Extensions/ImageTools.yy",
   },
   "productId":"",
   "resourceType":"GMExtension",
