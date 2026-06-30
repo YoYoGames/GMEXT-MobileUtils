@@ -31,6 +31,10 @@ static NSString *const kGMLNPrefix = @"GMLocalNotification";
 // Persistent listener invoked every time a local notification is presented or tapped.
 static gm::wire::GMFunction g_notificationListener = nil;
 
+// Notifications received before a listener is registered (e.g. a tap that
+// cold-started the app) are queued here and flushed once a listener is set.
+static NSMutableArray<NSDictionary<NSString *, NSString *> *> *g_pendingNotifications = nil;
+
 typedef void(^RunOnceCompletionHandler)(void);
 typedef void(^RunOncePresentationHandler)(UNNotificationPresentationOptions options);
 
@@ -87,6 +91,13 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     [self swizzleMethodInClass:appDelegateClass
               originalSelector:@selector(userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)
               swizzledSelector:@selector(gmln_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)];
+
+    // didFinishLaunchingWithOptions — so we can assign the notification center
+    // delegate before launch completes, which is required for iOS to deliver a
+    // notification tap that cold-started the app.
+    [self swizzleMethodInClass:appDelegateClass
+              originalSelector:@selector(application:didFinishLaunchingWithOptions:)
+              swizzledSelector:@selector(gmln_application:didFinishLaunchingWithOptions:)];
 }
 
 // Chaining swizzle: when the target already implements the original selector
@@ -180,6 +191,26 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     onceHandler();
 }
 
+// Swizzled didFinishLaunchingWithOptions
+- (BOOL)gmln_application:(UIApplication *)application
+    didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+    BOOL result = YES;
+
+    // Chain to the previously installed implementation (the runner's) if present.
+    if ([self respondsToSelector:@selector(gmln_application:didFinishLaunchingWithOptions:)]) {
+        result = [self gmln_application:application didFinishLaunchingWithOptions:launchOptions];
+    }
+
+    // Assign the notification center delegate AFTER the runner's launch so our
+    // app delegate (which carries the swizzled UN delegate methods) wins. Doing
+    // this before didFinishLaunching returns lets iOS deliver a cold-start tap.
+    UNUserNotificationCenter.currentNotificationCenter.delegate =
+        (id<UNUserNotificationCenterDelegate>)application.delegate;
+
+    return result;
+}
+
 #pragma mark - Extension init
 
 - (instancetype)init {
@@ -238,6 +269,16 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 
 - (void)mobile_utils_notification_set_listener:(gm::wire::GMFunction)callback {
     g_notificationListener = callback;
+
+    // Deliver any notifications that arrived before the listener was registered
+    // (e.g. a notification tap that cold-started the app).
+    if (g_pendingNotifications.count > 0) {
+        NSArray<NSDictionary<NSString *, NSString *> *> *pending = g_pendingNotifications;
+        g_pendingNotifications = nil;
+        for (NSDictionary<NSString *, NSString *> *info in pending) {
+            [GMLocalNotifications deliverNotification:info];
+        }
+    }
 }
 
 - (void)mobile_utils_notification_request_permission:(gm::wire::GMFunction)callback {
@@ -320,25 +361,42 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 }
 
 + (void)handleLocalNotification:(UNNotification *)notification {
-    if (!g_notificationListener) {
-        return;
-    }
-
     NSString *identifier = notification.request.identifier;
     if ([identifier hasPrefix:kGMLNPrefix]) {
         identifier = [identifier substringFromIndex:kGMLNPrefix.length];
     }
 
-    NSString *title = notification.request.content.title ?: @"";
-    NSString *message = notification.request.content.body ?: @"";
-    NSString *data = notification.request.content.userInfo[@"data_key"] ?: @"";
+    NSDictionary<NSString *, NSString *> *info = @{
+        @"id"      : identifier ?: @"",
+        @"title"   : notification.request.content.title ?: @"",
+        @"message" : notification.request.content.body ?: @"",
+        @"data"    : notification.request.content.userInfo[@"data_key"] ?: @"",
+        @"image"   : @"",
+    };
+
+    if (g_notificationListener) {
+        [self deliverNotification:info];
+        return;
+    }
+
+    // No listener yet (e.g. cold start from a tap). Queue until one registers.
+    if (g_pendingNotifications == nil) {
+        g_pendingNotifications = [NSMutableArray array];
+    }
+    [g_pendingNotifications addObject:info];
+}
+
++ (void)deliverNotification:(NSDictionary<NSString *, NSString *> *)info {
+    if (!g_notificationListener) {
+        return;
+    }
 
     g_notificationListener.call(
-        std::string(identifier.UTF8String ?: ""),
-        std::string(title.UTF8String ?: ""),
-        std::string(message.UTF8String ?: ""),
-        std::string(data.UTF8String ?: ""),
-        std::string("")
+        std::string(info[@"id"].UTF8String ?: ""),
+        std::string(info[@"title"].UTF8String ?: ""),
+        std::string(info[@"message"].UTF8String ?: ""),
+        std::string(info[@"data"].UTF8String ?: ""),
+        std::string(info[@"image"].UTF8String ?: "")
     );
 }
 

@@ -25,6 +25,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+
 /**
  * Extension Generator conversion of MobileUtils_LocalNotifications.
  *
@@ -33,7 +35,8 @@ import androidx.core.content.ContextCompat;
  *
  *     set_listener(callback) -> callback(identifier, title, message, data, image_path)
  *
- * Permission functions are iOS-only; the Android implementations are benign stubs.
+ * Notifications that arrive before a listener is registered (e.g. a tap that
+ * cold-started the app) are queued and flushed when set_listener is called.
  */
 public class GMLocalNotifications extends GMLocalNotificationsInternal implements NotificationCallback {
 
@@ -43,6 +46,10 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
 
     // Persistent listener invoked every time a local notification is received/tapped.
     private static GMFunction g_listener = null;
+
+    // Notifications received before a listener is registered are queued here and
+    // flushed once a listener is set.
+    private static final ArrayList<NotificationData> g_pending = new ArrayList<>();
 
     // One-shot callback for an in-flight POST_NOTIFICATIONS permission request.
     private GMFunction permissionCallback = null;
@@ -149,6 +156,20 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
 
     public void mobile_utils_notification_set_listener(GMFunction callback) {
         g_listener = callback;
+
+        // Deliver any notifications that arrived before the listener was
+        // registered (e.g. a notification tap that cold-started the app).
+        ArrayList<NotificationData> pending;
+        synchronized (g_pending) {
+            if (g_pending.isEmpty())
+                return;
+            pending = new ArrayList<>(g_pending);
+            g_pending.clear();
+        }
+
+        for (NotificationData nd : pending) {
+            deliver(callback, nd);
+        }
     }
 
     // Requests the POST_NOTIFICATIONS runtime permission on Android 13+ (API 33).
@@ -230,17 +251,30 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
     @Override
     public boolean onNotificationReceived(final NotificationData notificationData) {
 
-        // If app is not running or is suspended don't do anything
+        // If app is not running or is suspended don't do anything (let the
+        // receiver post a system notification instead).
         boolean appRunning = (RunnerActivity.CurrentActivity != null && !RunnerActivity.CurrentActivity.mbAppSuspended);
         if (!appRunning) {
             return false;
         }
 
+        // No listener yet (e.g. a tap that cold-started the app). Queue the
+        // notification so it is delivered once a listener registers.
         if (g_listener == null) {
-            return false;
+            synchronized (g_pending) {
+                g_pending.add(notificationData);
+            }
+            return true;
         }
 
-        final GMFunction listener = g_listener;
+        deliver(g_listener, notificationData);
+        return true;
+    }
+
+    private static void deliver(final GMFunction listener, final NotificationData notificationData) {
+        if (listener == null || RunnerActivity.CurrentActivity == null)
+            return;
+
         final String imagePath = notificationData.getImagePath();
 
         RunnerActivity.CurrentActivity.runOnUiThread(() ->
@@ -252,8 +286,6 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
                 imagePath == null ? "" : imagePath
             )
         );
-
-        return true;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

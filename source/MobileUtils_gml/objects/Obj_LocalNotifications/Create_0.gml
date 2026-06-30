@@ -19,11 +19,14 @@ permission_status = MobileUtilsNotificationPermission.NotDetermined;
 // notification fields are now delivered straight to this callback.
 mobile_utils_notification_set_listener(function(_id, _title, _message, _data, _image_path)
 {
-	show_debug_message("notification_id: " + _id);
-	show_debug_message("notification_title: " + _title);
-	show_debug_message("notification_message: " + _message);
-	show_debug_message("notification_data: " + _data);
-	show_debug_message("notification_image_path: " + _image_path);
+	var _info = "notification_id: " + _id + "\n"
+		+ "notification_title: " + _title + "\n"
+		+ "notification_message: " + _message + "\n"
+		+ "notification_data: " + _data + "\n"
+		+ "notification_image_path: " + _image_path;
+
+	show_debug_message(_info);
+	show_message_async(_info);
 });
 
 // Before delivering notifications we need permission. We first query the current
