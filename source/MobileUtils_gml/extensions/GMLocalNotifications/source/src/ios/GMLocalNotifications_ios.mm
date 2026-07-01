@@ -195,6 +195,12 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 - (BOOL)gmln_application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    // Assign the notification center delegate BEFORE the runner's launch runs.
+    // The runner's didFinishLaunching boots and spins the game loop, during
+    // which iOS may deliver a cold-start notification response; the delegate has
+    // to be in place first or that response is lost.
+    [GMLocalNotifications ensureNotificationDelegate];
+
     BOOL result = YES;
 
     // Chain to the previously installed implementation (the runner's) if present.
@@ -202,13 +208,14 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
         result = [self gmln_application:application didFinishLaunchingWithOptions:launchOptions];
     }
 
-    // Assign the notification center delegate AFTER the runner's launch so our
-    // app delegate (which carries the swizzled UN delegate methods) wins. Doing
-    // this before didFinishLaunching returns lets iOS deliver a cold-start tap.
-    UNUserNotificationCenter.currentNotificationCenter.delegate =
-        (id<UNUserNotificationCenterDelegate>)application.delegate;
-
     return result;
+}
+
+// Runner lifecycle hook, invoked on the extension object during app launch (the
+// same hook FCM uses). Guarantees the delegate is set during launch even if the
+// runner instantiates the extension object lazily rather than via the swizzle.
+- (void)onLaunch:(NSDictionary *)launchOptions {
+    [GMLocalNotifications ensureNotificationDelegate];
 }
 
 #pragma mark - Extension init
@@ -216,15 +223,24 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 - (instancetype)init {
     self = [super init];
 
-    // Ensure the app delegate is the notification center delegate so local
-    // notifications are delivered even when FCM is not present (idempotent).
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
-        center.delegate = (id<UNUserNotificationCenterDelegate>)[[UIApplication sharedApplication] delegate];
-    });
+    // Fallback: ensure the delegate is set when the extension object is created
+    // (covers app states other than a cold start).
+    [GMLocalNotifications ensureNotificationDelegate];
 
     return self;
+}
+
+// Assigns the runner app delegate as the notification center delegate. Idempotent
+// and safe to call from multiple launch hooks; the app delegate carries the
+// swizzled UN delegate methods. Setting the same value repeatedly is harmless and
+// coexists with FCM (which assigns the same app delegate).
++ (void)ensureNotificationDelegate {
+    id appDelegate = [[UIApplication sharedApplication] delegate];
+    if (appDelegate == nil) {
+        return;
+    }
+    UNUserNotificationCenter.currentNotificationCenter.delegate =
+        (id<UNUserNotificationCenterDelegate>)appDelegate;
 }
 
 #pragma mark - Generator API
