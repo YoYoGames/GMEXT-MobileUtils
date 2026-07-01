@@ -67,13 +67,11 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 + (void)load {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        NSLog(@"[GMLN] +load running (installing swizzles).");
-
         // Resolve the runner app delegate at runtime; its header is not on the
         // extension build's include path.
         Class appDelegateClass = NSClassFromString(@"iPad_RunnerAppDelegate");
         if (appDelegateClass == Nil) {
-            NSLog(@"[GMLN] +load: could not find iPad_RunnerAppDelegate.");
+            NSLog(@"[GMLocalNotifications] Could not find iPad_RunnerAppDelegate.");
             return;
         }
 
@@ -87,7 +85,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                         object:nil
                          queue:nil
                     usingBlock:^(NSNotification * _Nonnull note) {
-            NSLog(@"[GMLN] UIApplicationDidFinishLaunchingNotification observed.");
             [GMLocalNotifications ensureNotificationDelegate];
         }];
     });
@@ -188,8 +185,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 
     void (^onceHandler)(void) = RunOnceVoidCompletionHandler(completionHandler);
 
-    NSLog(@"[GMLN] didReceiveNotificationResponse fired (id=%@).", response.notification.request.identifier);
-
     if ([self respondsToSelector:@selector(gmln_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)]) {
         [self gmln_userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:onceHandler];
     }
@@ -198,7 +193,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     UNNotificationTrigger *trigger = notification.request.trigger;
 
     if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-        NSLog(@"[GMLN] didReceiveNotificationResponse: remote trigger, ignoring.");
         return;
     }
 
@@ -231,7 +225,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 // same hook FCM uses). Guarantees the delegate is set during launch even if the
 // runner instantiates the extension object lazily rather than via the swizzle.
 - (void)onLaunch:(NSDictionary *)launchOptions {
-    NSLog(@"[GMLN] onLaunch: hook ran.");
     [GMLocalNotifications ensureNotificationDelegate];
 }
 
@@ -254,14 +247,10 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 + (void)ensureNotificationDelegate {
     id appDelegate = [[UIApplication sharedApplication] delegate];
     if (appDelegate == nil) {
-        NSLog(@"[GMLN] ensureNotificationDelegate: app delegate is nil (skipping).");
         return;
     }
     UNUserNotificationCenter.currentNotificationCenter.delegate =
         (id<UNUserNotificationCenterDelegate>)appDelegate;
-    NSLog(@"[GMLN] ensureNotificationDelegate: delegate set to %@ (current=%@).",
-        NSStringFromClass([appDelegate class]),
-        NSStringFromClass([UNUserNotificationCenter.currentNotificationCenter.delegate class]));
 }
 
 #pragma mark - Generator API
@@ -306,8 +295,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 
 - (void)mobile_utils_notification_set_listener:(gm::wire::GMFunction)callback {
     g_notificationListener = callback;
-
-    NSLog(@"[GMLN] set_listener called (pending=%lu).", (unsigned long)g_pendingNotifications.count);
 
     // Deliver any notifications that arrived before the listener was registered
     // (e.g. a notification tap that cold-started the app).
@@ -414,7 +401,6 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     };
 
     if (g_notificationListener) {
-        NSLog(@"[GMLN] handleLocalNotification: listener present, delivering now (id=%@).", info[@"id"]);
         [self deliverNotification:info];
         return;
     }
@@ -424,16 +410,12 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
         g_pendingNotifications = [NSMutableArray array];
     }
     [g_pendingNotifications addObject:info];
-    NSLog(@"[GMLN] handleLocalNotification: no listener yet, queued (id=%@, pending=%lu).",
-        info[@"id"], (unsigned long)g_pendingNotifications.count);
 }
 
 + (void)deliverNotification:(NSDictionary<NSString *, NSString *> *)info {
     if (!g_notificationListener) {
         return;
     }
-
-    NSLog(@"[GMLN] deliverNotification: calling listener (id=%@).", info[@"id"]);
 
     g_notificationListener.call(
         std::string(info[@"id"].UTF8String ?: ""),
