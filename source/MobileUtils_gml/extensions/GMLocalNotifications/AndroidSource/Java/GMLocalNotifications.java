@@ -45,7 +45,7 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
     private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 0x4E4F; // 'NO'
 
     // Persistent listener invoked every time a local notification is received/tapped.
-    private static GMFunction g_listener = null;
+    private static volatile GMFunction g_listener = null;
 
     // Notifications received before a listener is registered are queued here and
     // flushed once a listener is set.
@@ -122,6 +122,8 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
         long fireTimeMs = System.currentTimeMillis() + (long) (seconds * 1000.0);
 
         Activity activity = RunnerActivity.CurrentActivity;
+        if (activity == null)
+            return;
 
         Intent intent = new Intent(activity, LocalNotificationReceiver.class);
         NotificationData notificationData = new NotificationData(identifier, title, message, data, imagePath);
@@ -139,6 +141,8 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
 
     public void mobile_utils_notification_cancel(String identifier) {
         Activity activity = RunnerActivity.CurrentActivity;
+        if (activity == null)
+            return;
 
         Context appContext = activity.getApplicationContext();
         Intent intent = new Intent(appContext, LocalNotificationReceiver.class);

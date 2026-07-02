@@ -33,7 +33,6 @@ public class GMMobileUtilsAppPopupSettings extends GMMobileUtilsAppPopupSettings
                     )
                 );
 
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 activity.startActivity(intent);
 
                 callback.call(true, "");

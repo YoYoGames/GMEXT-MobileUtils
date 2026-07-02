@@ -60,7 +60,7 @@ public class GMMobileUtilsImageTools
                 true
             );
 
-            return writePng(path, resized);
+            return writeImage(path, resized);
         }
         catch (Exception exception)
         {
@@ -115,7 +115,7 @@ public class GMMobileUtilsImageTools
                 h
             );
 
-            return writePng(path, cropped);
+            return writeImage(path, cropped);
         }
         catch (Exception exception)
         {
@@ -131,26 +131,66 @@ public class GMMobileUtilsImageTools
         }
     }
 
-    private static boolean writePng(
+    private static boolean writeImage(
         String path,
         Bitmap bitmap)
     {
-        try (
-            FileOutputStream stream =
-                new FileOutputStream(new File(path))
-        )
-        {
-            boolean success = bitmap.compress(
-                Bitmap.CompressFormat.PNG,
-                100,
-                stream
-            );
+        final String lower = path.toLowerCase();
 
-            stream.flush();
-            return success;
+        final Bitmap.CompressFormat format;
+        final int quality;
+
+        if (lower.endsWith(".jpg") || lower.endsWith(".jpeg"))
+        {
+            format = Bitmap.CompressFormat.JPEG;
+            quality = 90;
+        }
+        else
+        {
+            format = Bitmap.CompressFormat.PNG;
+            quality = 100;
+        }
+
+        final File target = new File(path);
+        final File directory = target.getParentFile();
+
+        // Compress into a sibling temp file first, then move it over the target.
+        // Writing straight to the target truncates it before compressing, so a
+        // failed/OOM compress would destroy the original with no recovery.
+        File temp = null;
+
+        try
+        {
+            temp = File.createTempFile("imgtool", null, directory);
+
+            boolean success;
+            try (FileOutputStream stream = new FileOutputStream(temp))
+            {
+                success = bitmap.compress(format, quality, stream);
+                stream.flush();
+            }
+
+            if (!success)
+            {
+                temp.delete();
+                return false;
+            }
+
+            if (target.exists() && !target.delete())
+            {
+                temp.delete();
+                return false;
+            }
+
+            // On failure here the new content still lives in temp; leave it
+            // rather than delete it, so the encode result is not lost as well.
+            return temp.renameTo(target);
         }
         catch (Exception exception)
         {
+            if (temp != null && temp.exists())
+                temp.delete();
+
             return false;
         }
     }

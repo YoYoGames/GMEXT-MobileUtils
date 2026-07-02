@@ -31,7 +31,7 @@
   "installdir":"",
   "iosCocoaPodDependencies":"",
   "iosCocoaPods":"",
-  "ioscodeinjection":"\r\n<YYIosEntitlements>\r\n<key>aps-environment</key>\r\n<string>development</string>\r\n</YYIosEntitlements>\r\n",
+  "ioscodeinjection":"\r\n<YYIosEntitlements>\r\n<key>aps-environment</key>\r\n<string>${YYEXTOPT_GMMobileUtilsAPN_APSEnvironment}</string>\r\n</YYIosEntitlements>\r\n",
   "iosdelegatename":"",
   "iosplistinject":null,
   "iosProps":true,
@@ -44,7 +44,13 @@
   "maclinkerflags":"-ObjC",
   "macsourcedir":"",
   "name":"GMMobileUtilsAPN",
-  "options":[],
+  "options":[
+    {"$GMExtensionOption":"","%Name":"__extOptLabel","defaultValue":"iOS","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"b2c1d4e6-3a5f-4c7d-9e1b-2f4a6c8d0e13","hidden":false,"listItems":[],"name":"__extOptLabel","optType":5,"resourceType":"GMExtensionOption","resourceVersion":"2.0",},
+    {"$GMExtensionOption":"","%Name":"APSEnvironment","defaultValue":"development","description":"","displayName":"APS Environment","exportToINI":false,"extensionId":null,"guid":"c3d2e5f7-4b6a-5d8e-af2c-3a5b7d9e1f24","hidden":false,"listItems":[
+        "development",
+        "production",
+      ],"name":"APSEnvironment","optType":6,"resourceType":"GMExtensionOption","resourceVersion":"2.0",},
+  ],
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{

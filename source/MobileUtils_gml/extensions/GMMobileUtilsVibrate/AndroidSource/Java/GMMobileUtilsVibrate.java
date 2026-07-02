@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.os.VibratorManager;
 
 public class GMMobileUtilsVibrate
     extends GMMobileUtilsVibrateInternal
@@ -16,10 +17,7 @@ public class GMMobileUtilsVibrate
         if (activity == null)
             return 0.0;
 
-        Vibrator vibrator =
-            (Vibrator)activity.getSystemService(
-                Context.VIBRATOR_SERVICE
-            );
+        Vibrator vibrator = getVibrator(activity);
 
         return vibrator != null && vibrator.hasVibrator()
             ? 1.0
@@ -40,10 +38,7 @@ public class GMMobileUtilsVibrate
 
         try
         {
-            Vibrator vibrator =
-                (Vibrator)activity.getSystemService(
-                    Context.VIBRATOR_SERVICE
-                );
+            Vibrator vibrator = getVibrator(activity);
 
             if (vibrator == null || !vibrator.hasVibrator())
                 return false;
@@ -85,10 +80,7 @@ public class GMMobileUtilsVibrate
 
         try
         {
-            Vibrator vibrator =
-                (Vibrator)activity.getSystemService(
-                    Context.VIBRATOR_SERVICE
-                );
+            Vibrator vibrator = getVibrator(activity);
 
             if (vibrator == null || !vibrator.hasVibrator())
                 return false;
@@ -115,6 +107,25 @@ public class GMMobileUtilsVibrate
         {
             return false;
         }
+    }
+
+    private static Vibrator getVibrator(Activity activity)
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        {
+            VibratorManager manager =
+                (VibratorManager)activity.getSystemService(
+                    Context.VIBRATOR_MANAGER_SERVICE
+                );
+
+            return manager != null
+                ? manager.getDefaultVibrator()
+                : null;
+        }
+
+        return (Vibrator)activity.getSystemService(
+            Context.VIBRATOR_SERVICE
+        );
     }
 
     private static boolean isValidAndroidEffect(int effect)

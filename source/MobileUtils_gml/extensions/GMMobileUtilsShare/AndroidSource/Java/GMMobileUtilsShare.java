@@ -58,8 +58,21 @@ public class GMMobileUtilsShare extends GMMobileUtilsShareInternal
                 }
                 else
                 {
-                    final File sourceFile =
-                        new File(activity.getFilesDir(), value);
+                    final File baseDir = activity.getFilesDir();
+                    final File sourceFile = new File(baseDir, value);
+
+                    // Subfolders (e.g. "my_images/pic.png") are allowed, but the
+                    // resolved path must stay inside the app private dir — reject
+                    // ../ traversal or absolute paths that escape the sandbox.
+                    final String basePath = baseDir.getCanonicalPath();
+                    final String resolvedPath = sourceFile.getCanonicalPath();
+
+                    if (!resolvedPath.equals(basePath)
+                        && !resolvedPath.startsWith(basePath + File.separator))
+                    {
+                        callback.call(false, "Invalid file path.");
+                        return;
+                    }
 
                     if (!sourceFile.exists())
                     {
@@ -90,7 +103,7 @@ public class GMMobileUtilsShare extends GMMobileUtilsShareInternal
 
                     final Uri fileUri = FileProvider.getUriForFile(
                         activity,
-                        activity.getPackageName() + ".fileprovider",
+                        activity.getPackageName() + ".share.fileprovider",
                         sharedFile
                     );
 

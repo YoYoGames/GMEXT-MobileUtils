@@ -24,7 +24,7 @@ public class GMMobileUtilsCamera extends GMMobileUtilsCameraInternal
 {
     private static final int CAMERA_REQUEST_CODE = 17;
 
-    private GMFunction cameraCallback = null;
+    private volatile GMFunction cameraCallback = null;
 
     public void mobile_utils_camera_open(final GMFunction callback)
     {
