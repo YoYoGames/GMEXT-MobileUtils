@@ -69,11 +69,9 @@
     if (result == nil)
         return false;
 
-    NSData *pngData =
-        UIImagePNGRepresentation(result);
-
-    return pngData != nil &&
-        [pngData writeToFile:pathString atomically:YES];
+    return [GMMobileUtilsImageTools
+        writeImage:result
+            toPath:pathString];
 }
 
 - (bool)mobile_utils_image_crop:
@@ -135,11 +133,24 @@
 
     CGImageRelease(imageRef);
 
-    NSData *pngData =
-        UIImagePNGRepresentation(cropped);
+    return [GMMobileUtilsImageTools
+        writeImage:cropped
+            toPath:pathString];
+}
 
-    return pngData != nil &&
-        [pngData writeToFile:pathString atomically:YES];
+// Encode by the destination suffix (.jpg/.jpeg -> JPEG, else PNG), matching the
+// Android side, and write atomically so a failed encode never truncates the file.
++ (BOOL)writeImage:(UIImage *)image toPath:(NSString *)path
+{
+    NSString *lower = path.lowercaseString;
+
+    NSData *data;
+    if ([lower hasSuffix:@".jpg"] || [lower hasSuffix:@".jpeg"])
+        data = UIImageJPEGRepresentation(image, 0.9);
+    else
+        data = UIImagePNGRepresentation(image);
+
+    return data != nil && [data writeToFile:path atomically:YES];
 }
 
 @end

@@ -66,6 +66,16 @@ extern UIViewController *g_controller;
             return;
         }
 
+        if (g_controller.presentedViewController != nil)
+        {
+            callback.call(
+                false,
+                "",
+                "Another screen is already presented."
+            );
+            return;
+        }
+
         _cameraCallback = callback;
         _cameraRequestActive = YES;
 
@@ -73,7 +83,8 @@ extern UIViewController *g_controller;
             [[UIImagePickerController alloc] init];
 
         picker.delegate = self;
-        picker.allowsEditing = YES;
+        // NO for parity with Android/Gallery (no forced crop step).
+        picker.allowsEditing = NO;
         picker.sourceType =
             UIImagePickerControllerSourceTypeCamera;
 
@@ -95,14 +106,14 @@ extern UIViewController *g_controller;
     if (image == nil)
         image = info[UIImagePickerControllerOriginalImage];
 
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
     if (image == nil)
     {
-        [picker dismissViewControllerAnimated:YES completion:^{
-            [self finishCameraRequest:
-                false
-                path:""
-                error:"Camera returned no image."];
-        }];
+        [self finishCameraRequest:
+            false
+            path:""
+            error:"Camera returned no image."];
         return;
     }
 
@@ -117,44 +128,47 @@ extern UIViewController *g_controller;
         [documentsPath
             stringByAppendingPathComponent:@"temp.jpg"];
 
-    NSData *jpegData =
-        UIImageJPEGRepresentation(image, 1.0);
+    // Encode + write off the main thread — a full-resolution capture would
+    // otherwise block the UI long enough to risk the watchdog. Fire the
+    // callback back on the main thread for consistency with every other path.
+    dispatch_async(
+        dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+        ^{
+            NSData *jpegData =
+                UIImageJPEGRepresentation(image, 0.85);
 
-    if (jpegData == nil)
-    {
-        [picker dismissViewControllerAnimated:YES completion:^{
-            [self finishCameraRequest:
-                false
-                path:""
-                error:"Could not encode camera image."];
-        }];
-        return;
-    }
+            BOOL written = NO;
+            if (jpegData != nil)
+                written = [jpegData writeToFile:path
+                                        options:NSDataWritingAtomic
+                                          error:nil];
 
-    NSError *writeError = nil;
-    BOOL written =
-        [jpegData writeToFile:path
-                      options:NSDataWritingAtomic
-                        error:&writeError];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (jpegData == nil)
+                {
+                    [self finishCameraRequest:
+                        false
+                        path:""
+                        error:"Could not encode camera image."];
+                    return;
+                }
 
-    [picker dismissViewControllerAnimated:YES completion:^{
-        if (!written)
-        {
-            const char *message =
-                writeError.localizedDescription.UTF8String;
+                if (!written)
+                {
+                    [self finishCameraRequest:
+                        false
+                        path:""
+                        error:"Could not save camera image."];
+                    return;
+                }
 
-            [self finishCameraRequest:
-                false
-                path:""
-                error:(message ? message : "Could not save camera image.")];
-            return;
+                [self finishCameraRequest:
+                    true
+                    path:(path.UTF8String ?: "")
+                    error:""];
+            });
         }
-
-        [self finishCameraRequest:
-            true
-            path:(path.UTF8String ?: "")
-            error:""];
-    }];
+    );
 }
 
 - (void)imagePickerControllerDidCancel:

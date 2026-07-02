@@ -35,6 +35,14 @@ static gm::wire::GMFunction g_notificationListener = nil;
 // cold-started the app) are queued here and flushed once a listener is set.
 static NSMutableArray<NSDictionary<NSString *, NSString *> *> *g_pendingNotifications = nil;
 
+// Dedupe the foreground present + tap pair: willPresent and then didReceive both
+// fire for the same notification within a moment. Android delivers once, so we
+// suppress the second delivery within a short window (a genuine later re-fire of
+// the same id still gets through).
+static NSString *g_lastHandledIdentifier = nil;
+static NSTimeInterval g_lastHandledTime = 0;
+static const NSTimeInterval kNotificationDedupeWindow = 3.0;
+
 typedef void(^RunOnceCompletionHandler)(void);
 typedef void(^RunOncePresentationHandler)(UNNotificationPresentationOptions options);
 
@@ -143,10 +151,15 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
         return;
     }
 
+    // Install OUR implementation under the swizzled selector before exchanging,
+    // so afterwards the original selector runs our handler and the swizzled
+    // selector chains to the previously installed one. Adding installedMethod's
+    // IMP here instead would leave both selectors pointing at the previous
+    // implementation and our handler would never run.
     class_addMethod(targetClass,
                     swizzledSelector,
-                    method_getImplementation(installedMethod),
-                    method_getTypeEncoding(installedMethod));
+                    method_getImplementation(swizzledMethod),
+                    method_getTypeEncoding(swizzledMethod));
 
     Method replacementMethod = class_getInstanceMethod(targetClass, swizzledSelector);
     method_exchangeImplementations(installedMethod, replacementMethod);
@@ -166,16 +179,28 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
         [self gmln_userNotificationCenter:center willPresentNotification:notification withCompletionHandler:onceHandler];
     }
 
+    UNNotificationPresentationOptions presentOptions;
+    if (@available(iOS 14.0, *)) {
+        presentOptions = UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionList | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge;
+    } else {
+        presentOptions = UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge;
+    }
+
     UNNotificationTrigger *trigger = notification.request.trigger;
 
-    // Remote notifications are handled by FCM (or whoever owns them); ignore here.
+    // Remote notifications are owned by whoever registered for push (FCM, or the
+    // sibling APN extension); we don't deliver them to the local listener. But we
+    // must still call the completion handler or iOS suppresses the foreground
+    // presentation and logs "completion handler not called". The run-once wrapper
+    // keeps this safe when a chained handler already called it.
     if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        onceHandler(presentOptions);
         return;
     }
 
     [GMLocalNotifications handleLocalNotification:notification];
 
-    onceHandler(UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionSound | UNNotificationPresentationOptionBadge);
+    onceHandler(presentOptions);
 }
 
 // Swizzled didReceiveNotificationResponse
@@ -193,6 +218,7 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     UNNotificationTrigger *trigger = notification.request.trigger;
 
     if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        onceHandler();
         return;
     }
 
@@ -265,7 +291,8 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                                      seconds:seconds
                                        title:title
                                      message:message
-                                        data:data];
+                                        data:data
+                                  image_path:std::string_view()];
 }
 
 - (void)mobile_utils_notification_create_ext:(std::string_view)identifier
@@ -275,15 +302,12 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                                         data:(std::string_view)data
                                   image_path:(std::string_view)image_path {
 
-    // iOS does not use the image path (legacy iOS had no _Ext variant). The
-    // notification is scheduled identically; image_path is accepted for API
-    // parity with Android. A future enhancement could attach a
-    // UNNotificationAttachment built from image_path.
     [self scheduleNotificationWithIdentifier:identifier
                                      seconds:seconds
                                        title:title
                                      message:message
-                                        data:data];
+                                        data:data
+                                  image_path:image_path];
 }
 
 - (void)mobile_utils_notification_cancel:(std::string_view)identifier {
@@ -356,7 +380,8 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                                   seconds:(double)seconds
                                     title:(std::string_view)title
                                   message:(std::string_view)message
-                                     data:(std::string_view)data {
+                                     data:(std::string_view)data
+                               image_path:(std::string_view)image_path {
 
     if (seconds <= 0) {
         return;
@@ -373,6 +398,12 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     content.sound = [UNNotificationSound defaultSound];
     content.userInfo = @{@"data_key" : dataString};
 
+    NSString *imagePathString = [[NSString alloc] initWithBytes:image_path.data() length:image_path.size() encoding:NSUTF8StringEncoding] ?: @"";
+    UNNotificationAttachment *attachment = [GMLocalNotifications attachmentForImagePath:imagePathString];
+    if (attachment != nil) {
+        content.attachments = @[attachment];
+    }
+
     UNTimeIntervalNotificationTrigger *trigger = [UNTimeIntervalNotificationTrigger triggerWithTimeInterval:seconds repeats:NO];
 
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
@@ -386,8 +417,67 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     }];
 }
 
+// Build a notification image attachment from image_path (absolute, or relative to
+// the Documents directory, matching how the rest of the extension resolves paths).
+// The file is copied into the temp dir first because UNNotificationAttachment
+// moves the source into its own data store. Returns nil when there is no usable
+// image so the caller simply schedules without an attachment.
++ (UNNotificationAttachment *)attachmentForImagePath:(NSString *)imagePath {
+    if (imagePath.length == 0) {
+        return nil;
+    }
+
+    NSString *resolvedPath = imagePath;
+    if (![imagePath hasPrefix:@"/"]) {
+        NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
+        resolvedPath = [documentsPath stringByAppendingPathComponent:imagePath];
+    }
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:resolvedPath]) {
+        return nil;
+    }
+
+    NSString *extension = resolvedPath.pathExtension;
+    NSString *tempName = [[NSUUID UUID] UUIDString];
+    if (extension.length > 0) {
+        tempName = [tempName stringByAppendingPathExtension:extension];
+    }
+    NSString *tempPath = [NSTemporaryDirectory() stringByAppendingPathComponent:tempName];
+
+    if (![fileManager copyItemAtPath:resolvedPath toPath:tempPath error:nil]) {
+        return nil;
+    }
+
+    NSError *attachmentError = nil;
+    UNNotificationAttachment *attachment =
+        [UNNotificationAttachment attachmentWithIdentifier:@"image"
+                                                       URL:[NSURL fileURLWithPath:tempPath]
+                                                   options:nil
+                                                     error:&attachmentError];
+
+    if (attachment == nil) {
+        [fileManager removeItemAtPath:tempPath error:nil];
+        return nil;
+    }
+
+    return attachment;
+}
+
 + (void)handleLocalNotification:(UNNotification *)notification {
-    NSString *identifier = notification.request.identifier;
+    NSString *rawIdentifier = notification.request.identifier ?: @"";
+
+    // Suppress the present+tap duplicate (see g_lastHandledIdentifier).
+    NSTimeInterval now = [NSDate timeIntervalSinceReferenceDate];
+    if (g_lastHandledIdentifier != nil
+        && [g_lastHandledIdentifier isEqualToString:rawIdentifier]
+        && (now - g_lastHandledTime) < kNotificationDedupeWindow) {
+        return;
+    }
+    g_lastHandledIdentifier = [rawIdentifier copy];
+    g_lastHandledTime = now;
+
+    NSString *identifier = rawIdentifier;
     if ([identifier hasPrefix:kGMLNPrefix]) {
         identifier = [identifier substringFromIndex:kGMLNPrefix.length];
     }

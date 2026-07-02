@@ -19,6 +19,14 @@ static NSString *g_cachedDeviceToken = nil;
 static gm::wire::GMFunction g_registerCallback = nil;
 static BOOL g_registrationActive = NO;
 
+// Bumped on every register call so a stale timeout can tell whether it still
+// applies to the in-flight request.
+static NSUInteger g_registrationGeneration = 0;
+
+// How long to wait for the OS to deliver didRegister / didFail before failing
+// the callback so the request cannot lock out every later call forever.
+static const NSTimeInterval kAPNRegistrationTimeout = 30.0;
+
 #pragma mark - App delegate swizzling
 
 + (void)load
@@ -115,11 +123,16 @@ static BOOL g_registrationActive = NO;
     Method installedMethod =
         class_getInstanceMethod(targetClass, originalSelector);
 
+    // Install OUR implementation under the swizzled selector, then exchange, so
+    // afterwards the original selector runs our handler and the swizzled selector
+    // chains to the runner's previous implementation. (Adding the installed IMP
+    // here instead would leave both selectors pointing at the runner's IMP and
+    // our handler would never run.)
     class_addMethod(
         targetClass,
         swizzledSelector,
-        method_getImplementation(installedMethod),
-        method_getTypeEncoding(installedMethod)
+        method_getImplementation(swizzledMethod),
+        method_getTypeEncoding(swizzledMethod)
     );
 
     Method replacementMethod =
@@ -231,6 +244,27 @@ static BOOL g_registrationActive = NO;
 
         g_registerCallback = callback;
         g_registrationActive = YES;
+
+        NSUInteger generation = ++g_registrationGeneration;
+
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                (int64_t)(kAPNRegistrationTimeout * NSEC_PER_SEC)
+            ),
+            dispatch_get_main_queue(),
+            ^{
+                if (g_registrationActive &&
+                    generation == g_registrationGeneration)
+                {
+                    [GMMobileUtilsAPN
+                        finishRegistration:false
+                        token:""
+                        error:"APNs registration timed out."
+                    ];
+                }
+            }
+        );
 
         if (@available(iOS 10.0, *))
         {

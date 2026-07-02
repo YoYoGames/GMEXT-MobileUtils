@@ -44,6 +44,12 @@ extern UIViewController *g_controller;
             return;
         }
 
+        if (g_controller.presentedViewController != nil)
+        {
+            callback.call(false, "Another screen is already presented.");
+            return;
+        }
+
         NSMutableArray *items = [NSMutableArray array];
 
         if ([self isTextMimeType:mimeString])
@@ -62,6 +68,21 @@ extern UIViewController *g_controller;
             NSString *filePath =
                 [documentsPath stringByAppendingPathComponent:
                     valueString ?: @""];
+
+            // Subfolders are allowed, but the resolved path must stay inside the
+            // Documents directory — reject ../ traversal or absolute escapes.
+            NSString *standardizedBase =
+                [documentsPath stringByStandardizingPath];
+            NSString *standardizedFile =
+                [filePath stringByStandardizingPath];
+
+            if (![standardizedFile isEqualToString:standardizedBase] &&
+                ![standardizedFile hasPrefix:
+                    [standardizedBase stringByAppendingString:@"/"]])
+            {
+                callback.call(false, "Invalid file path.");
+                return;
+            }
 
             if (![[NSFileManager defaultManager]
                     fileExistsAtPath:filePath])

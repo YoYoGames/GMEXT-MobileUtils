@@ -70,6 +70,17 @@ extern UIViewController *g_controller;
             return;
         }
 
+        if (g_controller.presentedViewController != nil)
+        {
+            callback.call(
+                false,
+                "",
+                "",
+                "Another screen is already presented."
+            );
+            return;
+        }
+
         _galleryCallback = callback;
         _galleryRequestActive = YES;
 
@@ -96,15 +107,15 @@ extern UIViewController *g_controller;
     UIImage *image =
         info[UIImagePickerControllerOriginalImage];
 
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
     if (image == nil)
     {
-        [picker dismissViewControllerAnimated:YES completion:^{
-            [self finishGalleryRequest:
-                false
-                path:""
-                filename:""
-                error:"Gallery returned no image."];
-        }];
+        [self finishGalleryRequest:
+            false
+            path:""
+            filename:""
+            error:"Gallery returned no image."];
         return;
     }
 
@@ -144,47 +155,49 @@ extern UIViewController *g_controller;
         [documentsPath
             stringByAppendingPathComponent:fileName];
 
-    NSData *jpegData =
-        UIImageJPEGRepresentation(image, 1.0);
+    // Decode/re-encode + write off the main thread — a large photo would
+    // otherwise block the UI. Deliver the callback back on the main thread.
+    dispatch_async(
+        dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0),
+        ^{
+            NSData *jpegData =
+                UIImageJPEGRepresentation(image, 1.0);
 
-    if (jpegData == nil)
-    {
-        [picker dismissViewControllerAnimated:YES completion:^{
-            [self finishGalleryRequest:
-                false
-                path:""
-                filename:""
-                error:"Could not encode selected image."];
-        }];
-        return;
-    }
+            BOOL written = NO;
+            if (jpegData != nil)
+                written = [jpegData writeToFile:path
+                                        options:NSDataWritingAtomic
+                                          error:nil];
 
-    NSError *writeError = nil;
-    BOOL written =
-        [jpegData writeToFile:path
-                      options:NSDataWritingAtomic
-                        error:&writeError];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (jpegData == nil)
+                {
+                    [self finishGalleryRequest:
+                        false
+                        path:""
+                        filename:""
+                        error:"Could not encode selected image."];
+                    return;
+                }
 
-   [picker dismissViewControllerAnimated:YES completion:^{
-    if (!written)
-    {
-            const char *message =
-                writeError.localizedDescription.UTF8String;
+                if (!written)
+                {
+                    [self finishGalleryRequest:
+                        false
+                        path:""
+                        filename:""
+                        error:"Could not save selected image."];
+                    return;
+                }
 
-            [self finishGalleryRequest:
-                false
-                path:""
-                filename:""
-                error:(message ? message : "Could not save selected image.")];
-            return;
+                [self finishGalleryRequest:
+                    true
+                    path:(path.UTF8String ?: "")
+                    filename:(fileName.UTF8String ?: "")
+                    error:""];
+            });
         }
-
-        [self finishGalleryRequest:
-            true
-            path:(path.UTF8String ? path.UTF8String : "")
-            filename:(fileName.UTF8String ? fileName.UTF8String : "")
-            error:""];
-    }];
+    );
 }
 
 - (void)imagePickerControllerDidCancel:
