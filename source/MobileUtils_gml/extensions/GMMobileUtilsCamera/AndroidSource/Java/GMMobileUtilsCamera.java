@@ -137,24 +137,37 @@ public class GMMobileUtilsCamera extends GMMobileUtilsCameraInternal
             final File output =
                 new File(directory, "temp.png");
 
-            try (FileOutputStream stream =
-                    new FileOutputStream(output))
+            // Bitmap.compress + write can block the UI thread (and will be a
+            // guaranteed ANR once the capture becomes full-resolution), so encode on
+            // a worker and fire the (thread-safe) callback from there.
+            new Thread(() ->
             {
-                final boolean compressed = bitmap.compress(
-                    Bitmap.CompressFormat.PNG,
-                    100,
-                    stream
-                );
+                try
+                {
+                    try (FileOutputStream stream =
+                            new FileOutputStream(output))
+                    {
+                        final boolean compressed = bitmap.compress(
+                            Bitmap.CompressFormat.PNG,
+                            100,
+                            stream
+                        );
 
-                if (!compressed)
-                    throw new IllegalStateException(
-                        "Could not encode camera image."
-                    );
+                        if (!compressed)
+                            throw new IllegalStateException(
+                                "Could not encode camera image."
+                            );
 
-                stream.flush();
-            }
+                        stream.flush();
+                    }
 
-            finish(true, output.getAbsolutePath(), "");
+                    finish(true, output.getAbsolutePath(), "");
+                }
+                catch (Exception exception)
+                {
+                    finish(false, "", error(exception));
+                }
+            }).start();
         }
         catch (Exception exception)
         {

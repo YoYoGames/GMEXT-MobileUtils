@@ -39,100 +39,134 @@ public class GMMobileUtilsShare extends GMMobileUtilsShareInternal
             return;
         }
 
-        activity.runOnUiThread(() ->
+        final String safeMime =
+            mime != null && !mime.isEmpty() ? mime : "*/*";
+
+        if (isTextMimeType(safeMime))
         {
-            try
+            // Text share: no file I/O, so launch the chooser directly on the UI thread.
+            activity.runOnUiThread(() ->
             {
-                final Intent shareIntent = new Intent(Intent.ACTION_SEND);
-                final String safeMime =
-                    mime != null && !mime.isEmpty() ? mime : "*/*";
-
-                shareIntent.setType(safeMime);
-
-                if (isTextMimeType(safeMime))
+                try
                 {
+                    final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType(safeMime);
                     shareIntent.putExtra(
                         Intent.EXTRA_TEXT,
                         value != null ? value : ""
                     );
+
+                    activity.startActivity(
+                        Intent.createChooser(
+                            shareIntent,
+                            title != null ? title : ""
+                        )
+                    );
+
+                    callback.call(true, "");
                 }
-                else
+                catch (Exception exception)
                 {
-                    final File baseDir = activity.getFilesDir();
-                    final File sourceFile = new File(baseDir, value);
+                    callback.call(false, error(exception));
+                }
+            });
+            return;
+        }
 
-                    // Subfolders (e.g. "my_images/pic.png") are allowed, but the
-                    // resolved path must stay inside the app private dir — reject
-                    // ../ traversal or absolute paths that escape the sandbox.
-                    final String basePath = baseDir.getCanonicalPath();
-                    final String resolvedPath = sourceFile.getCanonicalPath();
+        // File share: copyFile (FileChannel.transferTo of the whole file) can ANR on
+        // a large video/PDF/GIF, so do the containment check + copy on a worker and
+        // hop back to the UI thread only for startActivity (which must run there).
+        new Thread(() ->
+        {
+            try
+            {
+                final File baseDir = activity.getFilesDir();
+                final File sourceFile = new File(baseDir, value);
 
-                    if (!resolvedPath.equals(basePath)
-                        && !resolvedPath.startsWith(basePath + File.separator))
-                    {
-                        callback.call(false, "Invalid file path.");
-                        return;
-                    }
+                // Subfolders (e.g. "my_images/pic.png") are allowed, but the
+                // resolved path must stay inside the app private dir — reject
+                // ../ traversal or absolute paths that escape the sandbox.
+                final String basePath = baseDir.getCanonicalPath();
+                final String resolvedPath = sourceFile.getCanonicalPath();
 
-                    if (!sourceFile.exists())
-                    {
-                        callback.call(
-                            false,
-                            "Source file does not exist: "
-                                + sourceFile.getAbsolutePath()
-                        );
-                        return;
-                    }
-
-                    final File externalDirectory =
-                        activity.getExternalFilesDir(null);
-
-                    if (externalDirectory == null)
-                    {
-                        callback.call(
-                            false,
-                            "External files directory is unavailable."
-                        );
-                        return;
-                    }
-
-                    final File sharedFile =
-                        new File(externalDirectory, sourceFile.getName());
-
-                    copyFile(sourceFile, sharedFile);
-
-                    final Uri fileUri = FileProvider.getUriForFile(
-                        activity,
-                        activity.getPackageName() + ".share.fileprovider",
-                        sharedFile
-                    );
-
-                    String detectedMime =
-                        getMimeType(sharedFile.getAbsolutePath());
-
-                    if (detectedMime != null && !detectedMime.isEmpty())
-                        shareIntent.setType(detectedMime);
-
-                    shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-                    shareIntent.addFlags(
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION
-                    );
+                if (!resolvedPath.equals(basePath)
+                    && !resolvedPath.startsWith(basePath + File.separator))
+                {
+                    callback.call(false, "Invalid file path.");
+                    return;
                 }
 
-                activity.startActivity(
-                    Intent.createChooser(
-                        shareIntent,
-                        title != null ? title : ""
-                    )
+                if (!sourceFile.exists())
+                {
+                    callback.call(
+                        false,
+                        "Source file does not exist: "
+                            + sourceFile.getAbsolutePath()
+                    );
+                    return;
+                }
+
+                final File externalDirectory =
+                    activity.getExternalFilesDir(null);
+
+                if (externalDirectory == null)
+                {
+                    callback.call(
+                        false,
+                        "External files directory is unavailable."
+                    );
+                    return;
+                }
+
+                final File sharedFile =
+                    new File(externalDirectory, sourceFile.getName());
+
+                copyFile(sourceFile, sharedFile);
+
+                final Uri fileUri = FileProvider.getUriForFile(
+                    activity,
+                    activity.getPackageName() + ".share.fileprovider",
+                    sharedFile
                 );
 
-                callback.call(true, "");
+                final String detectedMime =
+                    getMimeType(sharedFile.getAbsolutePath());
+                final String finalMime =
+                    detectedMime != null && !detectedMime.isEmpty()
+                        ? detectedMime
+                        : safeMime;
+
+                activity.runOnUiThread(() ->
+                {
+                    try
+                    {
+                        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                        shareIntent.setType(finalMime);
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                        shareIntent.addFlags(
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        );
+
+                        activity.startActivity(
+                            Intent.createChooser(
+                                shareIntent,
+                                title != null ? title : ""
+                            )
+                        );
+
+                        callback.call(true, "");
+                    }
+                    catch (Exception exception)
+                    {
+                        callback.call(false, error(exception));
+                    }
+                });
             }
             catch (Exception exception)
             {
                 callback.call(false, error(exception));
             }
-        });
+        }).start();
     }
 
     private static boolean isTextMimeType(String mime)

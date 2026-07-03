@@ -27,7 +27,7 @@ public class GMMobileUtilsGallery extends GMMobileUtilsGalleryInternal
 {
     private static final int PICK_IMAGE_URI = 2;
 
-    private GMFunction galleryCallback = null;
+    private volatile GMFunction galleryCallback = null;
 
     public void mobile_utils_gallery_open(final GMFunction callback)
     {
@@ -100,71 +100,81 @@ public class GMMobileUtilsGallery extends GMMobileUtilsGalleryInternal
             return;
         }
 
-        try
+        if (data == null)
         {
-            if (data == null)
-                throw new IllegalStateException(
-                    "Gallery returned no Intent data."
-                );
+            finish(false, "", "", "Gallery returned no Intent data.");
+            return;
+        }
 
-            final Uri uri = data.getData();
+        final Uri uri = data.getData();
 
-            if (uri == null)
-                throw new IllegalStateException(
-                    "Gallery returned no image URI."
-                );
+        if (uri == null)
+        {
+            finish(false, "", "", "Gallery returned no image URI.");
+            return;
+        }
 
-            final Activity activity = RunnerActivity.CurrentActivity;
+        final Activity activity = RunnerActivity.CurrentActivity;
 
-            if (activity == null)
-                throw new IllegalStateException(
-                    "Activity is null."
-                );
+        if (activity == null)
+        {
+            finish(false, "", "", "Activity is null.");
+            return;
+        }
 
-            String fileName =
-                getDisplayName(activity, uri);
-
-            if (fileName == null || fileName.isEmpty())
-                fileName = "temp.jpg";
-
-            fileName = sanitizeFileName(fileName);
-
-            final File outputFile =
-                new File(activity.getFilesDir(), fileName);
-
-            try (
-                InputStream input =
-                    activity.getContentResolver()
-                        .openInputStream(uri);
-                OutputStream output =
-                    new FileOutputStream(outputFile)
-            )
+        // The display-name query and the InputStream -> FileOutputStream copy can
+        // block for hundreds of ms on large HEIC/photos. onActivityResult runs on
+        // the UI thread, so run the copy on a worker and fire the (thread-safe)
+        // callback from there. The content-URI read grant stays valid on the worker.
+        new Thread(() ->
+        {
+            try
             {
-                if (input == null)
-                    throw new IllegalStateException(
-                        "Could not open selected image."
-                    );
+                String fileName =
+                    getDisplayName(activity, uri);
 
-                final byte[] buffer = new byte[16 * 1024];
-                int read;
+                if (fileName == null || fileName.isEmpty())
+                    fileName = "temp.jpg";
 
-                while ((read = input.read(buffer)) != -1)
-                    output.write(buffer, 0, read);
+                fileName = sanitizeFileName(fileName);
 
-                output.flush();
+                final File outputFile =
+                    new File(activity.getFilesDir(), fileName);
+
+                try (
+                    InputStream input =
+                        activity.getContentResolver()
+                            .openInputStream(uri);
+                    OutputStream output =
+                        new FileOutputStream(outputFile)
+                )
+                {
+                    if (input == null)
+                        throw new IllegalStateException(
+                            "Could not open selected image."
+                        );
+
+                    final byte[] buffer = new byte[16 * 1024];
+                    int read;
+
+                    while ((read = input.read(buffer)) != -1)
+                        output.write(buffer, 0, read);
+
+                    output.flush();
+                }
+
+                finish(
+                    true,
+                    outputFile.getAbsolutePath(),
+                    fileName,
+                    ""
+                );
             }
-
-            finish(
-                true,
-                outputFile.getAbsolutePath(),
-                fileName,
-                ""
-            );
-        }
-        catch (Exception exception)
-        {
-            finish(false, "", "", error(exception));
-        }
+            catch (Exception exception)
+            {
+                finish(false, "", "", error(exception));
+            }
+        }).start();
     }
 
     private static String getDisplayName(
