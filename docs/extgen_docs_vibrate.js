@@ -1,20 +1,20 @@
 /**
  * @function_partial mobile_utils_vibrate_is_available
- * @returns {Real} 
+ * @returns {Real}
  * @function_end
  */
 
 /**
  * @function_partial mobile_utils_vibrate_predefined
  * @param {Real} kind
- * @returns {Bool} 
+ * @returns {Bool}
  * @function_end
  */
 
 /**
  * @function_partial mobile_utils_vibrate_shot
  * @param {Real} milliseconds
- * @returns {Bool} 
+ * @returns {Bool}
  * @function_end
  */
 

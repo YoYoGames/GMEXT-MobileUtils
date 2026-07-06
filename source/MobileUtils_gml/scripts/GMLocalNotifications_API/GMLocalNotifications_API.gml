@@ -39,6 +39,9 @@ enum MobileUtilsNotificationPermission
  */
 function mobile_utils_notification_create(_identifier, _seconds, _title, _message, _data)
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _identifier, type: String
@@ -80,6 +83,9 @@ function mobile_utils_notification_create(_identifier, _seconds, _title, _messag
  */
 function mobile_utils_notification_create_ext(_identifier, _seconds, _title, _message, _data, _image_path)
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _identifier, type: String
@@ -124,6 +130,9 @@ function mobile_utils_notification_create_ext(_identifier, _seconds, _title, _me
  */
 function mobile_utils_notification_set_listener(_callback)
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -143,6 +152,9 @@ function mobile_utils_notification_set_listener(_callback)
  */
 function mobile_utils_notification_request_permission(_callback)
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -162,6 +174,9 @@ function mobile_utils_notification_request_permission(_callback)
  */
 function mobile_utils_notification_permission_status(_callback)
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -185,6 +200,15 @@ function __GMLocalNotifications_get_decoders()
 /// @ignore
 function __GMLocalNotifications_get_dispatcher()
 {
+    static __available = __GMLocalNotifications_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMLocalNotifications_invocation_handler, __GMLocalNotifications_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMLocalNotifications_is_available()
+{
+    static __available = extension_exists("GMLocalNotifications");
+    return __available;
 }

@@ -28,6 +28,9 @@
  */
 function mobile_utils_share_open(_title, _mime, _value, _callback)
 {
+    static __available = __GMMobileUtilsShare_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMMobileUtilsShare_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -66,6 +69,15 @@ function __GMMobileUtilsShare_get_decoders()
 /// @ignore
 function __GMMobileUtilsShare_get_dispatcher()
 {
+    static __available = __GMMobileUtilsShare_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMMobileUtilsShare_invocation_handler, __GMMobileUtilsShare_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMMobileUtilsShare_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsShare");
+    return __available;
 }

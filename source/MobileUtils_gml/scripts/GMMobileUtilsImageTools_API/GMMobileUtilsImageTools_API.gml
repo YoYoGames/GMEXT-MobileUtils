@@ -35,10 +35,13 @@
  * @param {Real} _height
  * @param {Real} _offset_x
  * @param {Real} _offset_y
- * @returns {Bool} 
+ * @returns {Bool}
  */
 function mobile_utils_image_crop(_path, _width, _height, _offset_x, _offset_y)
 {
+    static __available = __GMMobileUtilsImageTools_is_available();
+    if (!__available) return;
+
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _path, type: String
@@ -72,4 +75,10 @@ function __GMMobileUtilsImageTools_get_decoders()
 {
     static __decoders = [];
     return __decoders;
+}
+/// @ignore
+function __GMMobileUtilsImageTools_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsImageTools");
+    return __available;
 }

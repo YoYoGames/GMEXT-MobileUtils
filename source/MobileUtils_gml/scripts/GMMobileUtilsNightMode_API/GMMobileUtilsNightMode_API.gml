@@ -36,3 +36,9 @@ function __GMMobileUtilsNightMode_get_decoders()
     static __decoders = [];
     return __decoders;
 }
+/// @ignore
+function __GMMobileUtilsNightMode_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsNightMode");
+    return __available;
+}

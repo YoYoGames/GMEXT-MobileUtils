@@ -63,3 +63,9 @@ function __GMMobileUtilsVibrate_get_decoders()
     static __decoders = [];
     return __decoders;
 }
+/// @ignore
+function __GMMobileUtilsVibrate_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsVibrate");
+    return __available;
+}

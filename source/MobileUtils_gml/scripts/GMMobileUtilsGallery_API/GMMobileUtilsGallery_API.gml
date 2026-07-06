@@ -25,6 +25,9 @@
  */
 function mobile_utils_gallery_open(_callback)
 {
+    static __available = __GMMobileUtilsGallery_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMMobileUtilsGallery_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -48,6 +51,15 @@ function __GMMobileUtilsGallery_get_decoders()
 /// @ignore
 function __GMMobileUtilsGallery_get_dispatcher()
 {
+    static __available = __GMMobileUtilsGallery_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMMobileUtilsGallery_invocation_handler, __GMMobileUtilsGallery_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMMobileUtilsGallery_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsGallery");
+    return __available;
 }

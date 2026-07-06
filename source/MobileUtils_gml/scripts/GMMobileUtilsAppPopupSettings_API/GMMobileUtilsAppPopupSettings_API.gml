@@ -25,6 +25,9 @@
  */
 function mobile_utils_app_popup_settings_show(_callback)
 {
+    static __available = __GMMobileUtilsAppPopupSettings_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMMobileUtilsAppPopupSettings_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -48,6 +51,15 @@ function __GMMobileUtilsAppPopupSettings_get_decoders()
 /// @ignore
 function __GMMobileUtilsAppPopupSettings_get_dispatcher()
 {
+    static __available = __GMMobileUtilsAppPopupSettings_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMMobileUtilsAppPopupSettings_invocation_handler, __GMMobileUtilsAppPopupSettings_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMMobileUtilsAppPopupSettings_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsAppPopupSettings");
+    return __available;
 }

@@ -25,6 +25,9 @@
  */
 function mobile_utils_camera_open(_callback)
 {
+    static __available = __GMMobileUtilsCamera_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMMobileUtilsCamera_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -48,6 +51,15 @@ function __GMMobileUtilsCamera_get_decoders()
 /// @ignore
 function __GMMobileUtilsCamera_get_dispatcher()
 {
+    static __available = __GMMobileUtilsCamera_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMMobileUtilsCamera_invocation_handler, __GMMobileUtilsCamera_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMMobileUtilsCamera_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsCamera");
+    return __available;
 }

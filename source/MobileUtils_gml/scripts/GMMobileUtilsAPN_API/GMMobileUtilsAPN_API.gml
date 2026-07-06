@@ -25,6 +25,9 @@
  */
 function mobile_utils_apn_register(_callback)
 {
+    static __available = __GMMobileUtilsAPN_is_available();
+    if (!__available) return;
+
     static __dispatcher = __GMMobileUtilsAPN_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
@@ -51,6 +54,15 @@ function __GMMobileUtilsAPN_get_decoders()
 /// @ignore
 function __GMMobileUtilsAPN_get_dispatcher()
 {
+    static __available = __GMMobileUtilsAPN_is_available();
+    if (!__available) return;
+
     static __dispatcher = new __GMNativeFunctionDispatcher(__GMMobileUtilsAPN_invocation_handler, __GMMobileUtilsAPN_get_decoders());
     return __dispatcher;
+}
+/// @ignore
+function __GMMobileUtilsAPN_is_available()
+{
+    static __available = extension_exists("GMMobileUtilsAPN");
+    return __available;
 }
