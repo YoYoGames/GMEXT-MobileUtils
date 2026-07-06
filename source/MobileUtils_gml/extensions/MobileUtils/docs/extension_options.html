@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>Mobile Utils - GMEXT-MobileUtils</title>
+    <title>Extension Options - GMEXT-MobileUtils</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -14,8 +14,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Mobile Utils";
-        var mkdocs_page_input_path = "home.md";
+        var mkdocs_page_name = "Extension Options";
+        var mkdocs_page_input_path = "extension_options.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -38,26 +38,28 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Mobile Utils</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#extensions-features">Extension's Features</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#guides">Guides</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Extension Options</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#camera">Camera</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gallery">Gallery</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#share">Share</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#push-notifications-apns">Push Notifications (APNs)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#local-notifications">Local Notifications</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -110,9 +112,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Mobile Utils</li>
+      <li class="breadcrumb-item active">Extension Options</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/home.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/extension_options.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -120,52 +122,117 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p><a id="top"></a></p>
-<h1 id="mobile-utils"><strong>Mobile Utils</strong></h1>
-<h2 id="extensions-features">Extension's Features</h2>
-<ul>
-<li>Take a photo with the device camera and pick an image from the gallery</li>
-<li>Resize and crop images on disk</li>
-<li>Present the native share sheet for text and files</li>
-<li>Open the application's system settings page</li>
-<li>Query the device's light/dark (night) mode</li>
-<li>Trigger predefined and custom device vibrations / haptics</li>
-<li>Schedule, cancel and listen for local notifications</li>
-<li>Register for Apple Push Notifications (APNs) and read the device token</li>
-</ul>
-<h2 id="introduction">Introduction</h2>
-<p>Mobile Utils is a set of helpers offering various device functionality on the mobile platforms <strong>Android</strong> and <strong>iOS</strong>. It is assembled from several small, independent sub-extensions so that a project only pulls in the features (and the associated permissions) that it actually uses.</p>
+                <h1 id="extension-options">Extension Options</h1>
+<p>Some Mobile Utils modules expose Extension Options that you should review before building. To edit them, open the extension in the GameMaker IDE, expand it in the Asset Browser, double-click the relevant sub-extension and select <strong>Extension Options</strong>. Each option below is filled in per sub-extension.</p>
+<p>Most options are iOS usage-description strings (shown to the player when a permission is requested) or the APNs environment. Modules not listed here — Image Tools, Night Mode, Vibration and Settings — have no options to configure.</p>
+<h2 id="camera">Camera</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Camera Usage Description</td>
+<td>String</td>
+<td><code>You can take photos to document your job.</code></td>
+<td>The text iOS shows when requesting camera access. Injected into the iOS <code>Info.plist</code> as <code>NSCameraUsageDescription</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="gallery">Gallery</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Photo Usage Description</td>
+<td>String</td>
+<td><code>You can select photos to attach to reports.</code></td>
+<td>The text iOS shows when requesting photo-library access. Injected as <code>NSPhotoLibraryUsageDescription</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="share">Share</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Photo Usage Description</td>
+<td>String</td>
+<td><code>Necesary permission if you want save the share image on your device</code></td>
+<td>The text iOS shows when the player saves a shared image to their library. Injected as <code>NSPhotoLibraryAddUsageDescription</code>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="push-notifications-apns">Push Notifications (APNs)</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APS Environment</td>
+<td>Combo (<code>development</code> / <code>production</code>)</td>
+<td><code>development</code></td>
+<td>The Apple push environment written to the iOS entitlements as <code>aps-environment</code>.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Set <strong>APS Environment</strong> to <code>production</code> for App Store / TestFlight release builds. Leaving it on <code>development</code> will break push delivery in release. See <a href="apn.html">Push Notifications (APNs)</a>.</p>
+</blockquote>
+<h2 id="local-notifications">Local Notifications</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>APS Environment</td>
+<td>Combo (<code>development</code> / <code>production</code>)</td>
+<td><code>development</code></td>
+<td>The Apple push environment written to the iOS entitlements as <code>aps-environment</code>. Set to <code>production</code> for release builds.</td>
+</tr>
+</tbody>
+</table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To avoid injecting unnecessary permissions into your application's manifest, the functionality is split into distinct modules. Import only the modules your game needs — each one is documented separately below.</p>
+<p>The Android notification channel name/description and the notification icon are <strong>not</strong> Extension Options. They are bundled Android resources inside the extension (<code>AndroidSource/res/values/</code> for the channel strings and <code>AndroidSource/res/drawable-*/notification_icon.png</code> for the icon) — edit those resource files to customise them.</p>
 </div>
-<p>The asynchronous functions (for example <a href="camera.html#mobile_utils_camera_open">mobile_utils_camera_open</a> or <a href="share.html#mobile_utils_share_open">mobile_utils_share_open</a>) do not return their result immediately; instead they take a <code>callback</code> method that is invoked once the operation finishes. See the <a href="getting_started.html">Getting Started</a> guide for how to work with these callbacks, and <a href="extension_options.html">Extension Options</a> for the per-module setup values.</p>
-<h2 id="guides">Guides</h2>
-<p>The following guides help you set up and start using the extension:</p>
-<ul>
-<li><a href="getting_started.html">Getting Started</a></li>
-<li><a href="extension_options.html">Extension Options</a></li>
-</ul>
-<h2 id="modules">Modules</h2>
-<p>The following modules are available under the Mobile Utils extension:</p>
-<ul>
-<li><a href="camera.html">Camera</a></li>
-<li><a href="gallery.html">Gallery</a></li>
-<li><a href="image_tools.html">Image Tools</a></li>
-<li><a href="share.html">Share</a></li>
-<li><a href="settings.html">Settings</a></li>
-<li><a href="nightmode.html">Night Mode</a></li>
-<li><a href="vibration.html">Device Vibration</a></li>
-<li><a href="local_notifications.html">Local Notifications</a></li>
-<li><a href="apn.html">Push Notifications (APNs)</a></li>
-</ul>
-<p><br></p>
-<hr />
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting Started">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="camera.html" class="btn btn-neutral float-right" title="Camera">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -193,8 +260,10 @@
         </span>
     
     
+      <span><a href="getting_started.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="getting_started.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="camera.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

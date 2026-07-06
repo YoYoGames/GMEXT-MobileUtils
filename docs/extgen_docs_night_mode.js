@@ -11,9 +11,3 @@
  * @member Undefined
  * @enum_end
  */
-
-/**
- * @const_partial macros
- * @const_end
- */
-

@@ -39,6 +39,18 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
                 </li>
               </ul>
@@ -76,6 +88,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -102,34 +118,115 @@
               
                 <p><a id="top"></a></p>
 <h1 id="device-vibration"><strong>Device Vibration</strong></h1>
-<p>This module contains functions to interact with device vibration on the Android, iOS and HTML5 platforms.</p>
+<p>This module triggers device vibration and haptic feedback on <strong>Android</strong> and <strong>iOS</strong>.</p>
+<p>The predefined effects use platform-specific enumerations that overlap numerically — always select the effect with the enum member that matches the running platform (see <a href="vibration.html#mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</a>).</p>
 <h2 id="functions">Functions</h2>
-<p>The following functions can be used:</p>
+<p>The following functions are provided to work with vibration:</p>
 <ul>
-<li><a href="vibration.html#mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</a></li>
-<li><a href="vibration.html#mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</a></li>
-<li><a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a></li>
+<li><a href="vibration.html#mobile_utils_vibrate_is_available">mobile_utils_vibrate_is_available</a></li>
+<li><a href="vibration.html#mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</a></li>
+<li><a href="vibration.html#mobile_utils_vibrate_shot">mobile_utils_vibrate_shot</a></li>
 </ul>
 <h2 id="constants">Constants</h2>
-<p>These are the constants that you can use:</p>
+<p>The following constants are used by this module:</p>
 <ul>
-<li><a href="vibration.html#mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</a></li>
+<li><a href="vibration.html#mobileutilsvibrationavailability">MobileUtilsVibrationAvailability</a></li>
+<li><a href="vibration.html#mobileutilsandroidvibrationkind">MobileUtilsAndroidVibrationKind</a></li>
+<li><a href="vibration.html#mobileutilsiosvibrationkind">MobileUtilsIOSVibrationKind</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</h1>
-<p>This function creates a one-shot vibration.</p>
-<p>A one-shot vibration will vibrate constantly for the specified period of time at the specified amplitude, and then stop.</p>
+<h1 id="mobile_utils_vibrate_is_available">mobile_utils_vibrate_is_available</h1>
+<p>This function reports what level of vibration / haptic support the device has.</p>
+<p>The returned value is a member of the <a href="vibration.html#mobileutilsvibrationavailability">MobileUtilsVibrationAvailability</a> enumeration. Call this before triggering a vibration to decide whether it will have any effect.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On iOS versions &lt; 13 this function's <code>milliseconds</code> parameter is ignored and it plays a medium impact predefined effect instead (<code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_MEDIUM</code>).</p>
+<p><code>HapticEngine</code> is only ever returned on iOS (devices with a Core Haptics engine). Android reports either <code>None</code> or <code>Basic</code>.</p>
 </div>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Shot(milliseconds, amplitude)</code></pre>
+<p><code>gml
+mobile_utils_vibrate_is_available()</code></p>
+</blockquote>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></p>
+</blockquote>
+<p>The device's vibration capability</p>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><code>gml
+if (mobile_utils_vibrate_is_available() == MobileUtilsVibrationAvailability.None)
+{
+    show_debug_message("Vibration is not available.");
+}</code>
+The code above checks whether the device can vibrate at all.</p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</h1>
+<p>This function plays one of the device's predefined haptic effects.</p>
+<p>The <code>kind</code> is a value from the platform-specific enumeration for the device you are running on: use a <a href="vibration.html#mobileutilsandroidvibrationkind">MobileUtilsAndroidVibrationKind</a> member on Android and a <a href="vibration.html#mobileutilsiosvibrationkind">MobileUtilsIOSVibrationKind</a> member on iOS. Branch on <code>os_type</code> to choose the correct one.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The two enumerations share the same low integers with different meanings (for example <code>2</code> is <code>Tick</code> on Android but <code>ImpactHeavy</code> on iOS), and some values exist on only one platform. Never pass a raw integer or an Android kind on iOS (or vice versa) — always use the enum member that matches the running platform, otherwise you get the wrong effect or a <code>false</code> return.</p>
+</div>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<p><code>gml
+mobile_utils_vibrate_predefined(kind)</code></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kind</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
+<td>The predefined effect to play — a <a href="vibration.html#mobileutilsandroidvibrationkind">MobileUtilsAndroidVibrationKind</a> member on Android or a <a href="vibration.html#mobileutilsiosvibrationkind">MobileUtilsIOSVibrationKind</a> member on iOS</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p><strong>Returns:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></p>
+</blockquote>
+<p><code>true</code> if the effect was played, <code>false</code> if the device cannot play it or the kind is not valid for the platform</p>
+<p><br></p>
+<p><strong>Example:</strong></p>
+<p><code>gml
+if (mobile_utils_vibrate_is_available())
+{
+    var _kind = (os_type == os_ios)
+        ? MobileUtilsIOSVibrationKind.ImpactMedium
+        : MobileUtilsAndroidVibrationKind.Click;
+    mobile_utils_vibrate_predefined(_kind);
+}</code>
+The code above plays a predefined haptic using the enum member appropriate to the current platform.</p>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobile_utils_vibrate_shot">mobile_utils_vibrate_shot</h1>
+<p>This function plays a single vibration of the given duration.</p>
+<p>On iOS 13 and later this is a continuous Core Haptics event of the requested length; on older iOS it falls back to a predefined impact. On Android it is a one-shot vibration of the requested duration.</p>
+<p><br></p>
+<p><strong>Syntax:</strong></p>
+<blockquote>
+<p><code>gml
+mobile_utils_vibrate_shot(milliseconds)</code></p>
 </blockquote>
 <table>
 <thead>
@@ -143,122 +240,30 @@
 <tr>
 <td>milliseconds</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
-<td>The number of milliseconds to vibrate</td>
-</tr>
-<tr>
-<td>amplitude</td>
-<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></td>
-<td>The amplitude of the vibration. This is a value between 1 and 255, or -1 for the default</td>
+<td>The vibration duration in milliseconds (must be greater than 0)</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
-<p><br></p>
-<p><br></p>
 <p><strong>Returns:</strong></p>
 <blockquote>
-<p>N/A</p>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></p>
 </blockquote>
+<p><code>true</code> if the vibration was played, <code>false</code> on an invalid duration or an incapable device</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><pre class="highlight"><code class="language-gml">if(MobileUtils_Vibrate_Is_Available())
+<p><code>gml
+if (mobile_utils_vibrate_is_available())
 {
-    MobileUtils_Vibrate_Shot(1000);
-}</code></pre>
-The code example first checks if device vibration is available using <a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a>. If it is, a one-shot vibration of one second is created using <a href="vibration.html#mobileutils_vibrate_shot">MobileUtils_Vibrate_Shot</a>.</p>
-<p><br></p>
+    mobile_utils_vibrate_shot(1000);
+}</code>
+The code above plays a one-second vibration when the device supports it.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</h1>
-<p>This function creates a predefined vibration effect.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This function is unsupported on HTML5.</p>
-</div>
-<p><br></p>
-<p><strong>Syntax:</strong></p>
-<blockquote>
-<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Predefined(effectId)</code></pre>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Argument</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>effectId</td>
-<td><a href="vibration.html#mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</a></td>
-<td>The predefined effect to create</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><strong>Returns:</strong></p>
-<blockquote>
-<p>N/A</p>
-</blockquote>
-<p><br></p>
-<p><strong>Example:</strong></p>
-<pre class="highlight"><code class="language-gml">if (os_type != os_android) { exit; }
-
-var _perm_vibrate = "android.permission.VIBRATE";
-if (os_check_permission(_perm_vibrate))
-{
-    MobileUtils_Vibrate_Predefined(MobileUtils_VIBRATE_KIND_ANDROID_HEAVY_CLICK);
-} else
-{
-    os_request_permission(_perm_vibrate);
-}</code></pre>
-<p><br></p>
-<p><br></p>
-<hr />
-<p align="right"><a href="#top">Back To Top</a></p>
-
-<h1 id="mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</h1>
-<p>This function returns if device vibration is available.</p>
-<p>The function returns 0 if vibration is not available, 1 if it is and 2 if extra functionality can be used.</p>
-<p><br></p>
-<p><strong>Syntax:</strong></p>
-<blockquote>
-<pre class="highlight"><code class="language-gml">MobileUtils_Vibrate_Is_Available()</code></pre>
-</blockquote>
-<p><br></p>
-<p><br></p>
-<p><br></p>
-<p><strong>Returns:</strong></p>
-<blockquote>
-<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></p>
-</blockquote>
-<p><br></p>
-<p><strong>Example:</strong></p>
-<p><pre class="highlight"><code class="language-gml">if (MobileUtils_Vibrate_Is_Available())
-{
-    show_debug_message("This device supports vibration.");
-}</code></pre>
-The code example above checks if device vibration is available using <a href="vibration.html#mobileutils_vibrate_is_available">MobileUtils_Vibrate_Is_Available</a> and shows a debug message if true.</p>
-<p><br></p>
-<p><br></p>
-<hr />
-<p align="right"><a href="#top">Back To Top</a></p>
-
-<h1 id="mobileutils_vibrate_kind">MobileUtils_VIBRATE_KIND</h1>
-<p>This set of constants represents the predefined vibration effects that can be used.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Constants are included for both Android and iOS. You should make sure to use the right constant on the right platform.</p>
-</div>
-<p>These constants are referenced by the following functions:</p>
-<ul>
-<li><a href="vibration.html#mobileutils_vibrate_predefined">MobileUtils_Vibrate_Predefined</a></li>
-</ul>
+<h1 id="mobileutilsvibrationavailability">MobileUtilsVibrationAvailability</h1>
+<p>This enumeration contains the vibration capability levels returned by <a href="vibration.html#mobile_utils_vibrate_is_available">mobile_utils_vibrate_is_available</a>.</p>
 <p><br></p>
 <table>
 <thead>
@@ -269,60 +274,107 @@ The code example above checks if device vibration is available using <a href="vi
 </thead>
 <tbody>
 <tr>
-<td><code>MobileUtils_VIBRATE_KIND_ANDROID_CLICK</code></td>
-<td>A click effect on Android.</td>
+<td><code>None</code></td>
+<td>The device has no vibration hardware.</td>
 </tr>
 <tr>
-<td><code>MobileUtils_VIBRATE_KIND_ANDROID_DOUBLE_CLICK</code></td>
-<td>A double click effect on Android.</td>
+<td><code>Basic</code></td>
+<td>The device supports basic vibration.</td>
 </tr>
 <tr>
-<td><code>MobileUtils_VIBRATE_KIND_ANDROID_HEAVY_CLICK</code></td>
-<td>A heavy click effect on Android.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_ANDROID_TICK</code></td>
-<td>A tick effect on Android.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_LIGHT</code></td>
-<td>A light impact haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_MEDIUM</code></td>
-<td>A medium impact haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_HEAVY</code></td>
-<td>A heavy impact haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_RIGID</code></td>
-<td>A rigid impact haptic effect on iOS. This is only available on iOS &gt;= 13.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_IMPACT_SOFT</code></td>
-<td>A soft impact haptic effect on iOS. This is only available on iOS &gt;= 13.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_SELECTION</code></td>
-<td>A selection haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_WARNING</code></td>
-<td>A warning notification haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_SUCCESS</code></td>
-<td>A success notification haptic effect on iOS.</td>
-</tr>
-<tr>
-<td><code>MobileUtils_VIBRATE_KIND_IOS_NOTIFICATION_ERROR</code></td>
-<td>An error notification haptic effect on iOS.</td>
+<td><code>HapticEngine</code></td>
+<td>The device has a dedicated haptic engine (iOS only).</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutilsandroidvibrationkind">MobileUtilsAndroidVibrationKind</h1>
+<p>This enumeration contains the predefined haptic effects available on <strong>Android</strong>, for use with <a href="vibration.html#mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</a>.</p>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Click</code></td>
+<td>A single click effect.</td>
+</tr>
+<tr>
+<td><code>DoubleClick</code></td>
+<td>A double click effect.</td>
+</tr>
+<tr>
+<td><code>Tick</code></td>
+<td>A light tick effect.</td>
+</tr>
+<tr>
+<td><code>HeavyClick</code></td>
+<td>A heavy click effect.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
+<p align="right"><a href="#top">Back To Top</a></p>
+
+<h1 id="mobileutilsiosvibrationkind">MobileUtilsIOSVibrationKind</h1>
+<p>This enumeration contains the predefined haptic effects available on <strong>iOS</strong>, for use with <a href="vibration.html#mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</a>.</p>
+<p><br></p>
+<table>
+<thead>
+<tr>
+<th>Member</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ImpactLight</code></td>
+<td>A light impact feedback.</td>
+</tr>
+<tr>
+<td><code>ImpactMedium</code></td>
+<td>A medium impact feedback.</td>
+</tr>
+<tr>
+<td><code>ImpactHeavy</code></td>
+<td>A heavy impact feedback.</td>
+</tr>
+<tr>
+<td><code>ImpactRigid</code></td>
+<td>A rigid impact feedback (iOS 13+).</td>
+</tr>
+<tr>
+<td><code>ImpactSoft</code></td>
+<td>A soft impact feedback (iOS 13+).</td>
+</tr>
+<tr>
+<td><code>Selection</code></td>
+<td>A selection-changed feedback.</td>
+</tr>
+<tr>
+<td><code>NotificationWarning</code></td>
+<td>A warning notification feedback.</td>
+</tr>
+<tr>
+<td><code>NotificationSuccess</code></td>
+<td>A success notification feedback.</td>
+</tr>
+<tr>
+<td><code>NotificationError</code></td>
+<td>An error notification feedback.</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<hr />
               
             </div>
           </div><footer>

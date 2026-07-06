@@ -39,6 +39,18 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
                 </li>
               </ul>
@@ -74,6 +86,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -100,26 +116,31 @@
               
                 <p><a id="top"></a></p>
 <h1 id="share"><strong>Share</strong></h1>
-<p>This module provides interaction with images on the device.</p>
+<p>This module presents the native share sheet for sharing text and files on <strong>Android</strong> and <strong>iOS</strong>.</p>
 <h2 id="functions">Functions</h2>
-<p>These are the functions in this module:</p>
+<p>The following function is provided to share content:</p>
 <ul>
-<li><a href="share.html#mobileutils_share_open">MobileUtils_Share_Open</a></li>
+<li><a href="share.html#mobile_utils_share_open">mobile_utils_share_open</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutils_share_open">MobileUtils_Share_Open</h1>
-<p>This function brings up a share popup.</p>
+<h1 id="mobile_utils_share_open">mobile_utils_share_open</h1>
+<p>This function presents the native share sheet so the player can share text or a file with another application.</p>
+<p>The <code>mime</code> argument selects what is shared. For a text MIME type (<code>text/plain</code>, <code>text/rtf</code>, <code>text/html</code>, <code>text/json</code> or <code>application/json</code>) the <code>value</code> is the text to share. For any other MIME type the <code>value</code> is a filename resolved relative to the application's storage area, and that file is shared. An empty <code>mime</code> defaults to <code>*/*</code> on Android.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On iOS devices, permissions will be requested automatically. Android developers already have the required permissions added to the manifest by the extension: <code>android.permission.READ_EXTERNAL_STORAGE</code>, <code>android.permission.WRITE_EXTERNAL_STORAGE</code>, <code>android.permission.CAMERA</code>.</p>
+<p>The <code>success</code> reported to the callback means the share sheet was successfully presented — it does not indicate whether the player actually completed a share, which the operating system does not report back.
+[!NOTE]</p>
+<p>To share a file it must first exist inside the application's storage. A typical pattern is to <code>file_copy</code> an included file into the sandbox and pass that filename as <code>value</code>.</p>
 </div>
+<p>This function operates asynchronously, which means that it does not immediately return the requested result. Instead, upon completion of the task, it will trigger the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a>.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<pre class="highlight"><code class="language-gml">MobileUtils_Share_Open(title, mime, path)</code></pre>
+<p><code>gml
+mobile_utils_share_open(title, mime, value, callback)</code></p>
 </blockquote>
 <table>
 <thead>
@@ -133,46 +154,73 @@
 <tr>
 <td>title</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>Title of the share (not available for all the providers)</td>
+<td>The title shown on the share chooser</td>
 </tr>
 <tr>
 <td>mime</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>One of the following strings: <code>"text/plain"</code>, <code>"text/rtf"</code>, <code>"text/html"</code>, <code>"text/json"</code>, <code>"image/jpg"</code>, <code>"image/gif"</code>, <code>"application/pdf"</code>, <code>"*/*"</code></td>
+<td>The MIME type of the content being shared (e.g. <code>"text/plain"</code>, <code>"image/jpeg"</code>, <code>"application/pdf"</code>)</td>
 </tr>
 <tr>
-<td>path</td>
+<td>value</td>
 <td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
-<td>The path to the file</td>
+<td>The text to share (text MIME types) or the filename to share (other MIME types)</td>
+</tr>
+<tr>
+<td>callback</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Script_Functions.htm">Function</a></td>
+<td>The method to call once the share sheet has been presented</td>
 </tr>
 </tbody>
 </table>
-<p><br></p>
-<p><br></p>
 <p><br></p>
 <p><strong>Returns:</strong></p>
 <blockquote>
 <p>N/A</p>
 </blockquote>
 <p><br></p>
+<p><strong>Triggers:</strong></p>
+<blockquote>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a></p>
+</blockquote>
+<p>This callback is triggered when the share sheet has been presented (or failed to present).</p>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>success</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Boolean</a></td>
+<td>Whether the share sheet was successfully presented</td>
+</tr>
+<tr>
+<td>error</td>
+<td><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Reference/Strings/Strings.htm">String</a></td>
+<td>The error message (empty when <code>success</code> is <code>true</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
 <p><strong>Example:</strong></p>
-<p><pre class="highlight"><code class="language-gml">var _file = "mSharedImage.gif";
+<p>```gml
+// Share a line of text.
+mobile_utils_share_open("Title!", "text/plain", "Hello World", function(_success, _error)
+{
+    if (!_success) show_debug_message("Share failed: " + _error);
+});</p>
+<p>// Share an image file (copied into the sandbox first).
+var _file = "shared_image.jpg";
 file_copy("YYImage.jpg", _file);
-
-var _read = "android.permission.READ_EXTERNAL_STORAGE";
-var _write = "android.permission.WRITE_EXTERNAL_STORAGE";
-if(os_check_permission(_write) and os_check_permission(_read))
-{
-    MobileUtils_Share_Open("Title!", "image/jpg", _file);
-}
-else
-{
-    os_request_permission(_write, _read);
-}
-</code></pre>
-The above code shows a code example.</p>
+mobile_utils_share_open("Title!", "image/jpeg", _file, function(_success, _error) {});
+```
+The code above shares a text string and, separately, an image file through the native share sheet.</p>
 <p><br></p>
-<p><br></p>
+<hr />
               
             </div>
           </div><footer>

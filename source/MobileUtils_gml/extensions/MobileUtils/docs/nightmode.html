@@ -39,6 +39,18 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
                 </li>
               </ul>
@@ -76,6 +88,10 @@
                 <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                </li>
+              </ul>
       </div>
     </div>
     </nav>
@@ -102,49 +118,53 @@
               
                 <p><a id="top"></a></p>
 <h1 id="night-mode"><strong>Night Mode</strong></h1>
-<p>This module provides functionality related to night mode.</p>
+<p>This module reports whether the device is using light or dark (night) mode on <strong>Android</strong> and <strong>iOS</strong>.</p>
 <h2 id="functions">Functions</h2>
-<p>These are the functions in this module:</p>
+<p>The following function is provided:</p>
 <ul>
-<li><a href="nightmode.html#mobileutils_nightmode_check">MobileUtils_NightMode_Check</a></li>
+<li><a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a></li>
 </ul>
 <h2 id="constants">Constants</h2>
-<p>These are the constants in this module:</p>
+<p>The following constant is used by this module:</p>
 <ul>
-<li><a href="nightmode.html#mobileutils_nightmode">MobileUtils_NightMode</a></li>
+<li><a href="nightmode.html#mobileutilsnightmode">MobileUtilsNightMode</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutils_nightmode_check">MobileUtils_NightMode_Check</h1>
-<p>This function returns the night mode setting of the device.</p>
+<h1 id="mobile_utils_night_mode_check">mobile_utils_night_mode_check</h1>
+<p>This function returns the device's current interface style (light or dark / night mode).</p>
+<p>The returned value is a member of the <a href="nightmode.html#mobileutilsnightmode">MobileUtilsNightMode</a> enumeration.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<pre class="highlight"><code class="language-gml">MobileUtils_NightMode_Check()</code></pre>
+<p><code>gml
+mobile_utils_night_mode_check()</code></p>
 </blockquote>
-<p><br></p>
-<p><br></p>
 <p><br></p>
 <p><strong>Returns:</strong></p>
 <blockquote>
-<p><a href="nightmode.html#mobileutils_nightmode">MobileUtils_NightMode</a></p>
+<p><a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Data_Types.htm">Real</a></p>
 </blockquote>
+<p>The current night-mode state</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<pre class="highlight"><code class="language-gml">var _mode = MobileUtils_NightMode_Check();</code></pre>
-<p><br></p>
+<p><code>gml
+switch (mobile_utils_night_mode_check())
+{
+    case MobileUtilsNightMode.Dark:      _str = "Dark";      break;
+    case MobileUtilsNightMode.Light:     _str = "Light";     break;
+    case MobileUtilsNightMode.Undefined: _str = "Undefined"; break;
+}
+draw_text(x, y, _str + " Mode");</code>
+The code above reads the current night-mode state and draws it on screen.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutils_nightmode">MobileUtils_NightMode</h1>
-<p>This set of constants represents the night mode setting.</p>
-<p>These constants are referenced by the following functions:</p>
-<ul>
-<li><a href="nightmode.html#mobileutils_nightmode_check">MobileUtils_NightMode_Check</a></li>
-</ul>
+<h1 id="mobileutilsnightmode">MobileUtilsNightMode</h1>
+<p>This enumeration contains the possible interface styles returned by <a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a>.</p>
 <p><br></p>
 <table>
 <thead>
@@ -155,20 +175,21 @@
 </thead>
 <tbody>
 <tr>
-<td><code>MobileUtils_NightMode_Night</code></td>
-<td>Night mode is set to night</td>
+<td><code>Dark</code></td>
+<td>The device is in dark (night) mode.</td>
 </tr>
 <tr>
-<td><code>MobileUtils_NightMode_Light</code></td>
-<td>Night mode is set to light</td>
+<td><code>Light</code></td>
+<td>The device is in light mode.</td>
 </tr>
 <tr>
-<td><code>MobileUtils_NightMode_Undefined</code></td>
-<td>Night mode is undefined</td>
+<td><code>Undefined</code></td>
+<td>The interface style could not be determined.</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
+<hr />
               
             </div>
           </div><footer>
