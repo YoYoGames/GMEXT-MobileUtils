@@ -1,0 +1,18 @@
+[gml_api]
+module GMMobileUtilsMicrophone;
+
+[global, bind = typed_gml]
+function mobile_utils_mic_request(): unit;
+
+// callback(status) where status is a MobileUtilsMicPermission value.
+[global, bind = typed_gml]
+function mobile_utils_mic_check(callback: func): unit;
+
+[global, bind = typed_gml]
+enum MobileUtilsMicPermission:int32
+{
+    Unknown = 0,
+    NotDetermined = 1,
+    Denied = 2,
+    Granted = 3,
+}

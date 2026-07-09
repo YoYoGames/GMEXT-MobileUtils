@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GMMobileUtilsMicrophone_API",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GMMobileUtilsMicrophone_API",
+  "parent":{
+    "name":"Microphone",
+    "path":"folders/MobileUtils/Extensions/Microphone.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
