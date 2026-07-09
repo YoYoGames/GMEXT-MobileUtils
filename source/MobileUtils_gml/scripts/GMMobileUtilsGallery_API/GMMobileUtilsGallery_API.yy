@@ -5,8 +5,8 @@
   "isDnD":false,
   "name":"GMMobileUtilsGallery_API",
   "parent":{
-    "name":"MobileUtils_Gallery",
-    "path":"folders/MobileUtils/Extensions/MobileUtils_Gallery.yy",
+    "name":"Gallery",
+    "path":"folders/MobileUtils/Extensions/Gallery.yy",
   },
   "resourceType":"GMScript",
   "resourceVersion":"2.0",
