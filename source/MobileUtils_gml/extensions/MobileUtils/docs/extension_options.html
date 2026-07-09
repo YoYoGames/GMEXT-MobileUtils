@@ -59,6 +59,8 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#local-notifications">Local Notifications</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#microphone">Microphone</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -96,6 +98,10 @@
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
                 </li>
               </ul>
       </div>
@@ -227,6 +233,25 @@
 <p class="admonition-title">Note</p>
 <p>The Android notification channel name/description and the notification icon are <strong>not</strong> Extension Options. They are bundled Android resources inside the extension (<code>AndroidSource/res/values/</code> for the channel strings and <code>AndroidSource/res/drawable-*/notification_icon.png</code> for the icon) — edit those resource files to customise them.</p>
 </div>
+<h2 id="microphone">Microphone</h2>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>iOS Mic Access Description</td>
+<td>String</td>
+<td><code>This app needs microphone access for voice chat.</code></td>
+<td>The text iOS shows when requesting microphone access. Injected into the iOS <code>Info.plist</code> as <code>NSMicrophoneUsageDescription</code>.</td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div><footer>
