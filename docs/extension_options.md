@@ -41,3 +41,9 @@ Most options are iOS usage-description strings (shown to the player when a permi
 
 > [!NOTE]
 > The Android notification channel name/description and the notification icon are **not** Extension Options. They are bundled Android resources inside the extension (`AndroidSource/res/values/` for the channel strings and `AndroidSource/res/drawable-*/notification_icon.png` for the icon) — edit those resource files to customise them.
+
+## Microphone
+
+| Option | Type | Default | Description |
+|----|----|----|----|
+| iOS Mic Access Description | String | `This app needs microphone access for voice chat.` | The text iOS shows when requesting microphone access. Injected into the iOS `Info.plist` as `NSMicrophoneUsageDescription`. |

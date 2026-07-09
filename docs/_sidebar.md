@@ -16,3 +16,4 @@
   * ${module.vibration}
   * ${module.local_notifications}
   * ${module.apn}
+  * ${module.microphone}

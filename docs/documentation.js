@@ -14,6 +14,7 @@
  * * Trigger predefined and custom device vibrations / haptics
  * * Schedule, cancel and listen for local notifications
  * * Register for Apple Push Notifications (APNs) and read the device token
+ * * Request and query the microphone (audio recording) permission
  *
  * @section_end
  *
@@ -47,6 +48,7 @@
  * @reference module.vibration
  * @reference module.local_notifications
  * @reference module.apn
+ * @reference module.microphone
  *
  * @section_end
  *
