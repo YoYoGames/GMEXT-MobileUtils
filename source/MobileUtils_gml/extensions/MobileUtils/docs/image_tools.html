@@ -38,61 +38,39 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Guides</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                  </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Modules</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Image Tools</a>
+                  <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Image Tools</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -108,6 +86,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Modules</li>
       <li class="breadcrumb-item active">Image Tools</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/image_tools.md" class="icon icon-github"> Edit on GitHub</a>
@@ -140,8 +119,8 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_image_width(path)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_image_width(path)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -167,9 +146,9 @@ mobile_utils_image_width(path)</code></p>
 <p>The image width in pixels, or <code>-1</code> if the file could not be read</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-var _w = mobile_utils_image_width(path);
-if (_w == -1) show_debug_message("Could not read image");</code>
+<p><div class="highlight"><pre><span></span><code>var _w = mobile_utils_image_width(path);
+if (_w == -1) show_debug_message(&quot;Could not read image&quot;);
+</code></pre></div>
 The code above reads the width of an image and checks for the failure value.</p>
 <p><br></p>
 <hr />
@@ -181,8 +160,8 @@ The code above reads the width of an image and checks for the failure value.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_image_height(path)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_image_height(path)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -208,8 +187,8 @@ mobile_utils_image_height(path)</code></p>
 <p>The image height in pixels, or <code>-1</code> if the file could not be read</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-var _h = mobile_utils_image_height(path);</code>
+<p><div class="highlight"><pre><span></span><code>var _h = mobile_utils_image_height(path);
+</code></pre></div>
 The code above reads the height of an image.</p>
 <p><br></p>
 <hr />
@@ -225,8 +204,8 @@ The code above reads the height of an image.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_image_resize(path, width, height)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_image_resize(path, width, height)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -262,11 +241,11 @@ mobile_utils_image_resize(path, width, height)</code></p>
 <p><code>true</code> if the image was resized and saved, <code>false</code> on invalid dimensions or a read/write failure</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-if (mobile_utils_image_resize(path, 256, 256))
+<p><div class="highlight"><pre><span></span><code>if (mobile_utils_image_resize(path, 256, 256))
 {
-    show_debug_message("Resized");
-}</code>
+    show_debug_message(&quot;Resized&quot;);
+}
+</code></pre></div>
 The code above resizes an image to 256x256 pixels in place.</p>
 <p><br></p>
 <hr />
@@ -282,8 +261,8 @@ The code above resizes an image to 256x256 pixels in place.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_image_crop(path, width, height, offset_x, offset_y)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_image_crop(path, width, height, offset_x, offset_y)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -329,13 +308,13 @@ mobile_utils_image_crop(path, width, height, offset_x, offset_y)</code></p>
 <p><code>true</code> if the image was cropped and saved, <code>false</code> on an out-of-bounds rectangle or a read/write failure</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-// Crop the image to a centered square, then scale it down.
+<p><div class="highlight"><pre><span></span><code>// Crop the image to a centered square, then scale it down.
 var _w = mobile_utils_image_width(path);
 var _h = mobile_utils_image_height(path);
 if (_w &gt; _h) mobile_utils_image_crop(path, _h, _h, (_w - _h) / 2, 0);
 else         mobile_utils_image_crop(path, _w, _w, 0, (_h - _w) / 2);
-mobile_utils_image_resize(path, 300, 300);</code>
+mobile_utils_image_resize(path, 300, 300);
+</code></pre></div>
 The code above crops an image to a centered square and resizes it to 300x300 pixels.</p>
 <p><br></p>
 <hr />

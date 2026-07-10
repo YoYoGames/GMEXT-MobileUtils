@@ -38,12 +38,9 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Guides</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting Started</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Getting Started</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#importing-the-extension">Importing the extension</a>
     </li>
@@ -58,51 +55,32 @@
     <li class="toctree-l2"><a class="reference internal" href="#next-steps">Next steps</a>
     </li>
     </ul>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                  </li>
               </ul>
+              <p class="caption"><span class="caption-text">Modules</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="image_tools.html">Image Tools</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="image_tools.html">Image Tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="local_notifications.html">Local Notifications</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -118,6 +96,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Guides</li>
       <li class="breadcrumb-item active">Getting Started</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/getting_started.md" class="icon icon-github"> Edit on GitHub</a>
@@ -140,16 +119,16 @@
 <p>Some modules expose Extension Options that you must review before building (for example the iOS usage-description strings and the APNs environment). These are described in the <a href="extension_options.html">Extension Options</a> guide.</p>
 <h2 id="working-with-callbacks">Working with callbacks</h2>
 <p>Most Mobile Utils functions are <strong>asynchronous</strong>: rather than returning a result directly, they take a <code>callback</code> method that is invoked once the operation finishes. The callback receives its results as positional arguments — typically a leading <code>success</code> (or <code>granted</code>) boolean, followed by the result values, and an <code>error</code> string that is empty on success.</p>
-<p><code>gml
-mobile_utils_camera_open(function(_success, _path, _error)
+<div class="highlight"><pre><span></span><code>mobile_utils_camera_open(function(_success, _path, _error)
 {
     if (!_success)
     {
-        show_debug_message("Camera failed: " + _error);
+        show_debug_message(&quot;Camera failed: &quot; + _error);
         return;
     }
     sprite = sprite_add(_path, 1, false, false, 0, 0);
-});</code></p>
+});
+</code></pre></div>
 <p>A few functions are <strong>synchronous</strong> and return their result directly, such as the <a href="image_tools.html">Image Tools</a> functions and <a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a>.</p>
 <h2 id="platform-notes">Platform notes</h2>
 <ul>
@@ -168,7 +147,6 @@ mobile_utils_camera_open(function(_success, _path, _error)
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="home.html" class="btn btn-neutral float-left" title="Mobile Utils"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="extension_options.html" class="btn btn-neutral float-right" title="Extension Options">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -196,8 +174,6 @@ mobile_utils_camera_open(function(_success, _path, _error)
           <a href="https://github.com/YoYoGames/GMEXT-MobileUtils" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
         </span>
     
-    
-      <span><a href="home.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="extension_options.html" style="color: #fcfcfc">Next &raquo;</a></span>

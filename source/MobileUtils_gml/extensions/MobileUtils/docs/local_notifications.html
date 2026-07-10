@@ -38,63 +38,41 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Guides</span></p>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="home.html">Mobile Utils</a>
-                </li>
+                  <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
+                  </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting Started</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="extension_options.html">Extension Options</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="image_tools.html">Image Tools</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Modules</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Local Notifications</a>
+                  <li class="toctree-l1"><a class="reference internal" href="camera.html">Camera</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="image_tools.html">Image Tools</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="share.html">Share</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="nightmode.html">Night Mode</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="vibration.html">Device Vibration</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Local Notifications</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#functions">Functions</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#constants">Constants</a>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="apn.html">Push Notifications (APNs)</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="microphone.html">Microphone</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -110,6 +88,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Modules</li>
       <li class="breadcrumb-item active">Local Notifications</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/YoYoGames/GMEXT-MobileUtils/edit/master/docs/local_notifications.md" class="icon icon-github"> Edit on GitHub</a>
@@ -152,8 +131,8 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_create(identifier, seconds, title, message, data)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_create(identifier, seconds, title, message, data)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -198,8 +177,8 @@ mobile_utils_notification_create(identifier, seconds, title, message, data)</cod
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-mobile_utils_notification_create("daily_reminder", 5, "Come back!", "Your energy is full.", "reminder");</code>
+<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_create(&quot;daily_reminder&quot;, 5, &quot;Come back!&quot;, &quot;Your energy is full.&quot;, &quot;reminder&quot;);
+</code></pre></div>
 The code above schedules a notification to appear five seconds from now.</p>
 <p><br></p>
 <hr />
@@ -211,8 +190,8 @@ The code above schedules a notification to appear five seconds from now.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_create_ext(identifier, seconds, title, message, data, image_path)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_create_ext(identifier, seconds, title, message, data, image_path)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -262,11 +241,11 @@ mobile_utils_notification_create_ext(identifier, seconds, title, message, data, 
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-// Save a sprite to disk, then schedule a notification that shows it.
-var _file = "notification_icon.png";
+<p><div class="highlight"><pre><span></span><code>// Save a sprite to disk, then schedule a notification that shows it.
+var _file = &quot;notification_icon.png&quot;;
 sprite_save(spr_icon, 0, _file);
-mobile_utils_notification_create_ext("with_icon", 5, "Large Icon!", "Nice, right?", "", _file);</code>
+mobile_utils_notification_create_ext(&quot;with_icon&quot;, 5, &quot;Large Icon!&quot;, &quot;Nice, right?&quot;, &quot;&quot;, _file);
+</code></pre></div>
 The code above schedules a notification that displays an image.</p>
 <p><br></p>
 <hr />
@@ -278,8 +257,8 @@ The code above schedules a notification that displays an image.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_cancel(identifier)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_cancel(identifier)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -304,8 +283,8 @@ mobile_utils_notification_cancel(identifier)</code></p>
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-mobile_utils_notification_cancel("daily_reminder");</code>
+<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_cancel(&quot;daily_reminder&quot;);
+</code></pre></div>
 The code above cancels a previously scheduled notification.</p>
 <p><br></p>
 <hr />
@@ -322,8 +301,8 @@ The code above cancels a previously scheduled notification.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_set_listener(callback)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_set_listener(callback)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -390,11 +369,11 @@ mobile_utils_notification_set_listener(callback)</code></p>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-mobile_utils_notification_set_listener(function(_id, _title, _message, _data, _image_path)
+<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_set_listener(function(_id, _title, _message, _data, _image_path)
 {
-    show_debug_message($"Notification '{_id}' fired: {_title} - {_message}");
-});</code>
+    show_debug_message($&quot;Notification &#39;{_id}&#39; fired: {_title} - {_message}&quot;);
+});
+</code></pre></div>
 The code above registers a listener that logs every notification as it is presented or tapped.</p>
 <p><br></p>
 <hr />
@@ -407,8 +386,8 @@ The code above registers a listener that logs every notification as it is presen
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_request_permission(callback)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_request_permission(callback)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -460,11 +439,11 @@ mobile_utils_notification_request_permission(callback)</code></p>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-mobile_utils_notification_request_permission(function(_granted, _error)
+<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_request_permission(function(_granted, _error)
 {
-    if (!_granted) show_debug_message("Notifications not granted: " + _error);
-});</code>
+    if (!_granted) show_debug_message(&quot;Notifications not granted: &quot; + _error);
+});
+</code></pre></div>
 The code above requests notification permission and logs the outcome.</p>
 <p><br></p>
 <hr />
@@ -481,8 +460,8 @@ The code above requests notification permission and logs the outcome.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<p><code>gml
-mobile_utils_notification_permission_status(callback)</code></p>
+<div class="highlight"><pre><span></span><code>mobile_utils_notification_permission_status(callback)
+</code></pre></div>
 </blockquote>
 <table>
 <thead>
@@ -529,14 +508,14 @@ mobile_utils_notification_permission_status(callback)</code></p>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><code>gml
-mobile_utils_notification_permission_status(function(_status)
+<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_permission_status(function(_status)
 {
     if (_status == MobileUtilsNotificationPermission.NotDetermined)
     {
         mobile_utils_notification_request_permission(function(_granted, _error) {});
     }
-});</code>
+});
+</code></pre></div>
 The code above checks the notification permission and requests it only if it has not been decided yet.</p>
 <p><br></p>
 <hr />
