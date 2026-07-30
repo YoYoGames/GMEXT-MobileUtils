@@ -33,12 +33,12 @@ enum MobileUtilsNightMode
 /// @ignore
 function __GMMobileUtilsNightMode_get_decoders()
 {
-    static __decoders = [];
-    return __decoders;
+    static __decoders__ = [];
+    return __decoders__;
 }
 /// @ignore
 function __GMMobileUtilsNightMode_is_available()
 {
-    static __available = extension_exists("GMMobileUtilsNightMode");
-    return __available;
+    static __available__ = extension_exists("GMMobileUtilsNightMode");
+    return __available__;
 }

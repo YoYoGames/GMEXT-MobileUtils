@@ -60,12 +60,12 @@ enum MobileUtilsIOSVibrationKind
 /// @ignore
 function __GMMobileUtilsVibrate_get_decoders()
 {
-    static __decoders = [];
-    return __decoders;
+    static __decoders__ = [];
+    return __decoders__;
 }
 /// @ignore
 function __GMMobileUtilsVibrate_is_available()
 {
-    static __available = extension_exists("GMMobileUtilsVibrate");
-    return __available;
+    static __available__ = extension_exists("GMMobileUtilsVibrate");
+    return __available__;
 }

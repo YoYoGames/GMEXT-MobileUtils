@@ -39,8 +39,8 @@ enum MobileUtilsNotificationPermission
  */
 function mobile_utils_notification_create(_identifier, _seconds, _title, _message, _data)
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
+    var __available__ = __GMLocalNotifications_is_available();
+    if (!__available__) return;
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -68,9 +68,9 @@ function mobile_utils_notification_create(_identifier, _seconds, _title, _messag
     buffer_write(__args_buffer, buffer_u32, string_byte_length(_data));
     buffer_write(__args_buffer, buffer_string, _data);
 
-    var _return_value = __mobile_utils_notification_create(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_notification_create(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -83,8 +83,8 @@ function mobile_utils_notification_create(_identifier, _seconds, _title, _messag
  */
 function mobile_utils_notification_create_ext(_identifier, _seconds, _title, _message, _data, _image_path)
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
+    var __available__ = __GMLocalNotifications_is_available();
+    if (!__available__) return;
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -117,9 +117,9 @@ function mobile_utils_notification_create_ext(_identifier, _seconds, _title, _me
     buffer_write(__args_buffer, buffer_u32, string_byte_length(_image_path));
     buffer_write(__args_buffer, buffer_string, _image_path);
 
-    var _return_value = __mobile_utils_notification_create_ext(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_notification_create_ext(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 // Skipping function mobile_utils_notification_cancel (no wrapper is required)
@@ -130,21 +130,21 @@ function mobile_utils_notification_create_ext(_identifier, _seconds, _title, _me
  */
 function mobile_utils_notification_set_listener(_callback)
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
+    var __available__ = __GMLocalNotifications_is_available();
+    if (!__available__) return;
 
-    static __dispatcher = __GMLocalNotifications_get_dispatcher();
+    var __dispatcher__ = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __mobile_utils_notification_set_listener(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_notification_set_listener(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -152,21 +152,21 @@ function mobile_utils_notification_set_listener(_callback)
  */
 function mobile_utils_notification_request_permission(_callback)
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
+    var __available__ = __GMLocalNotifications_is_available();
+    if (!__available__) return;
 
-    static __dispatcher = __GMLocalNotifications_get_dispatcher();
+    var __dispatcher__ = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __mobile_utils_notification_request_permission(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_notification_request_permission(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /**
@@ -174,41 +174,38 @@ function mobile_utils_notification_request_permission(_callback)
  */
 function mobile_utils_notification_permission_status(_callback)
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
+    var __available__ = __GMLocalNotifications_is_available();
+    if (!__available__) return;
 
-    static __dispatcher = __GMLocalNotifications_get_dispatcher();
+    var __dispatcher__ = __GMLocalNotifications_get_dispatcher();
 
     var __args_buffer = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
-    var _callback_handle = __ext_core_function_register(_callback, __dispatcher);
+    var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
     buffer_write(__args_buffer, buffer_u64, _callback_handle);
 
-    var _return_value = __mobile_utils_notification_permission_status(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_notification_permission_status(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /// @ignore
 function __GMLocalNotifications_get_decoders()
 {
-    static __decoders = [];
-    return __decoders;
+    static __decoders__ = [];
+    return __decoders__;
 }
 /// @ignore
 function __GMLocalNotifications_get_dispatcher()
 {
-    static __available = __GMLocalNotifications_is_available();
-    if (!__available) return;
-
-    static __dispatcher = new __GMNativeFunctionDispatcher(__GMLocalNotifications_invocation_handler, __GMLocalNotifications_get_decoders());
-    return __dispatcher;
+    static __dispatcher__ = new __GMNativeFunctionDispatcher(__GMLocalNotifications_invocation_handler, __GMLocalNotifications_get_decoders());
+    return __dispatcher__;
 }
 /// @ignore
 function __GMLocalNotifications_is_available()
 {
-    static __available = extension_exists("GMLocalNotifications");
-    return __available;
+    static __available__ = extension_exists("GMLocalNotifications");
+    return __available__;
 }

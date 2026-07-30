@@ -39,8 +39,8 @@
  */
 function mobile_utils_image_crop(_path, _width, _height, _offset_x, _offset_y)
 {
-    static __available = __GMMobileUtilsImageTools_is_available();
-    if (!__available) return;
+    var __available__ = __GMMobileUtilsImageTools_is_available();
+    if (!__available__) return;
 
     var __args_buffer = __ext_core_get_args_buffer();
 
@@ -65,20 +65,20 @@ function mobile_utils_image_crop(_path, _width, _height, _offset_x, _offset_y)
     if (!is_numeric(_offset_y)) show_error($"{_GMFUNCTION_} :: _offset_y expected number", true);
     buffer_write(__args_buffer, buffer_f64, _offset_y);
 
-    var _return_value = __mobile_utils_image_crop(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __mobile_utils_image_crop(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
 
-    return _return_value;
+    return __return_value__;
 }
 
 /// @ignore
 function __GMMobileUtilsImageTools_get_decoders()
 {
-    static __decoders = [];
-    return __decoders;
+    static __decoders__ = [];
+    return __decoders__;
 }
 /// @ignore
 function __GMMobileUtilsImageTools_is_available()
 {
-    static __available = extension_exists("GMMobileUtilsImageTools");
-    return __available;
+    static __available__ = extension_exists("GMMobileUtilsImageTools");
+    return __available__;
 }
