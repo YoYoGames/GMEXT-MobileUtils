@@ -5,5 +5,5 @@ import ${YYAndroidPackageName}.GMExtWire.GMFunction;
 import ${YYAndroidPackageName}.GMExtWire.GMValue;
 
 public interface GMMobileUtilsGalleryInterface {
-    public void mobile_utils_gallery_open(GMFunction callback);
+    public void gallery_open(GMFunction callback);
 }

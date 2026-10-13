@@ -26,18 +26,18 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_share_open",
+          "%Name": "__share_open",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_share_open",
+          "externalName": "__EXT_NATIVE__share_open",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_share_open",
+          "name": "__share_open",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

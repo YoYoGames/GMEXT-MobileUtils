@@ -29,7 +29,7 @@ public class GMMobileUtilsGallery extends GMMobileUtilsGalleryInternal
 
     private volatile GMFunction galleryCallback = null;
 
-    public void mobile_utils_gallery_open(final GMFunction callback)
+    public void gallery_open(final GMFunction callback)
     {
         final Activity activity = RunnerActivity.CurrentActivity;
 

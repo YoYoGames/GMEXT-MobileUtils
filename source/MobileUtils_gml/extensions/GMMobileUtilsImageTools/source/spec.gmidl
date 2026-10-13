@@ -2,20 +2,20 @@
 module GMMobileUtilsImageTools;
 
 [global, bind = typed_gml]
-function mobile_utils_image_width(path: string): real;
+function image_width(path: string): real;
 
 [global, bind = typed_gml]
-function mobile_utils_image_height(path: string): real;
+function image_height(path: string): real;
 
 [global, bind = typed_gml]
-function mobile_utils_image_resize(
+function image_resize(
     path: string,
     width: real,
     height: real
 ): bool;
 
 [global, bind = typed_gml]
-function mobile_utils_image_crop(
+function image_crop(
     path: string,
     width: real,
     height: real,

@@ -113,22 +113,22 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_apn_register:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__apn_register:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
     // field: callback, type: Function
     gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
 
-    [__impl mobile_utils_apn_register:callback];
+    [__impl apn_register:callback];
 
     return 0;
 }
 
-- (char*)__EXT_NATIVE__mobile_utils_apn_get_token
+- (char*)__EXT_NATIVE__apn_get_token
 {
     static std::string __result;
-    __result = [__impl mobile_utils_apn_get_token];
+    __result = [__impl apn_get_token];
 
     return (char*)__result.c_str();
 }

@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 public class GMMobileUtilsNightMode
     extends GMMobileUtilsNightModeInternal
 {
-    public double mobile_utils_night_mode_check()
+    public double night_mode_check()
     {
         Activity activity = RunnerActivity.CurrentActivity;
 

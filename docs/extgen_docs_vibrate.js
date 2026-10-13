@@ -1,25 +1,25 @@
 /**
- * @function_partial mobile_utils_vibrate_is_available
+ * @function_partial vibrate_is_available
  * @returns {Real}
  * @function_end
  */
 
 /**
- * @function_partial mobile_utils_vibrate_predefined
+ * @function_partial vibrate_predefined
  * @param {Real} kind
  * @returns {Bool}
  * @function_end
  */
 
 /**
- * @function_partial mobile_utils_vibrate_shot
+ * @function_partial vibrate_shot
  * @param {Real} milliseconds
  * @returns {Bool}
  * @function_end
  */
 
 /**
- * @enum_partial MobileUtilsVibrationAvailability
+ * @enum_partial VibrationAvailability
  * @member None
  * @member Basic
  * @member HapticEngine
@@ -27,7 +27,7 @@
  */
 
 /**
- * @enum_partial MobileUtilsAndroidVibrationKind
+ * @enum_partial AndroidVibrationKind
  * @member Click
  * @member DoubleClick
  * @member Tick
@@ -36,7 +36,7 @@
  */
 
 /**
- * @enum_partial MobileUtilsIOSVibrationKind
+ * @enum_partial IOSVibrationKind
  * @member ImpactLight
  * @member ImpactMedium
  * @member ImpactHeavy
@@ -47,10 +47,5 @@
  * @member NotificationSuccess
  * @member NotificationError
  * @enum_end
- */
-
-/**
- * @const_partial macros
- * @const_end
  */
 

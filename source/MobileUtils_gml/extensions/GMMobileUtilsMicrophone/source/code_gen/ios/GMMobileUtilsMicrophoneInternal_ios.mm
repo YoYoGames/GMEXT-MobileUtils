@@ -113,21 +113,21 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_mic_request
+- (double)__EXT_NATIVE__mic_request
 {
-    [__impl mobile_utils_mic_request];
+    [__impl mic_request];
 
     return 0;
 }
 
-- (double)__EXT_NATIVE__mobile_utils_mic_check:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__mic_check:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
     // field: callback, type: Function
     gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
 
-    [__impl mobile_utils_mic_check:callback];
+    [__impl mic_check:callback];
 
     return 0;
 }

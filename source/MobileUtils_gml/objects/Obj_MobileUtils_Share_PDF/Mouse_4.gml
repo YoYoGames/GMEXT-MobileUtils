@@ -1,7 +1,7 @@
 
 var _file = "YYSharedPdf.pdf"; 
 file_copy("YYPdf.pdf", _file); 
-mobile_utils_share_open( "Title!", "application/pdf", _file, function(_success, _error) 
+share_open( "Title!", "application/pdf", _file, function(_success, _error) 
 	{ 
 		if (_success) 
 		{ 

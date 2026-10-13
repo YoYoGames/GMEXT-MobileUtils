@@ -26,15 +26,15 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_night_mode_check",
+          "%Name": "night_mode_check",
           "argCount": 0,
           "args": [],
           "documentation": "@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_night_mode_check",
+          "externalName": "__EXT_NATIVE__night_mode_check",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_night_mode_check",
+          "name": "night_mode_check",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

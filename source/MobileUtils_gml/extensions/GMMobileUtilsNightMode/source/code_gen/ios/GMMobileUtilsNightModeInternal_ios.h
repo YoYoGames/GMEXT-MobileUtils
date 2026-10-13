@@ -17,7 +17,7 @@ namespace gm_consts
 
 namespace gm_enums
 {
-    enum class MobileUtilsNightMode : std::int32_t
+    enum class NightMode : std::int32_t
     {
         Dark = 0,
         Light = 1,
@@ -41,12 +41,12 @@ namespace gm::wire::details
 }
 
 @protocol GMMobileUtilsNightModeInterface <NSObject>
-- (double)mobile_utils_night_mode_check;
+- (double)night_mode_check;
 @end
 
 
 @interface GMMobileUtilsNightModeInternal : NSObject
-- (double)__EXT_NATIVE__mobile_utils_night_mode_check;
+- (double)__EXT_NATIVE__night_mode_check;
 @end
 
 

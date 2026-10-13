@@ -22,7 +22,7 @@ Some modules expose Extension Options that you must review before building (for 
 Most Mobile Utils functions are **asynchronous**: rather than returning a result directly, they take a `callback` method that is invoked once the operation finishes. The callback receives its results as positional arguments — typically a leading `success` (or `granted`) boolean, followed by the result values, and an `error` string that is empty on success.
 
 ```gml
-mobile_utils_camera_open(function(_success, _path, _error)
+camera_open(function(_success, _path, _error)
 {
     if (!_success)
     {
@@ -33,13 +33,13 @@ mobile_utils_camera_open(function(_success, _path, _error)
 });
 ```
 
-A few functions are **synchronous** and return their result directly, such as the ${module.image_tools} functions and ${function.mobile_utils_night_mode_check}.
+A few functions are **synchronous** and return their result directly, such as the ${module.image_tools} functions and ${function.night_mode_check}.
 
 ## Platform notes
 
 - Several behaviours differ between Android and iOS (image formats, haptic availability, the notification image path, and push support). Each module page calls these out — read the relevant notes before shipping.
 - ${module.apn} is **iOS-only and experimental**; guard those calls with `os_type == os_ios`.
-- The device vibration kinds are platform-specific and overlap numerically — always pick the enum member matching the running platform (see ${function.mobile_utils_vibrate_predefined}).
+- The device vibration kinds are platform-specific and overlap numerically — always pick the enum member matching the running platform (see ${function.vibrate_predefined}).
 
 ## Testing
 

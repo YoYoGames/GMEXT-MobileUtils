@@ -1,19 +1,14 @@
 /**
- * @function_partial mobile_utils_night_mode_check
+ * @function_partial night_mode_check
  * @returns {Real}
  * @function_end
  */
 
 /**
- * @enum_partial MobileUtilsNightMode
+ * @enum_partial NightMode
  * @member Dark
  * @member Light
  * @member Undefined
  * @enum_end
- */
-
-/**
- * @const_partial macros
- * @const_end
  */
 

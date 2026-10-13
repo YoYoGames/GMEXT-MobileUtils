@@ -119,7 +119,7 @@
 <p>Some modules expose Extension Options that you must review before building (for example the iOS usage-description strings and the APNs environment). These are described in the <a href="extension_options.html">Extension Options</a> guide.</p>
 <h2 id="working-with-callbacks">Working with callbacks</h2>
 <p>Most Mobile Utils functions are <strong>asynchronous</strong>: rather than returning a result directly, they take a <code>callback</code> method that is invoked once the operation finishes. The callback receives its results as positional arguments — typically a leading <code>success</code> (or <code>granted</code>) boolean, followed by the result values, and an <code>error</code> string that is empty on success.</p>
-<div class="highlight"><pre><span></span><code>mobile_utils_camera_open(function(_success, _path, _error)
+<div class="highlight"><pre><span></span><code>camera_open(function(_success, _path, _error)
 {
     if (!_success)
     {
@@ -129,12 +129,12 @@
     sprite = sprite_add(_path, 1, false, false, 0, 0);
 });
 </code></pre></div>
-<p>A few functions are <strong>synchronous</strong> and return their result directly, such as the <a href="image_tools.html">Image Tools</a> functions and <a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a>.</p>
+<p>A few functions are <strong>synchronous</strong> and return their result directly, such as the <a href="image_tools.html">Image Tools</a> functions and <a href="nightmode.html#night_mode_check">night_mode_check</a>.</p>
 <h2 id="platform-notes">Platform notes</h2>
 <ul>
 <li>Several behaviours differ between Android and iOS (image formats, haptic availability, the notification image path, and push support). Each module page calls these out — read the relevant notes before shipping.</li>
 <li><a href="apn.html">Push Notifications (APNs)</a> is <strong>iOS-only and experimental</strong>; guard those calls with <code>os_type == os_ios</code>.</li>
-<li>The device vibration kinds are platform-specific and overlap numerically — always pick the enum member matching the running platform (see <a href="vibration.html#mobile_utils_vibrate_predefined">mobile_utils_vibrate_predefined</a>).</li>
+<li>The device vibration kinds are platform-specific and overlap numerically — always pick the enum member matching the running platform (see <a href="vibration.html#vibrate_predefined">vibrate_predefined</a>).</li>
 </ul>
 <h2 id="testing">Testing</h2>
 <p>Test on real hardware. Cameras, photo libraries, share targets, haptics and notifications behave differently (or are unavailable) on simulators/emulators, and permission prompts only appear on device.</p>

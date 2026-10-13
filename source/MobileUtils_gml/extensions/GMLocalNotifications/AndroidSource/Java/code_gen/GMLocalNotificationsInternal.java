@@ -17,7 +17,7 @@ public abstract class GMLocalNotificationsInternal extends RunnerSocial implemen
         return __dispatch_queue.fetch(__ret_buffer);
     }
 
-    public double __EXT_NATIVE__mobile_utils_notification_create(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__local_notification_create(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
@@ -36,11 +36,11 @@ public abstract class GMLocalNotificationsInternal extends RunnerSocial implemen
         // field: data, type: String
         String data = GMExtWire.readString(__arg_buffer);
 
-        mobile_utils_notification_create(identifier, seconds, title, message, data);
+        local_notification_create(identifier, seconds, title, message, data);
         return 0;
     }
 
-    public double __EXT_NATIVE__mobile_utils_notification_create_ext(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__local_notification_create_ext(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
@@ -62,46 +62,46 @@ public abstract class GMLocalNotificationsInternal extends RunnerSocial implemen
         // field: image_path, type: String
         String image_path = GMExtWire.readString(__arg_buffer);
 
-        mobile_utils_notification_create_ext(identifier, seconds, title, message, data, image_path);
+        local_notification_create_ext(identifier, seconds, title, message, data, image_path);
         return 0;
     }
 
-    public double __EXT_NATIVE__mobile_utils_notification_cancel(String identifier)
+    public double __EXT_NATIVE__local_notification_cancel(String identifier)
     {
-        mobile_utils_notification_cancel(identifier);
+        local_notification_cancel(identifier);
         return 0;
     }
 
-    public double __EXT_NATIVE__mobile_utils_notification_set_listener(ByteBuffer __arg_buffer, double __arg_buffer_length)
-    {
-        GMExtWire.order(__arg_buffer);
-
-        // field: callback, type: Function
-        GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
-
-        mobile_utils_notification_set_listener(callback);
-        return 0;
-    }
-
-    public double __EXT_NATIVE__mobile_utils_notification_request_permission(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__local_notification_set_listener(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_notification_request_permission(callback);
+        local_notification_set_listener(callback);
         return 0;
     }
 
-    public double __EXT_NATIVE__mobile_utils_notification_permission_status(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__local_notification_request_permission(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_notification_permission_status(callback);
+        local_notification_request_permission(callback);
+        return 0;
+    }
+
+    public double __EXT_NATIVE__local_notification_permission_status(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    {
+        GMExtWire.order(__arg_buffer);
+
+        // field: callback, type: Function
+        GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
+
+        local_notification_permission_status(callback);
         return 0;
     }
 

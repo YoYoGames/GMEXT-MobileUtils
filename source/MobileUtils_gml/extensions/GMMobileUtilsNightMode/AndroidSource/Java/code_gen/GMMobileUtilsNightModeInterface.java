@@ -6,5 +6,5 @@ import ${YYAndroidPackageName}.GMExtWire.GMValue;
 import ${YYAndroidPackageName}.enums.*;
 
 public interface GMMobileUtilsNightModeInterface {
-    public double mobile_utils_night_mode_check();
+    public double night_mode_check();
 }

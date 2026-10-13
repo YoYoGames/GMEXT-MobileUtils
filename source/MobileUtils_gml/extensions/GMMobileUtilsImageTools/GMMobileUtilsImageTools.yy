@@ -26,41 +26,41 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_image_width",
+          "%Name": "image_width",
           "argCount": 1,
           "args": [
             1
           ],
           "documentation": "@param {String} path\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_image_width",
+          "externalName": "__EXT_NATIVE__image_width",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_image_width",
+          "name": "image_width",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_image_height",
+          "%Name": "image_height",
           "argCount": 1,
           "args": [
             1
           ],
           "documentation": "@param {String} path\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_image_height",
+          "externalName": "__EXT_NATIVE__image_height",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_image_height",
+          "name": "image_height",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_image_resize",
+          "%Name": "image_resize",
           "argCount": 3,
           "args": [
             1,
@@ -68,29 +68,29 @@
             2
           ],
           "documentation": "@param {String} path\r\n@param {Real} width\r\n@param {Real} height\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_image_resize",
+          "externalName": "__EXT_NATIVE__image_resize",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_image_resize",
+          "name": "image_resize",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_image_crop",
+          "%Name": "__image_crop",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_image_crop",
+          "externalName": "__EXT_NATIVE__image_crop",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_image_crop",
+          "name": "__image_crop",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

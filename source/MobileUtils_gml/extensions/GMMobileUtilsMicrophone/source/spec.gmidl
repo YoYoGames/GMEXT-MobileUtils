@@ -2,14 +2,14 @@
 module GMMobileUtilsMicrophone;
 
 [global, bind = typed_gml]
-function mobile_utils_mic_request(): unit;
+function mic_request(): unit;
 
-// callback(status) where status is a MobileUtilsMicPermission value.
+// callback(status) where status is a MicPermission value.
 [global, bind = typed_gml]
-function mobile_utils_mic_check(callback: func): unit;
+function mic_check(callback: func): unit;
 
 [global, bind = typed_gml]
-enum MobileUtilsMicPermission:int32
+enum MicPermission:int32
 {
     Unknown = 0,
     NotDetermined = 1,

@@ -2,10 +2,10 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_vibrate_is_available
+ * @function vibrate_is_available
  * @desc This function reports what level of vibration / haptic support the device has.
  *
- * The returned value is a member of the ${constant.MobileUtilsVibrationAvailability} enumeration. Call this before triggering a vibration to decide whether it will have any effect.
+ * The returned value is a member of the ${constant.VibrationAvailability} enumeration. Call this before triggering a vibration to decide whether it will have any effect.
  *
  * [[Note: `HapticEngine` is only ever returned on iOS (devices with a Core Haptics engine). Android reports either `None` or `Basic`.]]
  *
@@ -13,7 +13,7 @@
  *
  * @example
  * ```gml
- * if (mobile_utils_vibrate_is_available() == MobileUtilsVibrationAvailability.None)
+ * if (vibrate_is_available() == VibrationAvailability.None)
  * {
  *     show_debug_message("Vibration is not available.");
  * }
@@ -23,24 +23,24 @@
  */
 
 /**
- * @function mobile_utils_vibrate_predefined
+ * @function vibrate_predefined
  * @desc This function plays one of the device's predefined haptic effects.
  *
- * The `kind` is a value from the platform-specific enumeration for the device you are running on: use a ${constant.MobileUtilsAndroidVibrationKind} member on Android and a ${constant.MobileUtilsIOSVibrationKind} member on iOS. Branch on `os_type` to choose the correct one.
+ * The `kind` is a value from the platform-specific enumeration for the device you are running on: use a ${constant.AndroidVibrationKind} member on Android and a ${constant.IOSVibrationKind} member on iOS. Branch on `os_type` to choose the correct one.
  *
  * [[Warning: The two enumerations share the same low integers with different meanings (for example `2` is `Tick` on Android but `ImpactHeavy` on iOS), and some values exist on only one platform. Never pass a raw integer or an Android kind on iOS (or vice versa) — always use the enum member that matches the running platform, otherwise you get the wrong effect or a `false` return.]]
  *
- * @param {Real} kind The predefined effect to play — a ${constant.MobileUtilsAndroidVibrationKind} member on Android or a ${constant.MobileUtilsIOSVibrationKind} member on iOS
+ * @param {Real} kind The predefined effect to play — a ${constant.AndroidVibrationKind} member on Android or a ${constant.IOSVibrationKind} member on iOS
  * @returns {Bool} `true` if the effect was played, `false` if the device cannot play it or the kind is not valid for the platform
  *
  * @example
  * ```gml
- * if (mobile_utils_vibrate_is_available())
+ * if (vibrate_is_available())
  * {
  *     var _kind = (os_type == os_ios)
- *         ? MobileUtilsIOSVibrationKind.ImpactMedium
- *         : MobileUtilsAndroidVibrationKind.Click;
- *     mobile_utils_vibrate_predefined(_kind);
+ *         ? IOSVibrationKind.ImpactMedium
+ *         : AndroidVibrationKind.Click;
+ *     vibrate_predefined(_kind);
  * }
  * ```
  * The code above plays a predefined haptic using the enum member appropriate to the current platform.
@@ -48,7 +48,7 @@
  */
 
 /**
- * @function mobile_utils_vibrate_shot
+ * @function vibrate_shot
  * @desc This function plays a single vibration of the given duration.
  *
  * On iOS 13 and later this is a continuous Core Haptics event of the requested length; on older iOS it falls back to a predefined impact. On Android it is a one-shot vibration of the requested duration.
@@ -58,9 +58,9 @@
  *
  * @example
  * ```gml
- * if (mobile_utils_vibrate_is_available())
+ * if (vibrate_is_available())
  * {
- *     mobile_utils_vibrate_shot(1000);
+ *     vibrate_shot(1000);
  * }
  * ```
  * The code above plays a one-second vibration when the device supports it.
@@ -70,8 +70,8 @@
 // CONSTANTS
 
 /**
- * @const MobileUtilsVibrationAvailability
- * @desc This enumeration contains the vibration capability levels returned by ${function.mobile_utils_vibrate_is_available}.
+ * @const VibrationAvailability
+ * @desc This enumeration contains the vibration capability levels returned by ${function.vibrate_is_available}.
  * @member None The device has no vibration hardware.
  * @member Basic The device supports basic vibration.
  * @member HapticEngine The device has a dedicated haptic engine (iOS only).
@@ -79,8 +79,8 @@
  */
 
 /**
- * @const MobileUtilsAndroidVibrationKind
- * @desc This enumeration contains the predefined haptic effects available on **Android**, for use with ${function.mobile_utils_vibrate_predefined}.
+ * @const AndroidVibrationKind
+ * @desc This enumeration contains the predefined haptic effects available on **Android**, for use with ${function.vibrate_predefined}.
  * @member Click A single click effect.
  * @member DoubleClick A double click effect.
  * @member Tick A light tick effect.
@@ -89,8 +89,8 @@
  */
 
 /**
- * @const MobileUtilsIOSVibrationKind
- * @desc This enumeration contains the predefined haptic effects available on **iOS**, for use with ${function.mobile_utils_vibrate_predefined}.
+ * @const IOSVibrationKind
+ * @desc This enumeration contains the predefined haptic effects available on **iOS**, for use with ${function.vibrate_predefined}.
  * @member ImpactLight A light impact feedback.
  * @member ImpactMedium A medium impact feedback.
  * @member ImpactHeavy A heavy impact feedback.
@@ -110,20 +110,20 @@
  * @title Device Vibration
  * @desc This module triggers device vibration and haptic feedback on **Android** and **iOS**.
  *
- * The predefined effects use platform-specific enumerations that overlap numerically — always select the effect with the enum member that matches the running platform (see ${function.mobile_utils_vibrate_predefined}).
+ * The predefined effects use platform-specific enumerations that overlap numerically — always select the effect with the enum member that matches the running platform (see ${function.vibrate_predefined}).
  *
  * @section_func
  * @desc The following functions are provided to work with vibration:
- * @ref mobile_utils_vibrate_is_available
- * @ref mobile_utils_vibrate_predefined
- * @ref mobile_utils_vibrate_shot
+ * @ref vibrate_is_available
+ * @ref vibrate_predefined
+ * @ref vibrate_shot
  * @section_end
  *
  * @section_const
  * @desc The following constants are used by this module:
- * @ref MobileUtilsVibrationAvailability
- * @ref MobileUtilsAndroidVibrationKind
- * @ref MobileUtilsIOSVibrationKind
+ * @ref VibrationAvailability
+ * @ref AndroidVibrationKind
+ * @ref IOSVibrationKind
  * @section_end
  *
  * @module_end

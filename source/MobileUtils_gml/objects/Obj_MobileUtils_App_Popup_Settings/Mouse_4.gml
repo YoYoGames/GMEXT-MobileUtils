@@ -1,5 +1,5 @@
 
-mobile_utils_app_popup_settings_show(
+app_popup_settings_show(
     function(_success, _error)
     {
         if (_success)

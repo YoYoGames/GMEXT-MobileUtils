@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_image_width
+ * @function image_width
  * @desc This function returns the width, in pixels, of the image at the given path.
  *
  * The image is inspected on disk without being fully loaded into memory.
@@ -12,7 +12,7 @@
  *
  * @example
  * ```gml
- * var _w = mobile_utils_image_width(path);
+ * var _w = image_width(path);
  * if (_w == -1) show_debug_message("Could not read image");
  * ```
  * The code above reads the width of an image and checks for the failure value.
@@ -20,7 +20,7 @@
  */
 
 /**
- * @function mobile_utils_image_height
+ * @function image_height
  * @desc This function returns the height, in pixels, of the image at the given path.
  *
  * The image is inspected on disk without being fully loaded into memory.
@@ -30,14 +30,14 @@
  *
  * @example
  * ```gml
- * var _h = mobile_utils_image_height(path);
+ * var _h = image_height(path);
  * ```
  * The code above reads the height of an image.
  * @function_end
  */
 
 /**
- * @function mobile_utils_image_resize
+ * @function image_resize
  * @desc This function resizes the image at the given path to the requested pixel dimensions, overwriting the file in place.
  *
  * The output format is chosen from the file extension: a `.jpg`/`.jpeg` path is written as JPEG, any other extension as PNG. The image is written to a temporary file and then moved over the original, so a failed encode does not destroy the source file.
@@ -51,7 +51,7 @@
  *
  * @example
  * ```gml
- * if (mobile_utils_image_resize(path, 256, 256))
+ * if (image_resize(path, 256, 256))
  * {
  *     show_debug_message("Resized");
  * }
@@ -61,10 +61,10 @@
  */
 
 /**
- * @function mobile_utils_image_crop
+ * @function image_crop
  * @desc This function crops the image at the given path to a rectangle, overwriting the file in place.
  *
- * The crop rectangle is defined by its size (`width` x `height`) and its top-left origin (`offset_x`, `offset_y`), all in pixels. The rectangle must lie fully within the source image. As with ${function.mobile_utils_image_resize}, the output format follows the file extension and the write is performed via a temporary file.
+ * The crop rectangle is defined by its size (`width` x `height`) and its top-left origin (`offset_x`, `offset_y`), all in pixels. The rectangle must lie fully within the source image. As with ${function.image_resize}, the output format follows the file extension and the write is performed via a temporary file.
  *
  * [[Warning: This function runs synchronously on the calling thread and can block on large images.]]
  *
@@ -78,11 +78,11 @@
  * @example
  * ```gml
  * // Crop the image to a centered square, then scale it down.
- * var _w = mobile_utils_image_width(path);
- * var _h = mobile_utils_image_height(path);
- * if (_w > _h) mobile_utils_image_crop(path, _h, _h, (_w - _h) / 2, 0);
- * else         mobile_utils_image_crop(path, _w, _w, 0, (_h - _w) / 2);
- * mobile_utils_image_resize(path, 300, 300);
+ * var _w = image_width(path);
+ * var _h = image_height(path);
+ * if (_w > _h) image_crop(path, _h, _h, (_w - _h) / 2, 0);
+ * else         image_crop(path, _w, _w, 0, (_h - _w) / 2);
+ * image_resize(path, 300, 300);
  * ```
  * The code above crops an image to a centered square and resizes it to 300x300 pixels.
  * @function_end
@@ -99,10 +99,10 @@
  *
  * @section_func
  * @desc The following functions are provided to work with images:
- * @ref mobile_utils_image_width
- * @ref mobile_utils_image_height
- * @ref mobile_utils_image_resize
- * @ref mobile_utils_image_crop
+ * @ref image_width
+ * @ref image_height
+ * @ref image_resize
+ * @ref image_crop
  * @section_end
  *
  * @module_end

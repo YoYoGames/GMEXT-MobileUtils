@@ -17,20 +17,20 @@ public abstract class GMMobileUtilsMicrophoneInternal extends RunnerSocial imple
         return __dispatch_queue.fetch(__ret_buffer);
     }
 
-    public double __EXT_NATIVE__mobile_utils_mic_request()
+    public double __EXT_NATIVE__mic_request()
     {
-        mobile_utils_mic_request();
+        mic_request();
         return 0;
     }
 
-    public double __EXT_NATIVE__mobile_utils_mic_check(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__mic_check(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_mic_check(callback);
+        mic_check(callback);
         return 0;
     }
 

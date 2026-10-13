@@ -10,7 +10,7 @@ import android.provider.Settings;
 
 public class GMMobileUtilsAppPopupSettings extends GMMobileUtilsAppPopupSettingsInternal
 {
-    public void mobile_utils_app_popup_settings_show(final GMFunction callback)
+    public void app_popup_settings_show(final GMFunction callback)
     {
         final Activity activity = RunnerActivity.CurrentActivity;
 

@@ -1,7 +1,7 @@
 
 if (os_type == os_ios)
 {
-    mobile_utils_camera_open(
+    camera_open(
         function(_success, _path, _error)
         {
             if (!_success)
@@ -29,7 +29,7 @@ if (os_type == os_ios)
 // permission, and the manifest intentionally does not declare it (declaring it
 // would force a runtime grant or throw), so open the camera directly.
 
-mobile_utils_camera_open(
+camera_open(
     function(_success, _path, _error)
     {
         if (!_success)

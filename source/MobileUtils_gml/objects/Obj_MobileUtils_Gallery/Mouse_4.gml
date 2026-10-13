@@ -1,5 +1,5 @@
 
-mobile_utils_gallery_open(
+gallery_open(
     function(_success, _path, _filename, _error)
     {
         if (!_success)

@@ -23,26 +23,26 @@
 /**
  * @param {Function} _callback
  */
-function mobile_utils_apn_register(_callback)
+function apn_register(_callback)
 {
     var __available__ = __GMMobileUtilsAPN_is_available();
     if (!__available__) return;
 
     var __dispatcher__ = __GMMobileUtilsAPN_get_dispatcher();
 
-    var __args_buffer = __ext_core_get_args_buffer();
+    var __args_buffer__ = __ext_core_get_args_buffer();
 
     // param: _callback, type: Function
     if (!is_callable(_callback)) show_error($"{_GMFUNCTION_} :: _callback expected callable type", true);
     var _callback_handle = __ext_core_function_register(_callback, __dispatcher__);
-    buffer_write(__args_buffer, buffer_u64, _callback_handle);
+    buffer_write(__args_buffer__, buffer_u64, _callback_handle);
 
-    var __return_value__ = __mobile_utils_apn_register(buffer_get_address(__args_buffer), buffer_tell(__args_buffer));
+    var __return_value__ = __apn_register(buffer_get_address(__args_buffer__), buffer_tell(__args_buffer__));
 
     return __return_value__;
 }
 
-// Skipping function mobile_utils_apn_get_token (no wrapper is required)
+// Skipping function apn_get_token (no wrapper is required)
 
 
 /// @ignore
@@ -63,3 +63,8 @@ function __GMMobileUtilsAPN_is_available()
     static __available__ = extension_exists("GMMobileUtilsAPN");
     return __available__;
 }
+// #####################################################################
+// # Exports
+// #####################################################################
+
+#export apn_register

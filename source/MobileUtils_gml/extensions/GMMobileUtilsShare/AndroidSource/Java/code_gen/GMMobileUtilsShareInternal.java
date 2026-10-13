@@ -16,7 +16,7 @@ public abstract class GMMobileUtilsShareInternal extends RunnerSocial implements
         return __dispatch_queue.fetch(__ret_buffer);
     }
 
-    public double __EXT_NATIVE__mobile_utils_share_open(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__share_open(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
@@ -32,7 +32,7 @@ public abstract class GMMobileUtilsShareInternal extends RunnerSocial implements
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_share_open(title, mime, value, callback);
+        share_open(title, mime, value, callback);
         return 0;
     }
 

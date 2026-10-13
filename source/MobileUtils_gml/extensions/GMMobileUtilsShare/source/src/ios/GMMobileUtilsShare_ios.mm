@@ -17,7 +17,7 @@ extern UIViewController *g_controller;
  */
 @implementation GMMobileUtilsShare
 
-- (void)mobile_utils_share_open:(std::string_view)title
+- (void)share_open:(std::string_view)title
                           mime:(std::string_view)mime
                          value:(std::string_view)value
                       callback:(gm::wire::GMFunction)callback

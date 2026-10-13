@@ -103,13 +103,13 @@
 <h2 id="functions">Functions</h2>
 <p>The following function is provided to share content:</p>
 <ul>
-<li><a href="share.html#mobile_utils_share_open">mobile_utils_share_open</a></li>
+<li><a href="share.html#share_open">share_open</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_share_open">mobile_utils_share_open</h1>
+<h1 id="share_open">share_open</h1>
 <p>This function presents the native share sheet so the player can share text or a file with another application.</p>
 <p>The <code>mime</code> argument selects what is shared. For a text MIME type (<code>text/plain</code>, <code>text/rtf</code>, <code>text/html</code>, <code>text/json</code> or <code>application/json</code>) the <code>value</code> is the text to share. For any other MIME type the <code>value</code> is a filename resolved relative to the application's storage area, and that file is shared. An empty <code>mime</code> defaults to <code>*/*</code> on Android.</p>
 <div class="admonition note">
@@ -122,7 +122,7 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_share_open(title, mime, value, callback)
+<div class="highlight"><pre><span></span><code>share_open(title, mime, value, callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -191,7 +191,7 @@
 <p><br></p>
 <p><strong>Example:</strong></p>
 <p><div class="highlight"><pre><span></span><code>// Share a line of text.
-mobile_utils_share_open(&quot;Title!&quot;, &quot;text/plain&quot;, &quot;Hello World&quot;, function(_success, _error)
+share_open(&quot;Title!&quot;, &quot;text/plain&quot;, &quot;Hello World&quot;, function(_success, _error)
 {
     if (!_success) show_debug_message(&quot;Share failed: &quot; + _error);
 });
@@ -199,7 +199,7 @@ mobile_utils_share_open(&quot;Title!&quot;, &quot;text/plain&quot;, &quot;Hello 
 // Share an image file (copied into the sandbox first).
 var _file = &quot;shared_image.jpg&quot;;
 file_copy(&quot;YYImage.jpg&quot;, _file);
-mobile_utils_share_open(&quot;Title!&quot;, &quot;image/jpeg&quot;, _file, function(_success, _error) {});
+share_open(&quot;Title!&quot;, &quot;image/jpeg&quot;, _file, function(_success, _error) {});
 </code></pre></div>
 The code above shares a text string and, separately, an image file through the native share sheet.</p>
 <p><br></p>

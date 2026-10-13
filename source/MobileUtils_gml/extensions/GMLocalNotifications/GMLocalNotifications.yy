@@ -28,107 +28,107 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_notification_create",
+          "%Name": "__local_notification_create",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_create",
+          "externalName": "__EXT_NATIVE__local_notification_create",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_notification_create",
+          "name": "__local_notification_create",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_notification_create_ext",
+          "%Name": "__local_notification_create_ext",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_create_ext",
+          "externalName": "__EXT_NATIVE__local_notification_create_ext",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_notification_create_ext",
+          "name": "__local_notification_create_ext",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_notification_cancel",
+          "%Name": "local_notification_cancel",
           "argCount": 1,
           "args": [
             1
           ],
           "documentation": "@param {String} identifier\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_cancel",
+          "externalName": "__EXT_NATIVE__local_notification_cancel",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_notification_cancel",
+          "name": "local_notification_cancel",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_notification_set_listener",
+          "%Name": "__local_notification_set_listener",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_set_listener",
+          "externalName": "__EXT_NATIVE__local_notification_set_listener",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_notification_set_listener",
+          "name": "__local_notification_set_listener",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_notification_request_permission",
+          "%Name": "__local_notification_request_permission",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_request_permission",
+          "externalName": "__EXT_NATIVE__local_notification_request_permission",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_notification_request_permission",
+          "name": "__local_notification_request_permission",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_notification_permission_status",
+          "%Name": "__local_notification_permission_status",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_notification_permission_status",
+          "externalName": "__EXT_NATIVE__local_notification_permission_status",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_notification_permission_status",
+          "name": "__local_notification_permission_status",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

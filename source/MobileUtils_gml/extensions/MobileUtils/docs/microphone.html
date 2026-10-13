@@ -105,29 +105,29 @@
 <h2 id="functions">Functions</h2>
 <p>The following functions are provided to work with microphone permission:</p>
 <ul>
-<li><a href="microphone.html#mobile_utils_mic_request">mobile_utils_mic_request</a></li>
-<li><a href="microphone.html#mobile_utils_mic_check">mobile_utils_mic_check</a></li>
+<li><a href="microphone.html#mic_request">mic_request</a></li>
+<li><a href="microphone.html#mic_check">mic_check</a></li>
 </ul>
 <h2 id="constants">Constants</h2>
 <p>The following constant is used by this module:</p>
 <ul>
-<li><a href="microphone.html#mobileutilsmicpermission">MobileUtilsMicPermission</a></li>
+<li><a href="microphone.html#micpermission">MicPermission</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_mic_request">mobile_utils_mic_request</h1>
+<h1 id="mic_request">mic_request</h1>
 <p>This function requests the microphone (audio recording) permission, prompting the player if required.</p>
 <p>On Android this triggers the runtime <code>RECORD_AUDIO</code> prompt; on iOS it triggers the system microphone access prompt. If permission has already been granted or denied, the call is a harmless no-op — the OS answers immediately without showing a dialog again.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This function does not report the outcome directly. Call <a href="microphone.html#mobile_utils_mic_check">mobile_utils_mic_check</a> afterward (for example on the next room step or when the app resumes) to read the result.</p>
+<p>This function does not report the outcome directly. Call <a href="microphone.html#mic_check">mic_check</a> afterward (for example on the next room step or when the app resumes) to read the result.</p>
 </div>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_mic_request()
+<div class="highlight"><pre><span></span><code>mic_request()
 </code></pre></div>
 </blockquote>
 <p><br></p>
@@ -137,25 +137,25 @@
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_mic_request();
+<p><div class="highlight"><pre><span></span><code>mic_request();
 </code></pre></div>
 The code above prompts the player for microphone access if it has not been decided yet.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_mic_check">mobile_utils_mic_check</h1>
+<h1 id="mic_check">mic_check</h1>
 <p>This function queries the current microphone permission status without prompting the player.</p>
-<p>The status passed to the callback is a member of the <a href="microphone.html#mobileutilsmicpermission">MobileUtilsMicPermission</a> enumeration.</p>
+<p>The status passed to the callback is a member of the <a href="microphone.html#micpermission">MicPermission</a> enumeration.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>On Android, <code>NotDetermined</code> covers both "never asked" and "permanently denied" (<code>Don't ask again</code>) — the OS does not expose a way to tell these apart other than attempting the request via <a href="microphone.html#mobile_utils_mic_request">mobile_utils_mic_request</a> and checking again.</p>
+<p>On Android, <code>NotDetermined</code> covers both "never asked" and "permanently denied" (<code>Don't ask again</code>) — the OS does not expose a way to tell these apart other than attempting the request via <a href="microphone.html#mic_request">mic_request</a> and checking again.</p>
 </div>
 <p>This function operates asynchronously, which means that it does not immediately return the requested result. Instead, upon completion of the task, it will trigger the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a>.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_mic_check(callback)
+<div class="highlight"><pre><span></span><code>mic_check(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -196,18 +196,18 @@ The code above prompts the player for microphone access if it has not been decid
 <tbody>
 <tr>
 <td>status</td>
-<td><a href="microphone.html#mobileutilsmicpermission">MobileUtilsMicPermission</a></td>
+<td><a href="microphone.html#micpermission">MicPermission</a></td>
 <td>The current microphone permission status</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_mic_check(function(_status)
+<p><div class="highlight"><pre><span></span><code>mic_check(function(_status)
 {
-    if (_status == MobileUtilsMicPermission.NotDetermined)
+    if (_status == MicPermission.NotDetermined)
     {
-        mobile_utils_mic_request();
+        mic_request();
     }
 });
 </code></pre></div>
@@ -216,11 +216,11 @@ The code above checks the microphone permission and requests it only if it has n
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutilsmicpermission">MobileUtilsMicPermission</h1>
-<p>This enumeration contains the possible microphone permission states reported by <a href="microphone.html#mobile_utils_mic_check">mobile_utils_mic_check</a>.</p>
+<h1 id="micpermission">MicPermission</h1>
+<p>This enumeration contains the possible microphone permission states reported by <a href="microphone.html#mic_check">mic_check</a>.</p>
 <p>These constants are referenced by the following functions:</p>
 <ul>
-<li><a href="microphone.html#mobile_utils_mic_check">mobile_utils_mic_check</a></li>
+<li><a href="microphone.html#mic_check">mic_check</a></li>
 </ul>
 <p><br></p>
 <table>

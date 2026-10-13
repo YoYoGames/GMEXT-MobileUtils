@@ -2,7 +2,7 @@
 module GMMobileUtilsShare;
 
 [global, bind = typed_gml]
-function mobile_utils_share_open(
+function share_open(
     title: string,
     mime: string,
     value: string,

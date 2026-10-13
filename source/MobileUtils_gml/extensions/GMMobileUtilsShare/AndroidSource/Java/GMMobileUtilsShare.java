@@ -25,7 +25,7 @@ import java.nio.channels.FileChannel;
  */
 public class GMMobileUtilsShare extends GMMobileUtilsShareInternal
 {
-    public void mobile_utils_share_open(
+    public void share_open(
         String title,
         String mime,
         String value,

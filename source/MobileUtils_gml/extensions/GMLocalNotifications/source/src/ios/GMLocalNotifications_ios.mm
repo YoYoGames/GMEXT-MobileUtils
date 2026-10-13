@@ -16,12 +16,19 @@
  *     request_permission(callback)   -> callback(granted, error)
  *     permission_status(callback)    -> callback(status)
  *
- * Coexistence with YYFirebaseCloudMessaging:
- *   Both extensions swizzle the same two UNUserNotificationCenterDelegate
- *   selectors on iPad_RunnerAppDelegate. We use DISTINCT swizzled selector
- *   names (gmln_...) and a chaining swizzle so both implementations run in any
- *   load order. We handle only LOCAL notifications (non UNPushNotificationTrigger);
- *   FCM handles only remote ones, so neither double-handles.
+ * Coexistence with Firebase Cloud Messaging (both GMEXT-Firebase flavours):
+ *   - YYFirebaseCloudMessaging (ObjC, main) swizzles the two
+ *     UNUserNotificationCenterDelegate selectors on iPad_RunnerAppDelegate from
+ *     +load and makes the app delegate the notification center delegate. Its
+ *     swizzle only chains correctly when it runs before ours, so ours is
+ *     installed from a C constructor, which runs after every +load in the image.
+ *   - The Firebase C++ SDK (GMFirebase, dev) implements the same selectors on
+ *     UIApplication and makes the UIApplication the delegate. So we chain onto
+ *     BOTH classes: whichever object holds the delegate, our handler runs.
+ *   - We never take the delegate from someone else; we only fill it when empty.
+ *   - Notifications this extension scheduled (kGMLNPrefix) are handled here and
+ *     not passed down the chain, so FCM never sees them as push messages.
+ *     Everything else is passed down the chain untouched.
  */
 
 // Notification identifiers are namespaced with this prefix so cancelling /
@@ -68,26 +75,46 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     };
 }
 
+// A notification this extension scheduled: local, and carrying our prefix.
+static BOOL GMLNIsOwnNotification(UNNotification *notification) {
+    if ([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
+        return NO;
+    }
+    return [notification.request.identifier hasPrefix:kGMLNPrefix];
+}
+
 @implementation GMLocalNotifications
 
-#pragma mark - App delegate swizzling
+#pragma mark - Swizzling
 
-+ (void)load {
+// Called from GMLNInstallHooks (C constructor, bottom of file) rather than
+// +load, so YYFirebaseCloudMessaging's +load swizzle is always installed first.
++ (void)installHooks {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // Resolve the runner app delegate at runtime; its header is not on the
         // extension build's include path.
         Class appDelegateClass = NSClassFromString(@"iPad_RunnerAppDelegate");
-        if (appDelegateClass == Nil) {
+        if (appDelegateClass != Nil) {
+            class_addProtocol(appDelegateClass, @protocol(UNUserNotificationCenterDelegate));
+            [self swizzleUserNotificationMethodsForClass:appDelegateClass];
+
+            // didFinishLaunchingWithOptions - so we can assign the notification
+            // center delegate before launch completes, which is required for iOS
+            // to deliver a notification tap that cold-started the app.
+            [self swizzleMethodInClass:appDelegateClass
+                      originalSelector:@selector(application:didFinishLaunchingWithOptions:)
+                      swizzledSelector:@selector(gmln_application:didFinishLaunchingWithOptions:)];
+        } else {
             NSLog(@"[GMLocalNotifications] Could not find iPad_RunnerAppDelegate.");
-            return;
         }
 
-        class_addProtocol(appDelegateClass, @protocol(UNUserNotificationCenterDelegate));
-        [self swizzleUserNotificationMethodsForClass:appDelegateClass];
+        // The Firebase C++ SDK makes the UIApplication the delegate (its
+        // UIApplication (FIRFCM) category); chain onto that too.
+        [self swizzleUserNotificationMethodsForClass:[UIApplication class]];
 
         // Earliest reliable hook that does not depend on the runner instantiating
-        // our extension object: set the delegate when the app finishes launching.
+        // our extension object: fill the delegate when the app finishes launching.
         [[NSNotificationCenter defaultCenter]
             addObserverForName:UIApplicationDidFinishLaunchingNotification
                         object:nil
@@ -98,24 +125,17 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     });
 }
 
-+ (void)swizzleUserNotificationMethodsForClass:(Class)appDelegateClass {
++ (void)swizzleUserNotificationMethodsForClass:(Class)targetClass {
 
     // willPresentNotification
-    [self swizzleMethodInClass:appDelegateClass
+    [self swizzleMethodInClass:targetClass
               originalSelector:@selector(userNotificationCenter:willPresentNotification:withCompletionHandler:)
               swizzledSelector:@selector(gmln_userNotificationCenter:willPresentNotification:withCompletionHandler:)];
 
     // didReceiveNotificationResponse
-    [self swizzleMethodInClass:appDelegateClass
+    [self swizzleMethodInClass:targetClass
               originalSelector:@selector(userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)
               swizzledSelector:@selector(gmln_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)];
-
-    // didFinishLaunchingWithOptions — so we can assign the notification center
-    // delegate before launch completes, which is required for iOS to deliver a
-    // notification tap that cold-started the app.
-    [self swizzleMethodInClass:appDelegateClass
-              originalSelector:@selector(application:didFinishLaunchingWithOptions:)
-              swizzledSelector:@selector(gmln_application:didFinishLaunchingWithOptions:)];
 }
 
 // Chaining swizzle: when the target already implements the original selector
@@ -174,8 +194,11 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 
     void (^onceHandler)(UNNotificationPresentationOptions) = RunOncePresentationCompletionHandler(completionHandler);
 
-    // Call the chained previous implementation if one exists.
-    if ([self respondsToSelector:@selector(gmln_userNotificationCenter:willPresentNotification:withCompletionHandler:)]) {
+    // Call the chained previous implementation if one exists. Our own
+    // notifications stop here: the Firebase C++ SDK does not check the trigger
+    // and would report them to the game as FCM messages.
+    if (!GMLNIsOwnNotification(notification)
+        && [self respondsToSelector:@selector(gmln_userNotificationCenter:willPresentNotification:withCompletionHandler:)]) {
         [self gmln_userNotificationCenter:center willPresentNotification:notification withCompletionHandler:onceHandler];
     }
 
@@ -191,8 +214,9 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     // Remote notifications are owned by whoever registered for push (FCM, or the
     // sibling APN extension); we don't deliver them to the local listener. But we
     // must still call the completion handler or iOS suppresses the foreground
-    // presentation and logs "completion handler not called". The run-once wrapper
-    // keeps this safe when a chained handler already called it.
+    // presentation and logs "completion handler not called" (the Firebase C++
+    // SDK only forwards it, so with no delegate behind it nobody calls it). The
+    // run-once wrapper keeps this safe when a chained handler already called it.
     if ([trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         onceHandler(presentOptions);
         return;
@@ -210,7 +234,8 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 
     void (^onceHandler)(void) = RunOnceVoidCompletionHandler(completionHandler);
 
-    if ([self respondsToSelector:@selector(gmln_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)]) {
+    if (!GMLNIsOwnNotification(response.notification)
+        && [self respondsToSelector:@selector(gmln_userNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:)]) {
         [self gmln_userNotificationCenter:center didReceiveNotificationResponse:response withCompletionHandler:onceHandler];
     }
 
@@ -266,22 +291,26 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     return self;
 }
 
-// Assigns the runner app delegate as the notification center delegate. Idempotent
-// and safe to call from multiple launch hooks; the app delegate carries the
-// swizzled UN delegate methods. Setting the same value repeatedly is harmless and
-// coexists with FCM (which assigns the same app delegate).
+// Fills the notification center delegate with the runner app delegate, but only
+// when nobody holds it. FCM (app delegate) or the Firebase C++ SDK
+// (UIApplication) may already own it, and our handlers are chained onto both
+// classes, so taking it over would only break them. Idempotent and safe to call
+// from multiple launch hooks.
 + (void)ensureNotificationDelegate {
+    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
+    if (center.delegate != nil) {
+        return;
+    }
     id appDelegate = [[UIApplication sharedApplication] delegate];
     if (appDelegate == nil) {
         return;
     }
-    UNUserNotificationCenter.currentNotificationCenter.delegate =
-        (id<UNUserNotificationCenterDelegate>)appDelegate;
+    center.delegate = (id<UNUserNotificationCenterDelegate>)appDelegate;
 }
 
 #pragma mark - Generator API
 
-- (void)mobile_utils_notification_create:(std::string_view)identifier
+- (void)local_notification_create:(std::string_view)identifier
                                  seconds:(double)seconds
                                    title:(std::string_view)title
                                  message:(std::string_view)message
@@ -295,7 +324,7 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                                   image_path:std::string_view()];
 }
 
-- (void)mobile_utils_notification_create_ext:(std::string_view)identifier
+- (void)local_notification_create_ext:(std::string_view)identifier
                                      seconds:(double)seconds
                                        title:(std::string_view)title
                                      message:(std::string_view)message
@@ -310,14 +339,14 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
                                   image_path:image_path];
 }
 
-- (void)mobile_utils_notification_cancel:(std::string_view)identifier {
+- (void)local_notification_cancel:(std::string_view)identifier {
     NSString *prefixedId = [self prefixedIdentifier:identifier];
 
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center removePendingNotificationRequestsWithIdentifiers:@[prefixedId]];
 }
 
-- (void)mobile_utils_notification_set_listener:(gm::wire::GMFunction)callback {
+- (void)local_notification_set_listener:(gm::wire::GMFunction)callback {
     g_notificationListener = callback;
 
     // Deliver any notifications that arrived before the listener was registered
@@ -331,7 +360,7 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     }
 }
 
-- (void)mobile_utils_notification_request_permission:(gm::wire::GMFunction)callback {
+- (void)local_notification_request_permission:(gm::wire::GMFunction)callback {
     if (@available(iOS 10.0, *)) {
         UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert | UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
         [[UNUserNotificationCenter currentNotificationCenter]
@@ -351,16 +380,16 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
     }
 }
 
-- (void)mobile_utils_notification_permission_status:(gm::wire::GMFunction)callback {
+- (void)local_notification_permission_status:(gm::wire::GMFunction)callback {
     UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
     [center getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings *settings) {
-        gm_enums::MobileUtilsNotificationPermission status = gm_enums::MobileUtilsNotificationPermission::Unknown;
+        gm_enums::LocalNotificationPermission status = gm_enums::LocalNotificationPermission::Unknown;
         switch (settings.authorizationStatus) {
-            case UNAuthorizationStatusAuthorized:    status = gm_enums::MobileUtilsNotificationPermission::Authorized;    break;
-            case UNAuthorizationStatusDenied:        status = gm_enums::MobileUtilsNotificationPermission::Denied;        break;
-            case UNAuthorizationStatusNotDetermined: status = gm_enums::MobileUtilsNotificationPermission::NotDetermined; break;
-            case UNAuthorizationStatusProvisional:   status = gm_enums::MobileUtilsNotificationPermission::Provisional;   break;
-            case UNAuthorizationStatusEphemeral:     status = gm_enums::MobileUtilsNotificationPermission::Ephemeral;     break;
+            case UNAuthorizationStatusAuthorized:    status = gm_enums::LocalNotificationPermission::Authorized;    break;
+            case UNAuthorizationStatusDenied:        status = gm_enums::LocalNotificationPermission::Denied;        break;
+            case UNAuthorizationStatusNotDetermined: status = gm_enums::LocalNotificationPermission::NotDetermined; break;
+            case UNAuthorizationStatusProvisional:   status = gm_enums::LocalNotificationPermission::Provisional;   break;
+            case UNAuthorizationStatusEphemeral:     status = gm_enums::LocalNotificationPermission::Ephemeral;     break;
             default: break;
         }
         callback.call(static_cast<std::int32_t>(status));
@@ -517,3 +546,14 @@ static void(^RunOncePresentationCompletionHandler(void(^originalHandler)(UNNotif
 }
 
 @end
+
+// dyld runs every +load in the image before any C constructor, so hooking from
+// here puts our swizzle after YYFirebaseCloudMessaging's regardless of link
+// order (see the coexistence note at the top). The runtime is fully set up at
+// this point, so class lookups and method swizzling are safe.
+__attribute__((constructor))
+static void GMLNInstallHooks(void) {
+    @autoreleasepool {
+        [GMLocalNotifications installHooks];
+    }
+}

@@ -1,17 +1,12 @@
 /**
- * @function_partial mobile_utils_apn_register
+ * @function_partial apn_register
  * @param {Function} callback
  * @function_end
  */
 
 /**
- * @function_partial mobile_utils_apn_get_token
+ * @function_partial apn_get_token
  * @returns {String}
  * @function_end
- */
-
-/**
- * @const_partial macros
- * @const_end
  */
 

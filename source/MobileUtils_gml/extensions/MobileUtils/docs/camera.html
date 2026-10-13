@@ -103,13 +103,13 @@
 <h2 id="functions">Functions</h2>
 <p>The following function is provided to work with the camera:</p>
 <ul>
-<li><a href="camera.html#mobile_utils_camera_open">mobile_utils_camera_open</a></li>
+<li><a href="camera.html#camera_open">camera_open</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_camera_open">mobile_utils_camera_open</h1>
+<h1 id="camera_open">camera_open</h1>
 <p>This function brings up the device camera so the player can take a photo.</p>
 <p>This is an asynchronous function: it does not return the captured image directly. Instead, once the player takes a photo (or cancels), the <code>callback</code> method is invoked with the outcome. On success the photo is written to a file in the application's storage area and its absolute path is passed to the callback.</p>
 <div class="admonition note">
@@ -122,7 +122,7 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_camera_open(callback)
+<div class="highlight"><pre><span></span><code>camera_open(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -180,7 +180,7 @@
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_camera_open(function(_success, _path, _error)
+<p><div class="highlight"><pre><span></span><code>camera_open(function(_success, _path, _error)
 {
     if (!_success)
     {

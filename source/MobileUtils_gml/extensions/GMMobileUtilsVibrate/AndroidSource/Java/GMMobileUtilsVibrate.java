@@ -10,7 +10,7 @@ import android.os.VibratorManager;
 public class GMMobileUtilsVibrate
     extends GMMobileUtilsVibrateInternal
 {
-    public double mobile_utils_vibrate_is_available()
+    public double vibrate_is_available()
     {
         Activity activity = RunnerActivity.CurrentActivity;
 
@@ -24,7 +24,7 @@ public class GMMobileUtilsVibrate
             : 0.0;
     }
 
-    public boolean mobile_utils_vibrate_predefined(double kind)
+    public boolean vibrate_predefined(double kind)
     {
         Activity activity = RunnerActivity.CurrentActivity;
 
@@ -71,7 +71,7 @@ public class GMMobileUtilsVibrate
         }
     }
 
-    public boolean mobile_utils_vibrate_shot(double milliseconds)
+    public boolean vibrate_shot(double milliseconds)
     {
         Activity activity = RunnerActivity.CurrentActivity;
 

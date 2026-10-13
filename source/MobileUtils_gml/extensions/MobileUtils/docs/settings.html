@@ -103,13 +103,13 @@
 <h2 id="functions">Functions</h2>
 <p>The following function is provided:</p>
 <ul>
-<li><a href="settings.html#mobile_utils_app_popup_settings_show">mobile_utils_app_popup_settings_show</a></li>
+<li><a href="settings.html#app_popup_settings_show">app_popup_settings_show</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_app_popup_settings_show">mobile_utils_app_popup_settings_show</h1>
+<h1 id="app_popup_settings_show">app_popup_settings_show</h1>
 <p>This function opens the operating system's Settings page for your application.</p>
 <p>This is useful for directing the player to the system settings when a permission they previously denied needs to be granted manually (the app cannot change those settings itself).</p>
 <p>This is an asynchronous function: the <code>callback</code> method reports whether the operating system accepted the request to open the settings page.</p>
@@ -117,7 +117,7 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_app_popup_settings_show(callback)
+<div class="highlight"><pre><span></span><code>app_popup_settings_show(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -170,7 +170,7 @@
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_app_popup_settings_show(function(_success, _error)
+<p><div class="highlight"><pre><span></span><code>app_popup_settings_show(function(_success, _error)
 {
     if (_success) show_debug_message(&quot;Application settings opened.&quot;);
     else show_debug_message(&quot;Could not open settings: &quot; + _error);

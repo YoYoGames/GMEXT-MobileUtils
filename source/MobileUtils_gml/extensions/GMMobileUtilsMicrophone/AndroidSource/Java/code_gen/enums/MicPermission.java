@@ -2,7 +2,7 @@
 
 package ${YYAndroidPackageName}.enums;
 
-public enum MobileUtilsMicPermission
+public enum MicPermission
 {
     Unknown((int)0),
     NotDetermined((int)1),
@@ -10,7 +10,7 @@ public enum MobileUtilsMicPermission
     Granted((int)3);
 
     private final int value;
-    private MobileUtilsMicPermission(int v)
+    private MicPermission(int v)
     {
         this.value = v;
     }
@@ -18,20 +18,20 @@ public enum MobileUtilsMicPermission
     {
         return this.value;
     }
-    public static MobileUtilsMicPermission from(int v)
+    public static MicPermission from(int v)
     {
         switch (v)
         {
             case 0:
-                return MobileUtilsMicPermission.Unknown;
+                return MicPermission.Unknown;
             case 1:
-                return MobileUtilsMicPermission.NotDetermined;
+                return MicPermission.NotDetermined;
             case 2:
-                return MobileUtilsMicPermission.Denied;
+                return MicPermission.Denied;
             case 3:
-                return MobileUtilsMicPermission.Granted;
+                return MicPermission.Granted;
             default:
-                throw new IllegalArgumentException("Unknown MobileUtilsMicPermission value: " + v);
+                throw new IllegalArgumentException("Unknown MicPermission value: " + v);
         }
     }
 }

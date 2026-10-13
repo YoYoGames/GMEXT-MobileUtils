@@ -2,16 +2,16 @@
 module GMMobileUtilsVibrate;
 
 [global, bind = typed_gml]
-function mobile_utils_vibrate_is_available(): real;
+function vibrate_is_available(): real;
 
 [global, bind = typed_gml]
-function mobile_utils_vibrate_predefined(kind: real): bool;
+function vibrate_predefined(kind: real): bool;
 
 [global, bind = typed_gml]
-function mobile_utils_vibrate_shot(milliseconds: real): bool;
+function vibrate_shot(milliseconds: real): bool;
 
 [global, bind = typed_gml]
-enum MobileUtilsVibrationAvailability:int32
+enum VibrationAvailability:int32
 {
     None = 0,
     Basic = 1,
@@ -19,7 +19,7 @@ enum MobileUtilsVibrationAvailability:int32
 }
 
 [global, bind = typed_gml]
-enum MobileUtilsAndroidVibrationKind:int32
+enum AndroidVibrationKind:int32
 {
     Click = 0,
     DoubleClick = 1,
@@ -28,7 +28,7 @@ enum MobileUtilsAndroidVibrationKind:int32
 }
 
 [global, bind = typed_gml]
-enum MobileUtilsIOSVibrationKind:int32
+enum IOSVibrationKind:int32
 {
     ImpactLight = 0,
     ImpactMedium = 1,

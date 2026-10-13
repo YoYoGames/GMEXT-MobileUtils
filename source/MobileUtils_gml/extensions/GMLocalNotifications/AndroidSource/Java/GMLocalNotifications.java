@@ -4,7 +4,7 @@ import ${YYAndroidPackageName}.LocalNotificationReceiver;
 import ${YYAndroidPackageName}.NotificationCallback;
 import ${YYAndroidPackageName}.NotificationData;
 import ${YYAndroidPackageName}.GMExtWire.GMFunction;
-import ${YYAndroidPackageName}.enums.MobileUtilsNotificationPermission;
+import ${YYAndroidPackageName}.enums.LocalNotificationPermission;
 
 import android.Manifest;
 import android.app.Activity;
@@ -111,11 +111,11 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
 
     // ----- Generator API -----
 
-    public void mobile_utils_notification_create(String identifier, double seconds, String title, String message, String data) {
-        mobile_utils_notification_create_ext(identifier, seconds, title, message, data, null);
+    public void local_notification_create(String identifier, double seconds, String title, String message, String data) {
+        local_notification_create_ext(identifier, seconds, title, message, data, null);
     }
 
-    public void mobile_utils_notification_create_ext(String identifier, double seconds, String title, String message, String data, String imagePath) {
+    public void local_notification_create_ext(String identifier, double seconds, String title, String message, String data, String imagePath) {
         if (seconds <= 0)
             return;
 
@@ -139,7 +139,7 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
         am.set(AlarmManager.RTC_WAKEUP, fireTimeMs, pendingIntent);
     }
 
-    public void mobile_utils_notification_cancel(String identifier) {
+    public void local_notification_cancel(String identifier) {
         Activity activity = RunnerActivity.CurrentActivity;
         if (activity == null)
             return;
@@ -158,7 +158,7 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
         am.cancel(pendingIntent);
     }
 
-    public void mobile_utils_notification_set_listener(GMFunction callback) {
+    public void local_notification_set_listener(GMFunction callback) {
         g_listener = callback;
 
         // Deliver any notifications that arrived before the listener was
@@ -179,7 +179,7 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
     // Requests the POST_NOTIFICATIONS runtime permission on Android 13+ (API 33).
     // On older versions there is no runtime permission, so the effective state from
     // the system settings is reported instead. callback(granted, error).
-    public void mobile_utils_notification_request_permission(GMFunction callback) {
+    public void local_notification_request_permission(GMFunction callback) {
         final Activity activity = RunnerActivity.CurrentActivity;
         if (activity == null) {
             callback.call(false, "Activity is null.");
@@ -212,31 +212,31 @@ public class GMLocalNotifications extends GMLocalNotificationsInternal implement
         );
     }
 
-    // callback(status) where status is a MobileUtilsNotificationPermission value.
-    public void mobile_utils_notification_permission_status(GMFunction callback) {
+    // callback(status) where status is a LocalNotificationPermission value.
+    public void local_notification_permission_status(GMFunction callback) {
         final Activity activity = RunnerActivity.CurrentActivity;
         if (activity == null) {
-            callback.call(MobileUtilsNotificationPermission.Unknown.value());
+            callback.call(LocalNotificationPermission.Unknown.value());
             return;
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(activity, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
-                callback.call(MobileUtilsNotificationPermission.Authorized.value());
+                callback.call(LocalNotificationPermission.Authorized.value());
             } else if (activity.shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
                 // Requested before and denied (rationale should be shown).
-                callback.call(MobileUtilsNotificationPermission.Denied.value());
+                callback.call(LocalNotificationPermission.Denied.value());
             } else {
                 // Either never requested, or permanently denied ("Don't ask again").
-                callback.call(MobileUtilsNotificationPermission.NotDetermined.value());
+                callback.call(LocalNotificationPermission.NotDetermined.value());
             }
             return;
         }
 
         boolean enabled = NotificationManagerCompat.from(activity).areNotificationsEnabled();
         callback.call(enabled
-            ? MobileUtilsNotificationPermission.Authorized.value()
-            : MobileUtilsNotificationPermission.Denied.value());
+            ? LocalNotificationPermission.Authorized.value()
+            : LocalNotificationPermission.Denied.value());
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

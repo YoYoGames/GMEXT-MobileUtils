@@ -2,14 +2,14 @@
 
 package ${YYAndroidPackageName}.enums;
 
-public enum MobileUtilsNightMode
+public enum NightMode
 {
     Dark((int)0),
     Light((int)1),
     Undefined((int)2);
 
     private final int value;
-    private MobileUtilsNightMode(int v)
+    private NightMode(int v)
     {
         this.value = v;
     }
@@ -17,18 +17,18 @@ public enum MobileUtilsNightMode
     {
         return this.value;
     }
-    public static MobileUtilsNightMode from(int v)
+    public static NightMode from(int v)
     {
         switch (v)
         {
             case 0:
-                return MobileUtilsNightMode.Dark;
+                return NightMode.Dark;
             case 1:
-                return MobileUtilsNightMode.Light;
+                return NightMode.Light;
             case 2:
-                return MobileUtilsNightMode.Undefined;
+                return NightMode.Undefined;
             default:
-                throw new IllegalArgumentException("Unknown MobileUtilsNightMode value: " + v);
+                throw new IllegalArgumentException("Unknown NightMode value: " + v);
         }
     }
 }

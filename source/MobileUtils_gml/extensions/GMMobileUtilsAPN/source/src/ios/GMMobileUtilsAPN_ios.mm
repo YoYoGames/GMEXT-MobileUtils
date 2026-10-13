@@ -214,7 +214,7 @@ static const NSTimeInterval kAPNRegistrationTimeout = 30.0;
 
 #pragma mark - Generator API
 
-- (void)mobile_utils_apn_register:
+- (void)apn_register:
     (gm::wire::GMFunction)callback
 {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -330,7 +330,7 @@ static const NSTimeInterval kAPNRegistrationTimeout = 30.0;
     });
 }
 
-- (std::string)mobile_utils_apn_get_token
+- (std::string)apn_get_token
 {
     if (g_cachedDeviceToken.length == 0)
         return std::string();

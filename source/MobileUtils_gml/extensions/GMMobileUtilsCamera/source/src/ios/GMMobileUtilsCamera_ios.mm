@@ -30,7 +30,7 @@ extern UIViewController *g_controller;
     return self;
 }
 
-- (void)mobile_utils_camera_open:
+- (void)camera_open:
     (gm::wire::GMFunction)callback
 {
     dispatch_async(dispatch_get_main_queue(), ^{

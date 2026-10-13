@@ -28,49 +28,49 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_is_available",
+          "%Name": "vibrate_is_available",
           "argCount": 0,
           "args": [],
           "documentation": "@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_vibrate_is_available",
+          "externalName": "__EXT_NATIVE__vibrate_is_available",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_vibrate_is_available",
+          "name": "vibrate_is_available",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_predefined",
+          "%Name": "vibrate_predefined",
           "argCount": 1,
           "args": [
             2
           ],
           "documentation": "@param {Real} kind\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_vibrate_predefined",
+          "externalName": "__EXT_NATIVE__vibrate_predefined",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_vibrate_predefined",
+          "name": "vibrate_predefined",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_shot",
+          "%Name": "vibrate_shot",
           "argCount": 1,
           "args": [
             2
           ],
           "documentation": "@param {Real} milliseconds\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_vibrate_shot",
+          "externalName": "__EXT_NATIVE__vibrate_shot",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_vibrate_shot",
+          "name": "vibrate_shot",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
@@ -96,49 +96,49 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_is_available",
+          "%Name": "vibrate_is_available",
           "argCount": 0,
           "args": [],
           "documentation": "",
-          "externalName": "mobile_utils_vibrate_is_available",
-          "help": "mobile_utils_vibrate_is_available()",
+          "externalName": "vibrate_is_available",
+          "help": "vibrate_is_available()",
           "hidden": false,
           "kind": 5,
-          "name": "mobile_utils_vibrate_is_available",
+          "name": "vibrate_is_available",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_shot",
+          "%Name": "vibrate_shot",
           "argCount": 1,
           "args": [
             2
           ],
           "documentation": "",
-          "externalName": "mobile_utils_vibrate_shot",
-          "help": "mobile_utils_vibrate_shot(milliseconds)",
+          "externalName": "vibrate_shot",
+          "help": "vibrate_shot(milliseconds)",
           "hidden": false,
           "kind": 5,
-          "name": "mobile_utils_vibrate_shot",
+          "name": "vibrate_shot",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_vibrate_predefined",
+          "%Name": "vibrate_predefined",
           "argCount": 1,
           "args": [
             2
           ],
           "documentation": "",
-          "externalName": "mobile_utils_vibrate_predefined",
-          "help": "mobile_utils_vibrate_predefined(kind)",
+          "externalName": "vibrate_predefined",
+          "help": "vibrate_predefined(kind)",
           "hidden": false,
           "kind": 5,
-          "name": "mobile_utils_vibrate_predefined",
+          "name": "vibrate_predefined",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

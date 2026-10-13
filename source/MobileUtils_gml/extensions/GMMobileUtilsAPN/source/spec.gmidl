@@ -2,7 +2,7 @@
 module GMMobileUtilsAPN;
 
 [global, bind = typed_gml]
-function mobile_utils_apn_register(callback: func): unit;
+function apn_register(callback: func): unit;
 
 [global, bind = typed_gml]
-function mobile_utils_apn_get_token(): string;
+function apn_get_token(): string;

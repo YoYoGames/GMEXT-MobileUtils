@@ -17,14 +17,14 @@ namespace gm_consts
 
 namespace gm_enums
 {
-    enum class MobileUtilsVibrationAvailability : std::int32_t
+    enum class VibrationAvailability : std::int32_t
     {
         None = 0,
         Basic = 1,
         HapticEngine = 2
     };
 
-    enum class MobileUtilsAndroidVibrationKind : std::int32_t
+    enum class AndroidVibrationKind : std::int32_t
     {
         Click = 0,
         DoubleClick = 1,
@@ -32,7 +32,7 @@ namespace gm_enums
         HeavyClick = 5
     };
 
-    enum class MobileUtilsIOSVibrationKind : std::int32_t
+    enum class IOSVibrationKind : std::int32_t
     {
         ImpactLight = 0,
         ImpactMedium = 1,
@@ -62,16 +62,16 @@ namespace gm::wire::details
 }
 
 @protocol GMMobileUtilsVibrateInterface <NSObject>
-- (double)mobile_utils_vibrate_is_available;
-- (bool)mobile_utils_vibrate_predefined:(double)kind;
-- (bool)mobile_utils_vibrate_shot:(double)milliseconds;
+- (double)vibrate_is_available;
+- (bool)vibrate_predefined:(double)kind;
+- (bool)vibrate_shot:(double)milliseconds;
 @end
 
 
 @interface GMMobileUtilsVibrateInternal : NSObject
-- (double)__EXT_NATIVE__mobile_utils_vibrate_is_available;
-- (double)__EXT_NATIVE__mobile_utils_vibrate_predefined:(double)kind;
-- (double)__EXT_NATIVE__mobile_utils_vibrate_shot:(double)milliseconds;
+- (double)__EXT_NATIVE__vibrate_is_available;
+- (double)__EXT_NATIVE__vibrate_predefined:(double)kind;
+- (double)__EXT_NATIVE__vibrate_shot:(double)milliseconds;
 @end
 
 

@@ -112,23 +112,23 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_vibrate_is_available
+- (double)__EXT_NATIVE__vibrate_is_available
 {
-    double __result = [__impl mobile_utils_vibrate_is_available];
+    double __result = [__impl vibrate_is_available];
 
     return static_cast<double>(__result);
 }
 
-- (double)__EXT_NATIVE__mobile_utils_vibrate_predefined:(double)kind
+- (double)__EXT_NATIVE__vibrate_predefined:(double)kind
 {
-    bool __result = [__impl mobile_utils_vibrate_predefined:kind];
+    bool __result = [__impl vibrate_predefined:kind];
 
     return static_cast<double>(__result);
 }
 
-- (double)__EXT_NATIVE__mobile_utils_vibrate_shot:(double)milliseconds
+- (double)__EXT_NATIVE__vibrate_shot:(double)milliseconds
 {
-    bool __result = [__impl mobile_utils_vibrate_shot:milliseconds];
+    bool __result = [__impl vibrate_shot:milliseconds];
 
     return static_cast<double>(__result);
 }

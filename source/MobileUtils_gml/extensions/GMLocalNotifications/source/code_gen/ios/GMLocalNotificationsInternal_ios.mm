@@ -113,7 +113,7 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_notification_create:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__local_notification_create:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
@@ -132,12 +132,12 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     // field: data, type: String
     std::string_view data = gm::wire::codec::readValue<std::string_view>(__br);
 
-    [__impl mobile_utils_notification_create:identifier seconds:seconds title:title message:message data:data];
+    [__impl local_notification_create:identifier seconds:seconds title:title message:message data:data];
 
     return 0;
 }
 
-- (double)__EXT_NATIVE__mobile_utils_notification_create_ext:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__local_notification_create_ext:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
@@ -159,50 +159,50 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     // field: image_path, type: String
     std::string_view image_path = gm::wire::codec::readValue<std::string_view>(__br);
 
-    [__impl mobile_utils_notification_create_ext:identifier seconds:seconds title:title message:message data:data image_path:image_path];
+    [__impl local_notification_create_ext:identifier seconds:seconds title:title message:message data:data image_path:image_path];
 
     return 0;
 }
 
-- (double)__EXT_NATIVE__mobile_utils_notification_cancel:(char*)identifier
+- (double)__EXT_NATIVE__local_notification_cancel:(char*)identifier
 {
-    [__impl mobile_utils_notification_cancel:identifier];
+    [__impl local_notification_cancel:identifier];
 
     return 0;
 }
 
-- (double)__EXT_NATIVE__mobile_utils_notification_set_listener:(char*)__arg_buffer arg1:(double)__arg_buffer_length
-{
-    gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
-
-    // field: callback, type: Function
-    gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
-
-    [__impl mobile_utils_notification_set_listener:callback];
-
-    return 0;
-}
-
-- (double)__EXT_NATIVE__mobile_utils_notification_request_permission:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__local_notification_set_listener:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
     // field: callback, type: Function
     gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
 
-    [__impl mobile_utils_notification_request_permission:callback];
+    [__impl local_notification_set_listener:callback];
 
     return 0;
 }
 
-- (double)__EXT_NATIVE__mobile_utils_notification_permission_status:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__local_notification_request_permission:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
     // field: callback, type: Function
     gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
 
-    [__impl mobile_utils_notification_permission_status:callback];
+    [__impl local_notification_request_permission:callback];
+
+    return 0;
+}
+
+- (double)__EXT_NATIVE__local_notification_permission_status:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+{
+    gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
+
+    // field: callback, type: Function
+    gm::wire::GMFunction callback = gm::wire::codec::readFunction(__br, &__dispatch_queue);
+
+    [__impl local_notification_permission_status:callback];
 
     return 0;
 }

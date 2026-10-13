@@ -103,14 +103,14 @@
 <h2 id="functions">Functions</h2>
 <p>The following functions are provided to work with push notifications:</p>
 <ul>
-<li><a href="apn.html#mobile_utils_apn_register">mobile_utils_apn_register</a></li>
-<li><a href="apn.html#mobile_utils_apn_get_token">mobile_utils_apn_get_token</a></li>
+<li><a href="apn.html#apn_register">apn_register</a></li>
+<li><a href="apn.html#apn_get_token">apn_get_token</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_apn_register">mobile_utils_apn_register</h1>
+<h1 id="apn_register">apn_register</h1>
 <p>This function registers the device for Apple Push Notifications (APNs) and returns the resulting device token.</p>
 <p>Registration requests notification authorization and then asks Apple for a device token. Once obtained the token is cached for the rest of the process, so subsequent calls return it immediately. Send the token to your push backend so it can address this device.</p>
 <div class="admonition note">
@@ -121,7 +121,7 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_apn_register(callback)
+<div class="highlight"><pre><span></span><code>apn_register(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -180,7 +180,7 @@
 <p><br></p>
 <p><strong>Example:</strong></p>
 <p><div class="highlight"><pre><span></span><code>if (os_type != os_ios) return;
-mobile_utils_apn_register(function(_success, _token, _error)
+apn_register(function(_success, _token, _error)
 {
     if (_success) show_debug_message(&quot;Device token: &quot; + _token);
     else show_debug_message(&quot;APNs registration failed: &quot; + _error);
@@ -191,8 +191,8 @@ The code above registers for push notifications on iOS and logs the device token
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_apn_get_token">mobile_utils_apn_get_token</h1>
-<p>This function returns the APNs device token obtained by <a href="apn.html#mobile_utils_apn_register">mobile_utils_apn_register</a> earlier in this session.</p>
+<h1 id="apn_get_token">apn_get_token</h1>
+<p>This function returns the APNs device token obtained by <a href="apn.html#apn_register">apn_register</a> earlier in this session.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This is an iOS-only, experimental feature. It returns an empty string if registration has not completed (or on Android).</p>
@@ -200,7 +200,7 @@ The code above registers for push notifications on iOS and logs the device token
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_apn_get_token()
+<div class="highlight"><pre><span></span><code>apn_get_token()
 </code></pre></div>
 </blockquote>
 <p><br></p>
@@ -211,7 +211,7 @@ The code above registers for push notifications on iOS and logs the device token
 <p>The cached APNs device token, or an empty string if none is available</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>var _token = mobile_utils_apn_get_token();
+<p><div class="highlight"><pre><span></span><code>var _token = apn_get_token();
 if (_token != &quot;&quot;) show_debug_message(&quot;Token: &quot; + _token);
 </code></pre></div>
 The code above reads the cached push token and uses it if one is available.</p>

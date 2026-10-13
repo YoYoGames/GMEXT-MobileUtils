@@ -4,7 +4,7 @@
 
 @implementation GMMobileUtilsImageTools
 
-- (double)mobile_utils_image_width:
+- (double)image_width:
     (std::string_view)path
 {
     NSString *pathString =
@@ -19,7 +19,7 @@
     return image != nil ? image.size.width : -1.0;
 }
 
-- (double)mobile_utils_image_height:
+- (double)image_height:
     (std::string_view)path
 {
     NSString *pathString =
@@ -34,7 +34,7 @@
     return image != nil ? image.size.height : -1.0;
 }
 
-- (bool)mobile_utils_image_resize:
+- (bool)image_resize:
             (std::string_view)path
                               width:
             (double)width
@@ -74,7 +74,7 @@
             toPath:pathString];
 }
 
-- (bool)mobile_utils_image_crop:
+- (bool)image_crop:
             (std::string_view)path
                             width:
             (double)width

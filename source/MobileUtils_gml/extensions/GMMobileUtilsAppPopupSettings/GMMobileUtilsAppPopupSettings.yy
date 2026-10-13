@@ -26,18 +26,18 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_app_popup_settings_show",
+          "%Name": "__app_popup_settings_show",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_app_popup_settings_show",
+          "externalName": "__EXT_NATIVE__app_popup_settings_show",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_app_popup_settings_show",
+          "name": "__app_popup_settings_show",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

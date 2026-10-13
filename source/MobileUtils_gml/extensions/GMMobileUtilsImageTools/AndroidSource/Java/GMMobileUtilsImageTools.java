@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 public class GMMobileUtilsImageTools
     extends GMMobileUtilsImageToolsInternal
 {
-    public double mobile_utils_image_width(String path)
+    public double image_width(String path)
     {
         BitmapFactory.Options options =
             new BitmapFactory.Options();
@@ -22,7 +22,7 @@ public class GMMobileUtilsImageTools
             : -1.0;
     }
 
-    public double mobile_utils_image_height(String path)
+    public double image_height(String path)
     {
         BitmapFactory.Options options =
             new BitmapFactory.Options();
@@ -35,7 +35,7 @@ public class GMMobileUtilsImageTools
             : -1.0;
     }
 
-    public boolean mobile_utils_image_resize(
+    public boolean image_resize(
         String path,
         double width,
         double height)
@@ -76,7 +76,7 @@ public class GMMobileUtilsImageTools
         }
     }
 
-    public boolean mobile_utils_image_crop(
+    public boolean image_crop(
         String path,
         double width,
         double height,

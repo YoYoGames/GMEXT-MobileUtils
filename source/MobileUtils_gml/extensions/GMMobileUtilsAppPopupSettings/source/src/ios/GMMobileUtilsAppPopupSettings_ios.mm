@@ -15,7 +15,7 @@
  */
 @implementation GMMobileUtilsAppPopupSettings
 
-- (void)mobile_utils_app_popup_settings_show:
+- (void)app_popup_settings_show:
     (gm::wire::GMFunction)callback
 {
     dispatch_async(dispatch_get_main_queue(), ^{

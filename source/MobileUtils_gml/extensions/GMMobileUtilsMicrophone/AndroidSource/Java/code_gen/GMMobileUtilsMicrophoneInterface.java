@@ -6,6 +6,6 @@ import ${YYAndroidPackageName}.GMExtWire.GMValue;
 import ${YYAndroidPackageName}.enums.*;
 
 public interface GMMobileUtilsMicrophoneInterface {
-    public void mobile_utils_mic_request();
-    public void mobile_utils_mic_check(GMFunction callback);
+    public void mic_request();
+    public void mic_check(GMFunction callback);
 }

@@ -26,7 +26,7 @@
  *
  * [[Note: To avoid injecting unnecessary permissions into your application's manifest, the functionality is split into distinct modules. Import only the modules your game needs — each one is documented separately below.]]
  *
- * The asynchronous functions (for example ${function.mobile_utils_camera_open} or ${function.mobile_utils_share_open}) do not return their result immediately; instead they take a `callback` method that is invoked once the operation finishes. See the ${page.getting_started} guide for how to work with these callbacks, and ${page.extension_options} for the per-module setup values.
+ * The asynchronous functions (for example ${function.camera_open} or ${function.share_open}) do not return their result immediately; instead they take a `callback` method that is invoked once the operation finishes. See the ${page.getting_started} guide for how to work with these callbacks, and ${page.extension_options} for the per-module setup values.
  *
  * @section_end
  *

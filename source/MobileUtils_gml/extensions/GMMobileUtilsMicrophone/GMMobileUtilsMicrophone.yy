@@ -28,33 +28,33 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_mic_request",
+          "%Name": "mic_request",
           "argCount": 0,
           "args": [],
           "documentation": "@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_mic_request",
+          "externalName": "__EXT_NATIVE__mic_request",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_mic_request",
+          "name": "mic_request",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_mic_check",
+          "%Name": "__mic_check",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_mic_check",
+          "externalName": "__EXT_NATIVE__mic_check",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_mic_check",
+          "name": "__mic_check",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

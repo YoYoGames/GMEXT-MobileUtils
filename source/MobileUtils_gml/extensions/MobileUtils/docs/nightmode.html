@@ -105,24 +105,24 @@
 <h2 id="functions">Functions</h2>
 <p>The following function is provided:</p>
 <ul>
-<li><a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a></li>
+<li><a href="nightmode.html#night_mode_check">night_mode_check</a></li>
 </ul>
 <h2 id="constants">Constants</h2>
 <p>The following constant is used by this module:</p>
 <ul>
-<li><a href="nightmode.html#mobileutilsnightmode">MobileUtilsNightMode</a></li>
+<li><a href="nightmode.html#nightmode">NightMode</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_night_mode_check">mobile_utils_night_mode_check</h1>
+<h1 id="night_mode_check">night_mode_check</h1>
 <p>This function returns the device's current interface style (light or dark / night mode).</p>
-<p>The returned value is a member of the <a href="nightmode.html#mobileutilsnightmode">MobileUtilsNightMode</a> enumeration.</p>
+<p>The returned value is a member of the <a href="nightmode.html#nightmode">NightMode</a> enumeration.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_night_mode_check()
+<div class="highlight"><pre><span></span><code>night_mode_check()
 </code></pre></div>
 </blockquote>
 <p><br></p>
@@ -133,11 +133,11 @@
 <p>The current night-mode state</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>switch (mobile_utils_night_mode_check())
+<p><div class="highlight"><pre><span></span><code>switch (night_mode_check())
 {
-    case MobileUtilsNightMode.Dark:      _str = &quot;Dark&quot;;      break;
-    case MobileUtilsNightMode.Light:     _str = &quot;Light&quot;;     break;
-    case MobileUtilsNightMode.Undefined: _str = &quot;Undefined&quot;; break;
+    case NightMode.Dark:      _str = &quot;Dark&quot;;      break;
+    case NightMode.Light:     _str = &quot;Light&quot;;     break;
+    case NightMode.Undefined: _str = &quot;Undefined&quot;; break;
 }
 draw_text(x, y, _str + &quot; Mode&quot;);
 </code></pre></div>
@@ -146,8 +146,8 @@ The code above reads the current night-mode state and draws it on screen.</p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutilsnightmode">MobileUtilsNightMode</h1>
-<p>This enumeration contains the possible interface styles returned by <a href="nightmode.html#mobile_utils_night_mode_check">mobile_utils_night_mode_check</a>.</p>
+<h1 id="nightmode">NightMode</h1>
+<p>This enumeration contains the possible interface styles returned by <a href="nightmode.html#night_mode_check">night_mode_check</a>.</p>
 <p><br></p>
 <table>
 <thead>

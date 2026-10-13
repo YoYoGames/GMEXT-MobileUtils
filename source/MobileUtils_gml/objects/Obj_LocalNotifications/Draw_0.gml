@@ -2,7 +2,7 @@
 
 if(os_type == os_ios || os_type == os_android)
 {
-	// Map the MobileUtilsNotificationPermission value to a readable name.
+	// Map the LocalNotificationPermission value to a readable name.
 	var _names = ["Unknown", "NotDetermined", "Denied", "Authorized", "Provisional", "Ephemeral"];
 	var _name = (permission_status >= 0 && permission_status < array_length(_names))
 		? _names[permission_status]

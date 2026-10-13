@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_apn_register
+ * @function apn_register
  * @desc This function registers the device for Apple Push Notifications (APNs) and returns the resulting device token.
  *
  * Registration requests notification authorization and then asks Apple for a device token. Once obtained the token is cached for the rest of the process, so subsequent calls return it immediately. Send the token to your push backend so it can address this device.
@@ -21,7 +21,7 @@
  * @example
  * ```gml
  * if (os_type != os_ios) return;
- * mobile_utils_apn_register(function(_success, _token, _error)
+ * apn_register(function(_success, _token, _error)
  * {
  *     if (_success) show_debug_message("Device token: " + _token);
  *     else show_debug_message("APNs registration failed: " + _error);
@@ -32,8 +32,8 @@
  */
 
 /**
- * @function mobile_utils_apn_get_token
- * @desc This function returns the APNs device token obtained by ${function.mobile_utils_apn_register} earlier in this session.
+ * @function apn_get_token
+ * @desc This function returns the APNs device token obtained by ${function.apn_register} earlier in this session.
  *
  * [[Note: This is an iOS-only, experimental feature. It returns an empty string if registration has not completed (or on Android).]]
  *
@@ -41,7 +41,7 @@
  *
  * @example
  * ```gml
- * var _token = mobile_utils_apn_get_token();
+ * var _token = apn_get_token();
  * if (_token != "") show_debug_message("Token: " + _token);
  * ```
  * The code above reads the cached push token and uses it if one is available.
@@ -57,8 +57,8 @@
  *
  * @section_func
  * @desc The following functions are provided to work with push notifications:
- * @ref mobile_utils_apn_register
- * @ref mobile_utils_apn_get_token
+ * @ref apn_register
+ * @ref apn_get_token
  * @section_end
  *
  * @module_end

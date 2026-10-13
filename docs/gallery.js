@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_gallery_open
+ * @function gallery_open
  * @desc This function opens the device's photo gallery so the player can pick an image.
  *
  * This is an asynchronous function: once the player selects an image (or cancels), the `callback` method is invoked with the outcome. On success the chosen image is copied into the application's storage area and both its absolute path and its base filename are passed to the callback.
@@ -21,7 +21,7 @@
  *
  * @example
  * ```gml
- * mobile_utils_gallery_open(function(_success, _path, _filename, _error)
+ * gallery_open(function(_success, _path, _filename, _error)
  * {
  *     if (!_success)
  *     {
@@ -46,7 +46,7 @@
  *
  * @section_func
  * @desc The following function is provided to work with the gallery:
- * @ref mobile_utils_gallery_open
+ * @ref gallery_open
  * @section_end
  *
  * @module_end

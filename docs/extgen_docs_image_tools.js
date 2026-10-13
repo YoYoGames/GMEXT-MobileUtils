@@ -1,19 +1,19 @@
 /**
- * @function_partial mobile_utils_image_width
+ * @function_partial image_width
  * @param {String} path
  * @returns {Real}
  * @function_end
  */
 
 /**
- * @function_partial mobile_utils_image_height
+ * @function_partial image_height
  * @param {String} path
  * @returns {Real}
  * @function_end
  */
 
 /**
- * @function_partial mobile_utils_image_resize
+ * @function_partial image_resize
  * @param {String} path
  * @param {Real} width
  * @param {Real} height
@@ -22,7 +22,7 @@
  */
 
 /**
- * @function_partial mobile_utils_image_crop
+ * @function_partial image_crop
  * @param {String} path
  * @param {Real} width
  * @param {Real} height
@@ -30,10 +30,5 @@
  * @param {Real} offset_y
  * @returns {Bool}
  * @function_end
- */
-
-/**
- * @const_partial macros
- * @const_end
  */
 

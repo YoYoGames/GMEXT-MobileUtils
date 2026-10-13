@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_share_open
+ * @function share_open
  * @desc This function presents the native share sheet so the player can share text or a file with another application.
  *
  * The `mime` argument selects what is shared. For a text MIME type (`text/plain`, `text/rtf`, `text/html`, `text/json` or `application/json`) the `value` is the text to share. For any other MIME type the `value` is a filename resolved relative to the application's storage area, and that file is shared. An empty `mime` defaults to `*/*` on Android.
@@ -24,7 +24,7 @@
  * @example
  * ```gml
  * // Share a line of text.
- * mobile_utils_share_open("Title!", "text/plain", "Hello World", function(_success, _error)
+ * share_open("Title!", "text/plain", "Hello World", function(_success, _error)
  * {
  *     if (!_success) show_debug_message("Share failed: " + _error);
  * });
@@ -32,7 +32,7 @@
  * // Share an image file (copied into the sandbox first).
  * var _file = "shared_image.jpg";
  * file_copy("YYImage.jpg", _file);
- * mobile_utils_share_open("Title!", "image/jpeg", _file, function(_success, _error) {});
+ * share_open("Title!", "image/jpeg", _file, function(_success, _error) {});
  * ```
  * The code above shares a text string and, separately, an image file through the native share sheet.
  * @function_end
@@ -47,7 +47,7 @@
  *
  * @section_func
  * @desc The following function is provided to share content:
- * @ref mobile_utils_share_open
+ * @ref share_open
  * @section_end
  *
  * @module_end

@@ -8,14 +8,14 @@
 // # Enums
 // #####################################################################
 
-enum MobileUtilsVibrationAvailability
+enum VibrationAvailability
 {
     None = 0,
     Basic = 1,
     HapticEngine = 2
 }
 
-enum MobileUtilsAndroidVibrationKind
+enum AndroidVibrationKind
 {
     Click = 0,
     DoubleClick = 1,
@@ -23,7 +23,7 @@ enum MobileUtilsAndroidVibrationKind
     HeavyClick = 5
 }
 
-enum MobileUtilsIOSVibrationKind
+enum IOSVibrationKind
 {
     ImpactLight = 0,
     ImpactMedium = 1,
@@ -48,13 +48,13 @@ enum MobileUtilsIOSVibrationKind
 // # Functions
 // #####################################################################
 
-// Skipping function mobile_utils_vibrate_is_available (no wrapper is required)
+// Skipping function vibrate_is_available (no wrapper is required)
 
 
-// Skipping function mobile_utils_vibrate_predefined (no wrapper is required)
+// Skipping function vibrate_predefined (no wrapper is required)
 
 
-// Skipping function mobile_utils_vibrate_shot (no wrapper is required)
+// Skipping function vibrate_shot (no wrapper is required)
 
 
 /// @ignore
@@ -69,3 +69,8 @@ function __GMMobileUtilsVibrate_is_available()
     static __available__ = extension_exists("GMMobileUtilsVibrate");
     return __available__;
 }
+// #####################################################################
+// # Exports
+// #####################################################################
+
+#export VibrationAvailability, AndroidVibrationKind, IOSVibrationKind

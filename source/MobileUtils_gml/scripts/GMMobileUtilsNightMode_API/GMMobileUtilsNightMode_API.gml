@@ -8,7 +8,7 @@
 // # Enums
 // #####################################################################
 
-enum MobileUtilsNightMode
+enum NightMode
 {
     Dark = 0,
     Light = 1,
@@ -27,7 +27,7 @@ enum MobileUtilsNightMode
 // # Functions
 // #####################################################################
 
-// Skipping function mobile_utils_night_mode_check (no wrapper is required)
+// Skipping function night_mode_check (no wrapper is required)
 
 
 /// @ignore
@@ -42,3 +42,8 @@ function __GMMobileUtilsNightMode_is_available()
     static __available__ = extension_exists("GMMobileUtilsNightMode");
     return __available__;
 }
+// #####################################################################
+// # Exports
+// #####################################################################
+
+#export NightMode

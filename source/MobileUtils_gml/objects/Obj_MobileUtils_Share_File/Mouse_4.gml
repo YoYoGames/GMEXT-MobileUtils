@@ -1,7 +1,7 @@
 
 var _file = "YYSharedFile.yy"; 
 file_copy("YYFile.yy", _file); 
-mobile_utils_share_open( "Title!", "*/*", _file, 
+share_open( "Title!", "*/*", _file, 
 	function(_success, _error) 
 	{ 
 		if (_success) 

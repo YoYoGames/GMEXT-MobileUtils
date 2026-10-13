@@ -2,7 +2,7 @@
 module GMLocalNotifications;
 
 [global, bind = typed_gml]
-function mobile_utils_notification_create(
+function local_notification_create(
     identifier: string,
     seconds: real,
     title: string,
@@ -11,7 +11,7 @@ function mobile_utils_notification_create(
 ): unit;
 
 [global, bind = typed_gml]
-function mobile_utils_notification_create_ext(
+function local_notification_create_ext(
     identifier: string,
     seconds: real,
     title: string,
@@ -21,31 +21,31 @@ function mobile_utils_notification_create_ext(
 ): unit;
 
 [global, bind = typed_gml]
-function mobile_utils_notification_cancel(
+function local_notification_cancel(
     identifier: string
 ): unit;
 
 [global, bind = typed_gml]
-function mobile_utils_notification_set_listener(
+function local_notification_set_listener(
     callback: func
 ): unit;
 
 // request_permission -> callback(granted, error). iOS: UNUserNotificationCenter
 // authorization. Android: POST_NOTIFICATIONS (API 33+).
 [global, bind = typed_gml]
-function mobile_utils_notification_request_permission(
+function local_notification_request_permission(
     callback: func
 ): unit;
 
 // permission_status -> callback(status), where status is a
-// MobileUtilsNotificationPermission value.
+// LocalNotificationPermission value.
 [global, bind = typed_gml]
-function mobile_utils_notification_permission_status(
+function local_notification_permission_status(
     callback: func
 ): unit;
 
 [global, bind = typed_gml]
-enum MobileUtilsNotificationPermission:int32
+enum LocalNotificationPermission:int32
 {
     Unknown = 0,
     NotDetermined = 1,

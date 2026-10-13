@@ -30,7 +30,7 @@
     return self;
 }
 
-- (double)mobile_utils_vibrate_is_available
+- (double)vibrate_is_available
 {
     if (@available(iOS 13.0, *))
     {
@@ -45,7 +45,7 @@
     return 1.0;
 }
 
-- (bool)mobile_utils_vibrate_predefined:(double)kind
+- (bool)vibrate_predefined:(double)kind
 {
     int value = (int)kind;
 
@@ -136,7 +136,7 @@
     }
 }
 
-- (bool)mobile_utils_vibrate_shot:(double)milliseconds
+- (bool)vibrate_shot:(double)milliseconds
 {
     if (milliseconds <= 0.0)
         return false;
@@ -188,7 +188,7 @@
         return [player startAtTime:0 error:&error];
     }
 
-    return [self mobile_utils_vibrate_predefined:1.0];
+    return [self vibrate_predefined:1.0];
 }
 
 @end

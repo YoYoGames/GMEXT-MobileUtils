@@ -1,5 +1,5 @@
 
-mobile_utils_share_open( "Title!", "text/plain", "Hello World", 
+share_open( "Title!", "text/plain", "Hello World", 
 	function(_success, _error) 
 	{ 
 		if (_success) 

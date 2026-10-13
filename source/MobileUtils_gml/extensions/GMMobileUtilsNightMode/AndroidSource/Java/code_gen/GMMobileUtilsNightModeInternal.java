@@ -11,9 +11,9 @@ import ${YYAndroidPackageName}.enums.*;
 
 public abstract class GMMobileUtilsNightModeInternal extends RunnerSocial implements GMMobileUtilsNightModeInterface {
 
-    public double __EXT_NATIVE__mobile_utils_night_mode_check()
+    public double __EXT_NATIVE__night_mode_check()
     {
-        double __result = mobile_utils_night_mode_check();
+        double __result = night_mode_check();
         return (double)__result;
     }
 

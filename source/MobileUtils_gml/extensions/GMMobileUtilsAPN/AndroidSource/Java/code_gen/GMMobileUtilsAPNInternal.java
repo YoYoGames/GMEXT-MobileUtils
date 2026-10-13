@@ -16,20 +16,20 @@ public abstract class GMMobileUtilsAPNInternal extends RunnerSocial implements G
         return __dispatch_queue.fetch(__ret_buffer);
     }
 
-    public double __EXT_NATIVE__mobile_utils_apn_register(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__apn_register(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_apn_register(callback);
+        apn_register(callback);
         return 0;
     }
 
-    public String __EXT_NATIVE__mobile_utils_apn_get_token()
+    public String __EXT_NATIVE__apn_get_token()
     {
-        String __result = mobile_utils_apn_get_token();
+        String __result = apn_get_token();
         return __result;
     }
 

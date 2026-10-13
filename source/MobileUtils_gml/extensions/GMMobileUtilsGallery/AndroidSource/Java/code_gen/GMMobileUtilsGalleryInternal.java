@@ -16,14 +16,14 @@ public abstract class GMMobileUtilsGalleryInternal extends RunnerSocial implemen
         return __dispatch_queue.fetch(__ret_buffer);
     }
 
-    public double __EXT_NATIVE__mobile_utils_gallery_open(ByteBuffer __arg_buffer, double __arg_buffer_length)
+    public double __EXT_NATIVE__gallery_open(ByteBuffer __arg_buffer, double __arg_buffer_length)
     {
         GMExtWire.order(__arg_buffer);
 
         // field: callback, type: Function
         GMFunction callback = GMExtWire.readGMFunction(__arg_buffer, __dispatch_queue);
 
-        mobile_utils_gallery_open(callback);
+        gallery_open(callback);
         return 0;
     }
 

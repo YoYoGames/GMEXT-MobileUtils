@@ -105,33 +105,33 @@
 <h2 id="functions">Functions</h2>
 <p>The following functions are provided to work with local notifications:</p>
 <ul>
-<li><a href="local_notifications.html#mobile_utils_notification_create">mobile_utils_notification_create</a></li>
-<li><a href="local_notifications.html#mobile_utils_notification_create_ext">mobile_utils_notification_create_ext</a></li>
-<li><a href="local_notifications.html#mobile_utils_notification_cancel">mobile_utils_notification_cancel</a></li>
-<li><a href="local_notifications.html#mobile_utils_notification_set_listener">mobile_utils_notification_set_listener</a></li>
-<li><a href="local_notifications.html#mobile_utils_notification_request_permission">mobile_utils_notification_request_permission</a></li>
-<li><a href="local_notifications.html#mobile_utils_notification_permission_status">mobile_utils_notification_permission_status</a></li>
+<li><a href="local_notifications.html#local_notification_create">local_notification_create</a></li>
+<li><a href="local_notifications.html#local_notification_create_ext">local_notification_create_ext</a></li>
+<li><a href="local_notifications.html#local_notification_cancel">local_notification_cancel</a></li>
+<li><a href="local_notifications.html#local_notification_set_listener">local_notification_set_listener</a></li>
+<li><a href="local_notifications.html#local_notification_request_permission">local_notification_request_permission</a></li>
+<li><a href="local_notifications.html#local_notification_permission_status">local_notification_permission_status</a></li>
 </ul>
 <h2 id="constants">Constants</h2>
 <p>The following constant is used by this module:</p>
 <ul>
-<li><a href="local_notifications.html#mobileutilsnotificationpermission">MobileUtilsNotificationPermission</a></li>
+<li><a href="local_notifications.html#mobileutilsnotificationpermission">LocalNotificationPermission</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_create">mobile_utils_notification_create</h1>
+<h1 id="local_notification_create">local_notification_create</h1>
 <p>This function schedules a local notification to be shown after a delay.</p>
-<p>The notification fires <code>seconds</code> from now, showing <code>title</code> and <code>message</code>. The <code>data</code> string is an arbitrary payload that is delivered back to your listener when the notification is presented or tapped (see <a href="local_notifications.html#mobile_utils_notification_set_listener">mobile_utils_notification_set_listener</a>). Scheduling a new notification with an <code>identifier</code> that is already pending replaces the previous one.</p>
+<p>The notification fires <code>seconds</code> from now, showing <code>title</code> and <code>message</code>. The <code>data</code> string is an arbitrary payload that is delivered back to your listener when the notification is presented or tapped (see <a href="local_notifications.html#local_notification_set_listener">local_notification_set_listener</a>). Scheduling a new notification with an <code>identifier</code> that is already pending replaces the previous one.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If <code>seconds</code> is <code>0</code> or negative the call does nothing. Notification permission must be granted for the notification to appear (see <a href="local_notifications.html#mobile_utils_notification_request_permission">mobile_utils_notification_request_permission</a>).</p>
+<p>If <code>seconds</code> is <code>0</code> or negative the call does nothing. Notification permission must be granted for the notification to appear (see <a href="local_notifications.html#local_notification_request_permission">local_notification_request_permission</a>).</p>
 </div>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_create(identifier, seconds, title, message, data)
+<div class="highlight"><pre><span></span><code>local_notification_create(identifier, seconds, title, message, data)
 </code></pre></div>
 </blockquote>
 <table>
@@ -177,20 +177,20 @@
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_create(&quot;daily_reminder&quot;, 5, &quot;Come back!&quot;, &quot;Your energy is full.&quot;, &quot;reminder&quot;);
+<p><div class="highlight"><pre><span></span><code>local_notification_create(&quot;daily_reminder&quot;, 5, &quot;Come back!&quot;, &quot;Your energy is full.&quot;, &quot;reminder&quot;);
 </code></pre></div>
 The code above schedules a notification to appear five seconds from now.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_create_ext">mobile_utils_notification_create_ext</h1>
-<p>This function schedules a local notification with an image, extending <a href="local_notifications.html#mobile_utils_notification_create">mobile_utils_notification_create</a>.</p>
-<p>It behaves exactly like <a href="local_notifications.html#mobile_utils_notification_create">mobile_utils_notification_create</a> but also takes an <code>image_path</code>. On Android the image is shown as the notification's large icon; on iOS it is attached to the notification. The path is used as-is if absolute, otherwise it is resolved relative to the application's storage area; if the file cannot be used, the notification is still scheduled without the image.</p>
+<h1 id="local_notification_create_ext">local_notification_create_ext</h1>
+<p>This function schedules a local notification with an image, extending <a href="local_notifications.html#local_notification_create">local_notification_create</a>.</p>
+<p>It behaves exactly like <a href="local_notifications.html#local_notification_create">local_notification_create</a> but also takes an <code>image_path</code>. On Android the image is shown as the notification's large icon; on iOS it is attached to the notification. The path is used as-is if absolute, otherwise it is resolved relative to the application's storage area; if the file cannot be used, the notification is still scheduled without the image.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_create_ext(identifier, seconds, title, message, data, image_path)
+<div class="highlight"><pre><span></span><code>local_notification_create_ext(identifier, seconds, title, message, data, image_path)
 </code></pre></div>
 </blockquote>
 <table>
@@ -244,20 +244,20 @@ The code above schedules a notification to appear five seconds from now.</p>
 <p><div class="highlight"><pre><span></span><code>// Save a sprite to disk, then schedule a notification that shows it.
 var _file = &quot;notification_icon.png&quot;;
 sprite_save(spr_icon, 0, _file);
-mobile_utils_notification_create_ext(&quot;with_icon&quot;, 5, &quot;Large Icon!&quot;, &quot;Nice, right?&quot;, &quot;&quot;, _file);
+local_notification_create_ext(&quot;with_icon&quot;, 5, &quot;Large Icon!&quot;, &quot;Nice, right?&quot;, &quot;&quot;, _file);
 </code></pre></div>
 The code above schedules a notification that displays an image.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_cancel">mobile_utils_notification_cancel</h1>
-<p>This function cancels a pending local notification that was scheduled with <a href="local_notifications.html#mobile_utils_notification_create">mobile_utils_notification_create</a> or <a href="local_notifications.html#mobile_utils_notification_create_ext">mobile_utils_notification_create_ext</a>.</p>
+<h1 id="local_notification_cancel">local_notification_cancel</h1>
+<p>This function cancels a pending local notification that was scheduled with <a href="local_notifications.html#local_notification_create">local_notification_create</a> or <a href="local_notifications.html#local_notification_create_ext">local_notification_create_ext</a>.</p>
 <p>If no notification with the given identifier is pending, the call has no effect.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_cancel(identifier)
+<div class="highlight"><pre><span></span><code>local_notification_cancel(identifier)
 </code></pre></div>
 </blockquote>
 <table>
@@ -283,14 +283,14 @@ The code above schedules a notification that displays an image.</p>
 </blockquote>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_cancel(&quot;daily_reminder&quot;);
+<p><div class="highlight"><pre><span></span><code>local_notification_cancel(&quot;daily_reminder&quot;);
 </code></pre></div>
 The code above cancels a previously scheduled notification.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_set_listener">mobile_utils_notification_set_listener</h1>
+<h1 id="local_notification_set_listener">local_notification_set_listener</h1>
 <p>This function registers a listener that is called whenever a local notification is presented (while the app is in the foreground) or tapped by the player.</p>
 <p>The listener stays registered and may be invoked many times. Notifications that arrive before a listener is registered — for example a tap that cold-starts the app — are queued and delivered as soon as the listener is set.</p>
 <div class="admonition note">
@@ -301,7 +301,7 @@ The code above cancels a previously scheduled notification.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_set_listener(callback)
+<div class="highlight"><pre><span></span><code>local_notification_set_listener(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -369,7 +369,7 @@ The code above cancels a previously scheduled notification.</p>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_set_listener(function(_id, _title, _message, _data, _image_path)
+<p><div class="highlight"><pre><span></span><code>local_notification_set_listener(function(_id, _title, _message, _data, _image_path)
 {
     show_debug_message($&quot;Notification &#39;{_id}&#39; fired: {_title} - {_message}&quot;);
 });
@@ -379,14 +379,14 @@ The code above registers a listener that logs every notification as it is presen
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_request_permission">mobile_utils_notification_request_permission</h1>
+<h1 id="local_notification_request_permission">local_notification_request_permission</h1>
 <p>This function requests permission to show notifications, prompting the player if required.</p>
 <p>On Android 13+ this triggers the runtime <code>POST_NOTIFICATIONS</code> prompt; on iOS it requests notification authorization. On platforms/versions with no runtime prompt it reports the current effective setting.</p>
 <p>This function operates asynchronously, which means that it does not immediately return the requested result. Instead, upon completion of the task, it will trigger the <a href="https://manual.gamemaker.io/monthly/en/GameMaker_Language/GML_Overview/Method_Variables.htm">Callback</a>.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_request_permission(callback)
+<div class="highlight"><pre><span></span><code>local_notification_request_permission(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -439,7 +439,7 @@ The code above registers a listener that logs every notification as it is presen
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_request_permission(function(_granted, _error)
+<p><div class="highlight"><pre><span></span><code>local_notification_request_permission(function(_granted, _error)
 {
     if (!_granted) show_debug_message(&quot;Notifications not granted: &quot; + _error);
 });
@@ -449,9 +449,9 @@ The code above requests notification permission and logs the outcome.</p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_notification_permission_status">mobile_utils_notification_permission_status</h1>
+<h1 id="local_notification_permission_status">local_notification_permission_status</h1>
 <p>This function queries the current notification permission status without prompting the player.</p>
-<p>The status passed to the callback is a member of the <a href="local_notifications.html#mobileutilsnotificationpermission">MobileUtilsNotificationPermission</a> enumeration.</p>
+<p>The status passed to the callback is a member of the <a href="local_notifications.html#mobileutilsnotificationpermission">LocalNotificationPermission</a> enumeration.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>Provisional</code> and <code>Ephemeral</code> are only ever reported on iOS.</p>
@@ -460,7 +460,7 @@ The code above requests notification permission and logs the outcome.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_notification_permission_status(callback)
+<div class="highlight"><pre><span></span><code>local_notification_permission_status(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -501,18 +501,18 @@ The code above requests notification permission and logs the outcome.</p>
 <tbody>
 <tr>
 <td>status</td>
-<td><a href="local_notifications.html#mobileutilsnotificationpermission">MobileUtilsNotificationPermission</a></td>
+<td><a href="local_notifications.html#mobileutilsnotificationpermission">LocalNotificationPermission</a></td>
 <td>The current notification permission status</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_notification_permission_status(function(_status)
+<p><div class="highlight"><pre><span></span><code>local_notification_permission_status(function(_status)
 {
-    if (_status == MobileUtilsNotificationPermission.NotDetermined)
+    if (_status == LocalNotificationPermission.NotDetermined)
     {
-        mobile_utils_notification_request_permission(function(_granted, _error) {});
+        local_notification_request_permission(function(_granted, _error) {});
     }
 });
 </code></pre></div>
@@ -521,11 +521,11 @@ The code above checks the notification permission and requests it only if it has
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobileutilsnotificationpermission">MobileUtilsNotificationPermission</h1>
-<p>This enumeration contains the possible notification permission states reported by <a href="local_notifications.html#mobile_utils_notification_permission_status">mobile_utils_notification_permission_status</a> (and used with <a href="local_notifications.html#mobile_utils_notification_request_permission">mobile_utils_notification_request_permission</a>).</p>
+<h1 id="mobileutilsnotificationpermission">LocalNotificationPermission</h1>
+<p>This enumeration contains the possible notification permission states reported by <a href="local_notifications.html#local_notification_permission_status">local_notification_permission_status</a> (and used with <a href="local_notifications.html#local_notification_request_permission">local_notification_request_permission</a>).</p>
 <p>These constants are referenced by the following functions:</p>
 <ul>
-<li><a href="local_notifications.html#mobile_utils_notification_permission_status">mobile_utils_notification_permission_status</a></li>
+<li><a href="local_notifications.html#local_notification_permission_status">local_notification_permission_status</a></li>
 </ul>
 <p><br></p>
 <table>

@@ -5,5 +5,5 @@ import ${YYAndroidPackageName}.GMExtWire.GMFunction;
 import ${YYAndroidPackageName}.GMExtWire.GMValue;
 
 public interface GMMobileUtilsCameraInterface {
-    public void mobile_utils_camera_open(GMFunction callback);
+    public void camera_open(GMFunction callback);
 }

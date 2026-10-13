@@ -1,7 +1,7 @@
 
 if (os_type != os_ios) return;
 
-mobile_utils_apn_register(
+apn_register(
     function(_success, _token, _error)
     {
         if (_success)

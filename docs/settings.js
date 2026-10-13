@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_app_popup_settings_show
+ * @function app_popup_settings_show
  * @desc This function opens the operating system's Settings page for your application.
  *
  * This is useful for directing the player to the system settings when a permission they previously denied needs to be granted manually (the app cannot change those settings itself).
@@ -19,7 +19,7 @@
  *
  * @example
  * ```gml
- * mobile_utils_app_popup_settings_show(function(_success, _error)
+ * app_popup_settings_show(function(_success, _error)
  * {
  *     if (_success) show_debug_message("Application settings opened.");
  *     else show_debug_message("Could not open settings: " + _error);
@@ -38,7 +38,7 @@
  *
  * @section_func
  * @desc The following function is provided:
- * @ref mobile_utils_app_popup_settings_show
+ * @ref app_popup_settings_show
  * @section_end
  *
  * @module_end

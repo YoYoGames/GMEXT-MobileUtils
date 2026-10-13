@@ -6,7 +6,7 @@ if (_count == 0)
     exit;
 }
 
-if (!mobile_utils_vibrate_is_available())
+if (!vibrate_is_available())
 {
     show_debug_message("Vibration is not available.");
     exit;
@@ -15,7 +15,7 @@ if (!mobile_utils_vibrate_is_available())
 var _kind = kind_array[index];
 
 var _success =
-    mobile_utils_vibrate_predefined(_kind);
+    vibrate_predefined(_kind);
 
 if (!_success)
 {

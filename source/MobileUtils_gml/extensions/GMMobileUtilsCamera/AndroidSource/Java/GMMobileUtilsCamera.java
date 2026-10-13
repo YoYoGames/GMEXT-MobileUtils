@@ -26,7 +26,7 @@ public class GMMobileUtilsCamera extends GMMobileUtilsCameraInternal
 
     private volatile GMFunction cameraCallback = null;
 
-    public void mobile_utils_camera_open(final GMFunction callback)
+    public void camera_open(final GMFunction callback)
     {
         final Activity activity = RunnerActivity.CurrentActivity;
 

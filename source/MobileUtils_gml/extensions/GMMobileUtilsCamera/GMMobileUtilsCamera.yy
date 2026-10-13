@@ -26,18 +26,18 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_camera_open",
+          "%Name": "__camera_open",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_camera_open",
+          "externalName": "__EXT_NATIVE__camera_open",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_camera_open",
+          "name": "__camera_open",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2

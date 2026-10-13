@@ -112,9 +112,9 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_night_mode_check
+- (double)__EXT_NATIVE__night_mode_check
 {
-    double __result = [__impl mobile_utils_night_mode_check];
+    double __result = [__impl night_mode_check];
 
     return static_cast<double>(__result);
 }

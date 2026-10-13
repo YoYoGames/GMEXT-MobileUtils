@@ -104,22 +104,22 @@
 <h2 id="functions">Functions</h2>
 <p>The following functions are provided to work with images:</p>
 <ul>
-<li><a href="image_tools.html#mobile_utils_image_width">mobile_utils_image_width</a></li>
-<li><a href="image_tools.html#mobile_utils_image_height">mobile_utils_image_height</a></li>
-<li><a href="image_tools.html#mobile_utils_image_resize">mobile_utils_image_resize</a></li>
-<li><a href="image_tools.html#mobile_utils_image_crop">mobile_utils_image_crop</a></li>
+<li><a href="image_tools.html#image_width">image_width</a></li>
+<li><a href="image_tools.html#image_height">image_height</a></li>
+<li><a href="image_tools.html#image_resize">image_resize</a></li>
+<li><a href="image_tools.html#image_crop">image_crop</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_image_width">mobile_utils_image_width</h1>
+<h1 id="image_width">image_width</h1>
 <p>This function returns the width, in pixels, of the image at the given path.</p>
 <p>The image is inspected on disk without being fully loaded into memory.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_image_width(path)
+<div class="highlight"><pre><span></span><code>image_width(path)
 </code></pre></div>
 </blockquote>
 <table>
@@ -146,7 +146,7 @@
 <p>The image width in pixels, or <code>-1</code> if the file could not be read</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>var _w = mobile_utils_image_width(path);
+<p><div class="highlight"><pre><span></span><code>var _w = image_width(path);
 if (_w == -1) show_debug_message(&quot;Could not read image&quot;);
 </code></pre></div>
 The code above reads the width of an image and checks for the failure value.</p>
@@ -154,13 +154,13 @@ The code above reads the width of an image and checks for the failure value.</p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_image_height">mobile_utils_image_height</h1>
+<h1 id="image_height">image_height</h1>
 <p>This function returns the height, in pixels, of the image at the given path.</p>
 <p>The image is inspected on disk without being fully loaded into memory.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_image_height(path)
+<div class="highlight"><pre><span></span><code>image_height(path)
 </code></pre></div>
 </blockquote>
 <table>
@@ -187,14 +187,14 @@ The code above reads the width of an image and checks for the failure value.</p>
 <p>The image height in pixels, or <code>-1</code> if the file could not be read</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>var _h = mobile_utils_image_height(path);
+<p><div class="highlight"><pre><span></span><code>var _h = image_height(path);
 </code></pre></div>
 The code above reads the height of an image.</p>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_image_resize">mobile_utils_image_resize</h1>
+<h1 id="image_resize">image_resize</h1>
 <p>This function resizes the image at the given path to the requested pixel dimensions, overwriting the file in place.</p>
 <p>The output format is chosen from the file extension: a <code>.jpg</code>/<code>.jpeg</code> path is written as JPEG, any other extension as PNG. The image is written to a temporary file and then moved over the original, so a failed encode does not destroy the source file.</p>
 <div class="admonition warning">
@@ -204,7 +204,7 @@ The code above reads the height of an image.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_image_resize(path, width, height)
+<div class="highlight"><pre><span></span><code>image_resize(path, width, height)
 </code></pre></div>
 </blockquote>
 <table>
@@ -241,7 +241,7 @@ The code above reads the height of an image.</p>
 <p><code>true</code> if the image was resized and saved, <code>false</code> on invalid dimensions or a read/write failure</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>if (mobile_utils_image_resize(path, 256, 256))
+<p><div class="highlight"><pre><span></span><code>if (image_resize(path, 256, 256))
 {
     show_debug_message(&quot;Resized&quot;);
 }
@@ -251,9 +251,9 @@ The code above resizes an image to 256x256 pixels in place.</p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_image_crop">mobile_utils_image_crop</h1>
+<h1 id="image_crop">image_crop</h1>
 <p>This function crops the image at the given path to a rectangle, overwriting the file in place.</p>
-<p>The crop rectangle is defined by its size (<code>width</code> x <code>height</code>) and its top-left origin (<code>offset_x</code>, <code>offset_y</code>), all in pixels. The rectangle must lie fully within the source image. As with <a href="image_tools.html#mobile_utils_image_resize">mobile_utils_image_resize</a>, the output format follows the file extension and the write is performed via a temporary file.</p>
+<p>The crop rectangle is defined by its size (<code>width</code> x <code>height</code>) and its top-left origin (<code>offset_x</code>, <code>offset_y</code>), all in pixels. The rectangle must lie fully within the source image. As with <a href="image_tools.html#image_resize">image_resize</a>, the output format follows the file extension and the write is performed via a temporary file.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This function runs synchronously on the calling thread and can block on large images.</p>
@@ -261,7 +261,7 @@ The code above resizes an image to 256x256 pixels in place.</p>
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_image_crop(path, width, height, offset_x, offset_y)
+<div class="highlight"><pre><span></span><code>image_crop(path, width, height, offset_x, offset_y)
 </code></pre></div>
 </blockquote>
 <table>
@@ -309,11 +309,11 @@ The code above resizes an image to 256x256 pixels in place.</p>
 <p><br></p>
 <p><strong>Example:</strong></p>
 <p><div class="highlight"><pre><span></span><code>// Crop the image to a centered square, then scale it down.
-var _w = mobile_utils_image_width(path);
-var _h = mobile_utils_image_height(path);
-if (_w &gt; _h) mobile_utils_image_crop(path, _h, _h, (_w - _h) / 2, 0);
-else         mobile_utils_image_crop(path, _w, _w, 0, (_h - _w) / 2);
-mobile_utils_image_resize(path, 300, 300);
+var _w = image_width(path);
+var _h = image_height(path);
+if (_w &gt; _h) image_crop(path, _h, _h, (_w - _h) / 2, 0);
+else         image_crop(path, _w, _w, 0, (_h - _w) / 2);
+image_resize(path, 300, 300);
 </code></pre></div>
 The code above crops an image to a centered square and resizes it to 300x300 pixels.</p>
 <p><br></p>

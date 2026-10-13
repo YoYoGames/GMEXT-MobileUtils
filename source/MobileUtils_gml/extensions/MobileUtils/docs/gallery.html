@@ -103,13 +103,13 @@
 <h2 id="functions">Functions</h2>
 <p>The following function is provided to work with the gallery:</p>
 <ul>
-<li><a href="gallery.html#mobile_utils_gallery_open">mobile_utils_gallery_open</a></li>
+<li><a href="gallery.html#gallery_open">gallery_open</a></li>
 </ul>
 <p><br></p>
 <hr />
 <p align="right"><a href="#top">Back To Top</a></p>
 
-<h1 id="mobile_utils_gallery_open">mobile_utils_gallery_open</h1>
+<h1 id="gallery_open">gallery_open</h1>
 <p>This function opens the device's photo gallery so the player can pick an image.</p>
 <p>This is an asynchronous function: once the player selects an image (or cancels), the <code>callback</code> method is invoked with the outcome. On success the chosen image is copied into the application's storage area and both its absolute path and its base filename are passed to the callback.</p>
 <div class="admonition note">
@@ -120,7 +120,7 @@
 <p><br></p>
 <p><strong>Syntax:</strong></p>
 <blockquote>
-<div class="highlight"><pre><span></span><code>mobile_utils_gallery_open(callback)
+<div class="highlight"><pre><span></span><code>gallery_open(callback)
 </code></pre></div>
 </blockquote>
 <table>
@@ -183,7 +183,7 @@
 </table>
 <p><br></p>
 <p><strong>Example:</strong></p>
-<p><div class="highlight"><pre><span></span><code>mobile_utils_gallery_open(function(_success, _path, _filename, _error)
+<p><div class="highlight"><pre><span></span><code>gallery_open(function(_success, _path, _filename, _error)
 {
     if (!_success)
     {

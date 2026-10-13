@@ -26,33 +26,33 @@
       "functions": [
         {
           "$GMExtensionFunction": "",
-          "%Name": "__mobile_utils_apn_register",
+          "%Name": "__apn_register",
           "argCount": 2,
           "args": [
             1,
             2
           ],
           "documentation": "@param {Pointer} _arg_buffer\r\n@param {Real} _arg_buffer_length\r\n@returns {Real}",
-          "externalName": "__EXT_NATIVE__mobile_utils_apn_register",
+          "externalName": "__EXT_NATIVE__apn_register",
           "help": "",
           "hidden": true,
           "kind": 4,
-          "name": "__mobile_utils_apn_register",
+          "name": "__apn_register",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 2
         },
         {
           "$GMExtensionFunction": "",
-          "%Name": "mobile_utils_apn_get_token",
+          "%Name": "apn_get_token",
           "argCount": 0,
           "args": [],
           "documentation": "@returns {String}",
-          "externalName": "__EXT_NATIVE__mobile_utils_apn_get_token",
+          "externalName": "__EXT_NATIVE__apn_get_token",
           "help": "",
           "hidden": false,
           "kind": 4,
-          "name": "mobile_utils_apn_get_token",
+          "name": "apn_get_token",
           "resourceType": "GMExtensionFunction",
           "resourceVersion": "2.0",
           "returnType": 1

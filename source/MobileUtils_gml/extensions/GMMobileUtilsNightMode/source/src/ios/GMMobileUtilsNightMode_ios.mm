@@ -6,7 +6,7 @@ extern UIViewController *g_controller;
 
 @implementation GMMobileUtilsNightMode
 
-- (double)mobile_utils_night_mode_check
+- (double)night_mode_check
 {
     if (@available(iOS 12.0, *))
     {

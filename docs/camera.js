@@ -2,7 +2,7 @@
 // FUNCTIONS
 
 /**
- * @function mobile_utils_camera_open
+ * @function camera_open
  * @desc This function brings up the device camera so the player can take a photo.
  *
  * This is an asynchronous function: it does not return the captured image directly. Instead, once the player takes a photo (or cancels), the `callback` method is invoked with the outcome. On success the photo is written to a file in the application's storage area and its absolute path is passed to the callback.
@@ -21,7 +21,7 @@
  *
  * @example
  * ```gml
- * mobile_utils_camera_open(function(_success, _path, _error)
+ * camera_open(function(_success, _path, _error)
  * {
  *     if (!_success)
  *     {
@@ -44,7 +44,7 @@
  *
  * @section_func
  * @desc The following function is provided to work with the camera:
- * @ref mobile_utils_camera_open
+ * @ref camera_open
  * @section_end
  *
  * @module_end

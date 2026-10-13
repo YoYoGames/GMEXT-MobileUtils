@@ -3,33 +3,33 @@
 
 @implementation GMMobileUtilsMicrophone
 
-// Fire-and-forget by design (see spec.gmidl) — call mobile_utils_mic_check
+// Fire-and-forget by design (see spec.gmidl) — call mic_check
 // afterward (e.g. on the next room step or app resume) to read the result.
 // iOS shows its own system permission dialog; requesting again once the user
 // has already answered is a harmless no-op (the block fires immediately with
 // the existing answer).
-- (void)mobile_utils_mic_request
+- (void)mic_request
 {
     [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
         (void)granted;
     }];
 }
 
-- (void)mobile_utils_mic_check:(gm::wire::GMFunction)callback
+- (void)mic_check:(gm::wire::GMFunction)callback
 {
-    gm_enums::MobileUtilsMicPermission status;
+    gm_enums::MicPermission status;
 
     switch ([[AVAudioSession sharedInstance] recordPermission])
     {
         case AVAudioSessionRecordPermissionGranted:
-            status = gm_enums::MobileUtilsMicPermission::Granted;
+            status = gm_enums::MicPermission::Granted;
             break;
         case AVAudioSessionRecordPermissionDenied:
-            status = gm_enums::MobileUtilsMicPermission::Denied;
+            status = gm_enums::MicPermission::Denied;
             break;
         case AVAudioSessionRecordPermissionUndetermined:
         default:
-            status = gm_enums::MobileUtilsMicPermission::NotDetermined;
+            status = gm_enums::MicPermission::NotDetermined;
             break;
     }
 

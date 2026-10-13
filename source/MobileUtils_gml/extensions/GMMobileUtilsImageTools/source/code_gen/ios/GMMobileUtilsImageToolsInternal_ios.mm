@@ -112,28 +112,28 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     }
     return self;
 }
-- (double)__EXT_NATIVE__mobile_utils_image_width:(char*)path
+- (double)__EXT_NATIVE__image_width:(char*)path
 {
-    double __result = [__impl mobile_utils_image_width:path];
+    double __result = [__impl image_width:path];
 
     return static_cast<double>(__result);
 }
 
-- (double)__EXT_NATIVE__mobile_utils_image_height:(char*)path
+- (double)__EXT_NATIVE__image_height:(char*)path
 {
-    double __result = [__impl mobile_utils_image_height:path];
+    double __result = [__impl image_height:path];
 
     return static_cast<double>(__result);
 }
 
-- (double)__EXT_NATIVE__mobile_utils_image_resize:(char*)path arg1:(double)width arg2:(double)height
+- (double)__EXT_NATIVE__image_resize:(char*)path arg1:(double)width arg2:(double)height
 {
-    bool __result = [__impl mobile_utils_image_resize:path width:static_cast<double>(width) height:static_cast<double>(height)];
+    bool __result = [__impl image_resize:path width:static_cast<double>(width) height:static_cast<double>(height)];
 
     return static_cast<double>(__result);
 }
 
-- (double)__EXT_NATIVE__mobile_utils_image_crop:(char*)__arg_buffer arg1:(double)__arg_buffer_length
+- (double)__EXT_NATIVE__image_crop:(char*)__arg_buffer arg1:(double)__arg_buffer_length
 {
     gm::byteio::BufferReader __br{__arg_buffer, static_cast<size_t>(__arg_buffer_length)};
 
@@ -152,7 +152,7 @@ static void GMInjectSelectorsIntoSubclass(Class subclass, Class base)
     // field: offset_y, type: Float64
     double offset_y = gm::wire::codec::readValue<double>(__br);
 
-    bool __result = [__impl mobile_utils_image_crop:path width:width height:height offset_x:offset_x offset_y:offset_y];
+    bool __result = [__impl image_crop:path width:width height:height offset_x:offset_x offset_y:offset_y];
 
     return static_cast<double>(__result);
 }
